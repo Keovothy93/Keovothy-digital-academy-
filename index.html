@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KEOVOTHY Digital Academy — E-Books វគ្គសិក្សា និងមេរៀនអនុវត្តជំនាញឌីជីថល។">
+    <meta name="theme-color" content="#030303">
     <title>Digital Academy - សាលាឌីជីថល</title>
     <!-- Tailwind CSS -->
-    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=Z5yMHyAqYZWIxQazDIRWFl69bXiHRLk_4AYJpe85kRJM0Aeu733k_hdiZ0oObtNQRIfz-QxW7oF9XZnEdg78J29vCqzzQy49a5U-d8rpGBB2Jg-pN_xIxOl9xZuZC1V6uSAld3S2xczK2ydf0lPwCP7nrosw5-3QA4sgHIgg-BH0KBiN8RO5mQD-JH4MbES3HOOegAvUNCXkjCiRziMIEln2ALA93ANstegWsV2Lfow-sLtLBIB0MO7qY5R5ZbhuWcZfjaF5rWzx448ZmrGKbXCXbGd6zdJi3jFOnkop4lH16rNA3HtjjJJzXXKJ0uhB" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jaGF0Z3B0LmNvbS9iYWNrZW5kLWFwaS9lc3R1YXJ5L2NvbnRlbnQ_aWQ9ZmlsZV8wMDAwMDAwMGZkMDQ4MWY3OTFkNGZhMDExZGM0NmQ2NyZmbj1pbmRleCUyODIlMjkuaHRtbCZjZD1hdHRhY2htZW50JnRzPTQ5Njc4NSZwPWZzJmNpZD0xJnNpZz0wMWM5ZmUyMjhmZjBhNmIyZTBlMDIzNTczZmM0ODg2ZDc5Yjk5NjAzNjYzNDc5N2RhYmU0MGJjNGZiOGQ4ZWMxJnY9MA"/><script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -28,7 +30,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scroll-padding-top: 9rem; }
         body {
             position: relative; isolation: isolate;
             background:
@@ -379,7 +381,7 @@
             .motion-track { animation-duration: 27s; }
             .motion-item { width: 17.2rem; }
         }
-        @media (pointer: fine) { body { cursor: none; } }
+        @media (pointer: fine) and (min-width: 768px) { body { cursor: none; } }
 
         /* 3D Preserves */
         .preserve-3d { transform-style: preserve-3d; perspective: 1200px; }
@@ -531,6 +533,137 @@
             .motion-item:hover, .motion-item:focus-visible,
             .academy-card:hover, .academy-card.is-scroll-target { animation: none !important; }
         }
+
+        /* Glowing announcement ticker */
+        .announcement-bar {
+            position: fixed; inset: 0 0 auto; z-index: 70; height: 2.65rem;
+            display: flex; align-items: center; overflow: hidden;
+            border-bottom: 1px solid rgba(244,214,117,.28);
+            background: linear-gradient(90deg, #020202, #191303 48%, #020202);
+            box-shadow: 0 5px 30px rgba(0,0,0,.72), 0 0 24px rgba(212,175,55,.10);
+        }
+        .announcement-bar::before, .announcement-bar::after {
+            content: ''; position: absolute; z-index: 3; top: 0; bottom: 0; width: min(14vw, 8rem); pointer-events: none;
+        }
+        .announcement-bar::before { left: 0; background: linear-gradient(90deg, #030303 20%, transparent); }
+        .announcement-bar::after { right: 0; background: linear-gradient(-90deg, #030303 20%, transparent); }
+        .announcement-track {
+            display: flex; align-items: center; width: max-content; min-width: 200%;
+            animation: announcement-scroll 26s linear infinite; will-change: transform;
+        }
+        .announcement-bar:hover .announcement-track { animation-play-state: paused; }
+        .announcement-message {
+            display: flex; align-items: center; justify-content: space-around; gap: 2rem;
+            width: max-content; min-width: 50%; margin: 0; padding: 0 2rem;
+            color: #fff3bd; white-space: nowrap; font-size: .76rem; font-weight: 800; letter-spacing: .04em;
+            text-shadow: 0 0 9px rgba(255,226,124,.58), 0 0 22px rgba(212,175,55,.3);
+        }
+        .announcement-message i { color: #f4d675; filter: drop-shadow(0 0 7px rgba(244,214,117,.85)); }
+        .announcement-bulb { width: .35rem; height: .35rem; flex: 0 0 auto; border-radius: 99px; background: #ffe483; box-shadow: 0 0 5px #fff2b0, 0 0 13px #d4af37; animation: bulb-twinkle 1.6s ease-in-out infinite alternate; }
+        .announcement-bulb:nth-of-type(even) { animation-delay: -.8s; }
+        @keyframes announcement-scroll { to { transform: translateX(-50%); } }
+        @keyframes bulb-twinkle { from { opacity: .38; transform: scale(.78); } to { opacity: 1; transform: scale(1.2); } }
+
+        /* Tutorial centre */
+        .tutorial-section { position: relative; z-index: 10; padding: 7rem 0; scroll-margin-top: 8rem; }
+        .tutorial-shell {
+            display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(19rem, .88fr); gap: 1.25rem;
+            padding: 1.25rem; border: 1px solid rgba(212,175,55,.22); border-radius: 2rem;
+            background: linear-gradient(145deg, rgba(18,18,18,.94), rgba(5,5,5,.98));
+            box-shadow: 0 32px 90px rgba(0,0,0,.56), inset 0 1px 0 rgba(255,255,255,.045);
+        }
+        .tutorial-video-frame {
+            position: relative; align-self: start; overflow: hidden; aspect-ratio: 16/9; border-radius: 1.35rem;
+            border: 1px solid rgba(244,214,117,.28); background: #000;
+            box-shadow: 0 18px 55px rgba(0,0,0,.5), 0 0 40px rgba(212,175,55,.08);
+        }
+        .tutorial-video-frame::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+        }
+        .tutorial-video { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .tutorial-guide { display: flex; flex-direction: column; padding: .65rem .5rem .35rem; }
+        .tutorial-guide h3 { margin: 0 0 .65rem; color: #fff; font-size: clamp(1.35rem, 2.4vw, 1.8rem); font-weight: 900; line-height: 1.5; }
+        .tutorial-guide > p { margin: 0 0 1rem; color: #9ca3af; font-size: .93rem; line-height: 1.85; }
+        .tutorial-steps { display: grid; gap: .65rem; margin-top: .3rem; }
+        .tutorial-step {
+            width: 100%; min-height: 4.25rem; display: grid; grid-template-columns: 2.55rem 1fr auto; align-items: center; gap: .85rem;
+            padding: .75rem .8rem; border: 1px solid rgba(255,255,255,.08); border-radius: 1rem;
+            background: rgba(255,255,255,.03); color: #e5e7eb; text-align: left; cursor: pointer;
+            transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+        }
+        .tutorial-step:hover, .tutorial-step:focus-visible, .tutorial-step.is-active {
+            outline: none; transform: translateX(4px); border-color: rgba(244,214,117,.55);
+            background: rgba(212,175,55,.09); box-shadow: 0 10px 28px rgba(0,0,0,.25), 0 0 18px rgba(212,175,55,.08);
+        }
+        .tutorial-step-number { display: grid; place-items: center; width: 2.35rem; height: 2.35rem; border-radius: .75rem; background: #d4af37; color: #050505; font-size: .76rem; font-weight: 900; }
+        .tutorial-step strong { display: block; margin-bottom: .2rem; color: #fff; font-size: .9rem; line-height: 1.45; }
+        .tutorial-step small { display: block; color: #8f949d; font-size: .72rem; line-height: 1.5; }
+        .tutorial-step > i { color: #d4af37; font-size: .78rem; }
+        .tutorial-fab {
+            position: fixed; right: 1.15rem; bottom: 1.15rem; z-index: 58;
+            display: inline-flex; align-items: center; gap: .65rem; min-height: 3.25rem; padding: .75rem 1rem;
+            border: 1px solid rgba(244,214,117,.48); border-radius: 999px; background: rgba(9,9,9,.9);
+            color: #f5d879; font-size: .8rem; font-weight: 800; text-decoration: none;
+            box-shadow: 0 16px 45px rgba(0,0,0,.5), 0 0 25px rgba(212,175,55,.16); backdrop-filter: blur(16px);
+            transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+        }
+        .tutorial-fab:hover, .tutorial-fab:focus-visible { outline: none; transform: translateY(-3px); background: #d4af37; color: #050505; box-shadow: 0 18px 50px rgba(0,0,0,.55), 0 0 32px rgba(212,175,55,.38); }
+
+        /* Illuminated footer brand */
+        .footer-brand-stage { display: grid; place-items: center; margin: 0 auto 2.25rem; text-align: center; }
+        .footer-logo-orbit {
+            position: relative; display: grid; place-items: center; width: 7rem; height: 7rem; margin-bottom: .85rem;
+            border-radius: 999px; background: radial-gradient(circle, rgba(212,175,55,.18), rgba(0,0,0,.04) 62%, transparent 64%);
+        }
+        .footer-logo-orbit::before {
+            content: ''; position: absolute; inset: -.2rem; border-radius: inherit;
+            background: repeating-conic-gradient(from 0deg, #ffe583 0deg 3deg, transparent 3deg 16deg);
+            -webkit-mask: radial-gradient(circle, transparent 62%, #000 64% 68%, transparent 70%);
+            mask: radial-gradient(circle, transparent 62%, #000 64% 68%, transparent 70%);
+            filter: drop-shadow(0 0 5px rgba(244,214,117,.82)); animation: footer-orbit-spin 12s linear infinite;
+        }
+        .footer-logo-orbit::after { content: ''; position: absolute; inset: .45rem; border-radius: inherit; border: 1px solid rgba(244,214,117,.42); box-shadow: 0 0 24px rgba(212,175,55,.35), inset 0 0 22px rgba(212,175,55,.12); animation: footer-logo-glow 2.4s ease-in-out infinite alternate; }
+        .footer-logo-orbit img { position: relative; z-index: 2; width: 5.3rem; height: 5.3rem; object-fit: cover; border-radius: 999px; }
+        .footer-brand-name { color: #f4d675; font-size: .73rem; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; text-shadow: 0 0 14px rgba(212,175,55,.55); }
+        @keyframes footer-orbit-spin { to { transform: rotate(360deg); } }
+        @keyframes footer-logo-glow { to { box-shadow: 0 0 34px rgba(255,226,124,.62), inset 0 0 28px rgba(212,175,55,.2); } }
+
+        /* Responsive refinements */
+        @media (max-width: 1023px) {
+            .tutorial-shell { grid-template-columns: 1fr; }
+            .tutorial-guide { padding: .65rem .25rem .2rem; }
+        }
+        @media (max-width: 767px) {
+            .announcement-bar { height: 2.45rem; }
+            .announcement-message { gap: 1.2rem; min-width: 50%; padding-inline: 1rem; font-size: .68rem; }
+            #main-header { top: 3.25rem !important; width: calc(100% - 1rem); border-radius: 1.5rem; }
+            #main-header > div { padding-inline: 1rem; }
+            #main-header > div > div { height: 4.2rem; }
+            .mobile-nav-panel { top: 7.9rem; left: .5rem; width: calc(100% - 1rem); max-height: calc(100dvh - 8.5rem); }
+            #home { min-height: auto; padding-top: 9.25rem; padding-bottom: 5.5rem; }
+            .hero-title { font-size: clamp(2.05rem, 10.5vw, 2.75rem) !important; line-height: 1.35; }
+            .academy-section, .tutorial-section { padding-block: 5rem; }
+            .section-heading { font-size: clamp(1.85rem, 8.8vw, 2.45rem) !important; line-height: 1.45; }
+            .academy-card .glow-card-inner.p-8, .academy-card .glow-card-inner > .p-10 { padding: 1.35rem; }
+            .academy-card { transform: none !important; }
+            .academy-card .media-frame { height: 14rem; margin-bottom: 1.4rem; }
+            .academy-card h3 { font-size: 1.35rem; line-height: 1.5; }
+            .tutorial-shell { padding: .65rem; border-radius: 1.35rem; }
+            .tutorial-video-frame { border-radius: 1rem; }
+            .tutorial-step { grid-template-columns: 2.4rem 1fr; }
+            .tutorial-step > i { display: none; }
+            .tutorial-fab { right: .8rem; bottom: .8rem; width: 3.15rem; height: 3.15rem; min-height: 0; justify-content: center; padding: 0; }
+            .tutorial-fab span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+            footer .footer-bottom-links { justify-content: center; gap: 1rem 1.5rem; flex-wrap: wrap; }
+            footer .footer-bottom-links > :not([hidden]) ~ :not([hidden]) { margin-left: 0 !important; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .announcement-track, .announcement-bulb, .footer-logo-orbit::before, .footer-logo-orbit::after { animation: none !important; }
+            .announcement-track { transform: none; }
+            .announcement-bar { overflow-x: auto; }
+            .tutorial-step:hover, .tutorial-step:focus-visible, .tutorial-step.is-active, .tutorial-fab:hover, .tutorial-fab:focus-visible { transform: none; }
+        }
     </style>
   	<style type="text/css">
     #navbar-iframe {
@@ -577,8 +710,32 @@
         </div>
     </div>
 
+    <!-- Glowing running announcement -->
+    <aside class="announcement-bar" aria-label="សេចក្ដីជូនដំណឹង">
+        <div class="announcement-track">
+            <p class="announcement-message">
+                <span class="announcement-bulb" aria-hidden="true"></span>
+                <span><i class="fa-solid fa-bolt" aria-hidden="true"></i> សិក្សាជំនាញឌីជីថលថ្មីៗ ងាយយល់ និងអនុវត្តបានជាក់ស្តែង</span>
+                <span class="announcement-bulb" aria-hidden="true"></span>
+                <span><i class="fa-solid fa-book-open" aria-hidden="true"></i> E-Books និងវគ្គសិក្សាឥតគិតថ្លៃ</span>
+                <span class="announcement-bulb" aria-hidden="true"></span>
+                <span><i class="fa-brands fa-telegram" aria-hidden="true"></i> ទទួលបានមេរៀនថ្មីៗតាម Telegram Channel</span>
+                <span class="announcement-bulb" aria-hidden="true"></span>
+            </p>
+            <p class="announcement-message" aria-hidden="true">
+                <span class="announcement-bulb"></span>
+                <span><i class="fa-solid fa-bolt"></i> សិក្សាជំនាញឌីជីថលថ្មីៗ ងាយយល់ និងអនុវត្តបានជាក់ស្តែង</span>
+                <span class="announcement-bulb"></span>
+                <span><i class="fa-solid fa-book-open"></i> E-Books និងវគ្គសិក្សាឥតគិតថ្លៃ</span>
+                <span class="announcement-bulb"></span>
+                <span><i class="fa-brands fa-telegram"></i> ទទួលបានមេរៀនថ្មីៗតាម Telegram Channel</span>
+                <span class="announcement-bulb"></span>
+            </p>
+        </div>
+    </aside>
+
     <!-- Floating Dynamic Nav Dock -->
-    <header class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl bg-black/40 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.4)]" id="main-header">
+    <header class="fixed top-[3.65rem] left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl bg-black/40 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.4)]" id="main-header">
         <div class="px-6 sm:px-8">
             <div class="flex justify-between items-center h-20">
                 
@@ -590,7 +747,7 @@
                     </div>
                 </div>
                 
-                <nav class="hidden md:flex space-x-10">
+                <nav class="hidden md:flex space-x-7 lg:space-x-9">
                     <a href="#home" class="nav-link is-active text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
                         ទំព័រដើម <span class="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gold transition-all duration-300 group-hover:w-full -translate-x-1/2 shadow-[0_0_10px_#D4AF37]"></span>
                     </a>
@@ -599,6 +756,9 @@
                     </a>
                     <a href="#courses" class="nav-link text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
                         វគ្គសិក្សា <span class="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gold transition-all duration-300 group-hover:w-full -translate-x-1/2 shadow-[0_0_10px_#D4AF37]"></span>
+                    </a>
+                    <a href="#tutorial" class="nav-link text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
+                        របៀបប្រើ <span class="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gold transition-all duration-300 group-hover:w-full -translate-x-1/2 shadow-[0_0_10px_#D4AF37]"></span>
                     </a>
                     <a href="https://t.me/keovothy" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
                         ទំនាក់ទំនង <span class="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gold transition-all duration-300 group-hover:w-full -translate-x-1/2 shadow-[0_0_10px_#D4AF37]"></span>
@@ -634,6 +794,9 @@
                                 <a href="#courses" class="mobile-nav-link flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
                                     <span>វគ្គសិក្សា</span><i class="fa-solid fa-graduation-cap text-xs text-gold/70"></i>
                                 </a>
+                                <a href="#tutorial" class="mobile-nav-link flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
+                                    <span>របៀបប្រើវេបសាយ</span><i class="fa-solid fa-circle-play text-xs text-gold/70"></i>
+                                </a>
                                 <a href="https://t.me/keovothy" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
                                     <span>ទំនាក់ទំនង</span><i class="fa-brands fa-telegram text-sm text-gold/70"></i>
                                 </a>
@@ -661,7 +824,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-24 scroll-mt-28">
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-40 pb-24 scroll-mt-36">
         <!-- Clean visual focus behind the hero content -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute left-1/2 top-[44%] h-[560px] w-[900px] max-w-[95vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.11)_0%,rgba(212,175,55,0.035)_38%,transparent_72%)]"></div>
@@ -748,6 +911,54 @@
                 <a href="#book-content-creation" class="motion-item motion-link" tabindex="-1"><img src="https://images.unsplash.com/photo-1758553026412-bc1da0ebd366?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async"><div><strong>Content Creation</strong><span>គំនិត ការសរសេរ និងការបង្កើតមាតិកា</span></div></a>
                 <a href="#book-graphic-design" class="motion-item motion-link" tabindex="-1"><img src="https://images.unsplash.com/photo-1716471330463-f475b00f0506?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async"><div><strong>Graphic Design</strong><span>ពណ៌ Layout និងការរចនាបែបអាជីព</span></div></a>
                 <a href="#course-crm-system" class="motion-item motion-link" tabindex="-1"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async"><div><strong>CRM System</strong><span>គ្រប់គ្រងទិន្នន័យ និងទំនាក់ទំនងអតិថិជន</span></div></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Easy-to-find video tutorial and written guidance -->
+    <section id="tutorial" class="tutorial-section" aria-labelledby="tutorial-title">
+        <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 text-center" data-aos="fade-up">
+                <p class="section-kicker">Quick Start Guide</p>
+                <h2 id="tutorial-title" class="section-heading mb-5 text-4xl font-black text-white md:text-5xl">វីដេអូណែនាំ <span class="text-shimmer">របៀបប្រើវេបសាយ</span></h2>
+                <div class="mx-auto h-1 w-20 rounded-full bg-gold shadow-[0_0_15px_#D4AF37]"></div>
+                <p class="section-copy">មើលវីដេអូខ្លី រួចជ្រើសចំណុចខាងស្តាំ ដើម្បីរៀនប្រើមុខងារសំខាន់ៗម្តងមួយជំហាន។</p>
+            </div>
+
+            <div class="tutorial-shell" data-aos="fade-up" data-aos-delay="120">
+                <div class="tutorial-video-frame">
+                    <video id="tutorial-video" class="tutorial-video" controls muted playsinline preload="metadata" poster="assets/tutorial-01.png" aria-describedby="tutorial-video-description">
+                        <source src="assets/website-guide-mobile.mp4" type="video/mp4">
+                        Browser របស់អ្នកមិនអាចបង្ហាញវីដេអូនេះបានទេ។ សូមអានសេចក្ដីណែនាំនៅខាងក្រោម។
+                    </video>
+                </div>
+
+                <div class="tutorial-guide">
+                    <h3>ចាប់ផ្តើមប្រើប្រាស់ក្នុងរយៈពេលខ្លី</h3>
+                    <p id="tutorial-video-description">ចុចលើជំហានណាមួយ ដើម្បីលោតទៅផ្នែកនោះក្នុងវីដេអូ។ អ្នកអាចផ្អាក ឬបើកមើលពេញអេក្រង់បាន។</p>
+                    <div class="tutorial-steps" aria-label="ជំហានប្រើប្រាស់វេបសាយ">
+                        <button type="button" class="tutorial-step is-active" data-tutorial-time="0" aria-pressed="true">
+                            <span class="tutorial-step-number">01</span>
+                            <span><strong>ស្វែងរកតាមម៉ឺនុយ</strong><small>លើ Mobile ចុចសញ្ញា ☰ ហើយជ្រើសផ្នែកដែលចង់មើល។</small></span>
+                            <i class="fa-solid fa-play" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="tutorial-step" data-tutorial-time="3.7" aria-pressed="false">
+                            <span class="tutorial-step-number">02</span>
+                            <span><strong>ទាញយក E-Book</strong><small>ចូលផ្នែកសៀវភៅ ជ្រើសប្រធានបទ ហើយចុចប៊ូតុងទាញយក។</small></span>
+                            <i class="fa-solid fa-play" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="tutorial-step" data-tutorial-time="7.1" aria-pressed="false">
+                            <span class="tutorial-step-number">03</span>
+                            <span><strong>ចូលរៀនវគ្គសិក្សា</strong><small>ជ្រើសវគ្គដែលចង់រៀន ហើយចុច “ចុចចូលទីនេះ”។</small></span>
+                            <i class="fa-solid fa-play" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="tutorial-step" data-tutorial-time="10.5" aria-pressed="false">
+                            <span class="tutorial-step-number">04</span>
+                            <span><strong>ស្នើសុំជំនួយ</strong><small>ប្រើ Telegram Bot, Telegram Channel ឬ Facebook ដើម្បីទាក់ទង។</small></span>
+                            <i class="fa-solid fa-play" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -922,18 +1133,29 @@
         </div>
     </section>
 
+    <a href="#tutorial" class="tutorial-fab" aria-label="មើលវីដេអូណែនាំរបៀបប្រើវេបសាយ">
+        <i class="fa-solid fa-circle-play" aria-hidden="true"></i>
+        <span>របៀបប្រើវេបសាយ</span>
+    </a>
+
     <!-- Footer -->
     <footer class="bg-[#050505] border-t border-white/5 mt-auto relative z-10 pt-12 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="footer-brand-stage" aria-label="KEOVOTHY Digital Academy">
+                <div class="footer-logo-orbit">
+                    <img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt="KEOVOTHY Digital Academy Logo" loading="lazy" decoding="async">
+                </div>
+                <span class="footer-brand-name">KEOVOTHY Digital Academy</span>
+            </div>
             <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-light">
                 <p class="mb-4 md:mb-0 text-center md:text-left">
                     © 2026 Digital Academy. រក្សាសិទ្ធិគ្រប់យ៉ាង។ 
                     <span class="block sm:inline mt-2 sm:mt-0 sm:ml-2">រៀបចំឡើងដោយ <span class="text-gold font-bold text-sm tracking-wider">រស់ កែវវុទ្ធី</span></span>
                 </p>
-                <div class="flex space-x-8">
+                <div class="footer-bottom-links flex space-x-8">
                     <a href="#" class="hover:text-gold transition">ឯកជនភាព</a>
                     <a href="#" class="hover:text-gold transition">លក្ខខណ្ឌ</a>
-                    <a href="#" class="hover:text-gold transition">ជំនួយ</a>
+                    <a href="#tutorial" class="hover:text-gold transition">ជំនួយ</a>
                 </div>
             </div>
         </div>
@@ -996,7 +1218,7 @@
         });
 
         // Keep desktop and mobile navigation aligned with the visible section
-        const observedSections = [...document.querySelectorAll('#home, #books, #courses')];
+        const observedSections = [...document.querySelectorAll('#home, #tutorial, #books, #courses')];
         const updateActiveNavigation = (sectionId) => {
             document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
                 const active = link.getAttribute('href') === `#${sectionId}`;
@@ -1013,6 +1235,29 @@
         document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', () => {
             document.getElementById('mobile-nav-details')?.removeAttribute('open');
         }));
+
+        // Tutorial chapter controls: seek the local guide video and keep the written step in sync
+        const tutorialVideo = document.getElementById('tutorial-video');
+        const tutorialSteps = [...document.querySelectorAll('.tutorial-step')];
+        const setActiveTutorialStep = (activeStep) => {
+            tutorialSteps.forEach(step => {
+                const active = step === activeStep;
+                step.classList.toggle('is-active', active);
+                step.setAttribute('aria-pressed', String(active));
+            });
+        };
+        tutorialSteps.forEach(step => step.addEventListener('click', () => {
+            if (!tutorialVideo) return;
+            tutorialVideo.currentTime = Number(step.dataset.tutorialTime || 0);
+            setActiveTutorialStep(step);
+            const playRequest = tutorialVideo.play();
+            if (playRequest && typeof playRequest.catch === 'function') playRequest.catch(() => {});
+        }));
+        tutorialVideo?.addEventListener('timeupdate', () => {
+            const currentTime = tutorialVideo.currentTime;
+            const activeStep = [...tutorialSteps].reverse().find(step => currentTime >= Number(step.dataset.tutorialTime || 0));
+            if (activeStep) setActiveTutorialStep(activeStep);
+        });
 
         // Smooth in-page navigation for the moving showcase and menu links
         document.addEventListener('click', (event) => {
@@ -1084,7 +1329,7 @@
         let ringX = mouseX, ringY = mouseY;
         let auraX = mouseX, auraY = mouseY;
         
-        if (window.matchMedia("(pointer: fine)").matches) {
+        if (window.matchMedia("(pointer: fine) and (min-width: 768px)").matches) {
             window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX; mouseY = e.clientY;
                 cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
