@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Academy - សាលាឌីជីថល</title>
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=Z5yMHyAqYZWIxQazDIRWFl69bXiHRLk_4AYJpe85kRJM0Aeu733k_hdiZ0oObtNQRIfz-QxW7oF9XZnEdg78J29vCqzzQy49a5U-d8rpGBB2Jg-pN_xIxOl9xZuZC1V6uSAld3S2xczK2ydf0lPwCP7nrosw5-3QA4sgHIgg-BH0KBiN8RO5mQD-JH4MbES3HOOegAvUNCXkjCiRziMIEln2ALA93ANstegWsV2Lfow-sLtLBIB0MO7qY5R5ZbhuWcZfjaF5rWzx448ZmrGKbXCXbGd6zdJi3jFOnkop4lH16rNA3HtjjJJzXXKJ0uhB" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jaGF0Z3B0LmNvbS9iYWNrZW5kLWFwaS9lc3R1YXJ5L2NvbnRlbnQ_aWQ9ZmlsZV8wMDAwMDAwMGZkMDQ4MWY3OTFkNGZhMDExZGM0NmQ2NyZmbj1pbmRleCUyODIlMjkuaHRtbCZjZD1hdHRhY2htZW50JnRzPTQ5Njc4NSZwPWZzJmNpZD0xJnNpZz0wMWM5ZmUyMjhmZjBhNmIyZTBlMDIzNTczZmM0ODg2ZDc5Yjk5NjAzNjYzNDc5N2RhYmU0MGJjNGZiOGQ4ZWMxJnY9MA"/><script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -28,7 +28,15 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        body { background-color: #030303; color: #ffffff; font-size: 16px; overflow-x: hidden; cursor: none; }
+        html { scroll-behavior: smooth; }
+        body {
+            position: relative; isolation: isolate;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(212,175,55,.065), transparent 30%),
+                radial-gradient(circle at 88% 72%, rgba(212,175,55,.05), transparent 32%),
+                #030303;
+            color: #ffffff; font-size: 16px; overflow-x: hidden; cursor: auto;
+        }
         
         /* Film Grain Overlay */
         .noise-overlay {
@@ -57,7 +65,7 @@
         #scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: #D4AF37; z-index: 10000; width: 0%; box-shadow: 0 0 15px #D4AF37; transition: width 0.1s ease-out; }
 
         /* Canvas Particle Background */
-        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .5; }
 
         /* Animated Glowing Border Cards */
         .glow-card-wrapper { position: relative; overflow: hidden; border-radius: 1.5rem; background: #050505; padding: 1px; }
@@ -68,6 +76,310 @@
         }
         .glow-card-wrapper:hover::before { opacity: 1; animation-duration: 2s; }
         .glow-card-inner { position: relative; background: #080808; border-radius: 1.4rem; z-index: 1; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+
+        /* Living brand background */
+        .site-brand-field {
+            position: fixed; inset: 0; z-index: 1; overflow: hidden;
+            pointer-events: none; opacity: .95;
+        }
+        .site-brand-field::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(212,175,55,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,175,55,.025) 1px, transparent 1px);
+            background-size: 72px 72px;
+            mask-image: radial-gradient(circle at center, black, transparent 82%);
+            animation: grid-breathe 9s ease-in-out infinite;
+        }
+        .floating-brand {
+            position: absolute; display: grid; place-items: center;
+            width: var(--brand-size); height: var(--brand-size); border-radius: 999px;
+            opacity: var(--brand-opacity); filter: grayscale(1) sepia(1) saturate(.9);
+            will-change: transform;
+        }
+        .floating-brand::before {
+            content: ''; position: absolute; inset: -22%; border-radius: inherit;
+            border: 1px solid rgba(212,175,55,.16);
+            box-shadow: inset 0 0 35px rgba(212,175,55,.07), 0 0 55px rgba(212,175,55,.06);
+            animation: brand-ring 7s ease-in-out infinite;
+        }
+        .floating-brand img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
+        .brand-a { --brand-size: 270px; --brand-opacity: .075; left: -80px; top: 15%; animation: logo-drift-a 24s ease-in-out infinite; }
+        .brand-b { --brand-size: 180px; --brand-opacity: .07; right: 4%; top: 10%; animation: logo-drift-b 20s ease-in-out infinite; }
+        .brand-c { --brand-size: 340px; --brand-opacity: .05; right: -125px; bottom: 4%; animation: logo-drift-a 30s ease-in-out infinite reverse; }
+        .brand-d { --brand-size: 125px; --brand-opacity: .08; left: 20%; bottom: 10%; animation: logo-drift-b 18s ease-in-out infinite reverse; }
+        .brand-sweep {
+            position: absolute; top: -20%; left: -20%; width: 28%; height: 140%;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,.035), transparent);
+            filter: blur(18px); transform: rotate(16deg);
+            animation: brand-sweep 16s linear infinite;
+        }
+        .logo-runner {
+            --runner-size: 84px;
+            position: absolute; left: 0; z-index: 2;
+            width: calc(var(--runner-size) + 180px); height: var(--runner-size);
+            opacity: .18; will-change: transform;
+            animation: logo-run-across var(--run-time, 20s) ease-in-out var(--run-delay, 0s) infinite alternate;
+        }
+        .runner-top { top: 21%; --run-time: 18s; --run-delay: -3s; }
+        .runner-middle { top: 52%; --runner-size: 64px; --run-time: 23s; --run-delay: -13s; animation-direction: alternate-reverse; }
+        .runner-bottom { top: 80%; --runner-size: 98px; --run-time: 27s; --run-delay: -8s; }
+        .runner-trail {
+            position: absolute; top: 50%; right: calc(var(--runner-size) * .68); width: 180px; height: 2px;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,.04), rgba(244,214,117,.7));
+            box-shadow: 0 0 16px rgba(212,175,55,.32);
+        }
+        .runner-orb {
+            position: absolute; top: 0; right: 0; display: grid; place-items: center;
+            width: var(--runner-size); height: var(--runner-size); padding: 5px;
+            border: 1px solid rgba(244,214,117,.52); border-radius: 999px;
+            background: rgba(3,3,3,.66);
+            box-shadow: 0 0 28px rgba(212,175,55,.28), inset 0 0 18px rgba(212,175,55,.1);
+            backdrop-filter: blur(8px);
+            animation: runner-orb-life 3.8s ease-in-out infinite;
+        }
+        .runner-orb::before {
+            content: ''; position: absolute; inset: -9px; border-radius: inherit;
+            border: 1px dashed rgba(212,175,55,.34);
+            animation: runner-ring-spin 9s linear infinite;
+        }
+        .runner-orb img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
+        @keyframes logo-drift-a {
+            0%,100% { transform: translate3d(0,0,0) rotate(-7deg) scale(1); }
+            50% { transform: translate3d(38px,-28px,0) rotate(8deg) scale(1.08); }
+        }
+        @keyframes logo-drift-b {
+            0%,100% { transform: translate3d(0,0,0) rotate(6deg); }
+            50% { transform: translate3d(-32px,34px,0) rotate(-8deg); }
+        }
+        @keyframes brand-ring { 50% { transform: scale(1.1); opacity: .35; } }
+        @keyframes grid-breathe { 50% { opacity: .45; transform: scale(1.025); } }
+        @keyframes brand-sweep { to { transform: translateX(520%) rotate(16deg); } }
+        @keyframes logo-run-across {
+            0% { transform: translate3d(-280px, 18px, 0); }
+            35% { transform: translate3d(calc(35vw - 90px), -18px, 0); }
+            65% { transform: translate3d(calc(67vw - 90px), 14px, 0); }
+            100% { transform: translate3d(calc(100vw + 40px), -10px, 0); }
+        }
+        @keyframes runner-orb-life {
+            0%,100% { transform: translateY(0) rotate(-3deg) scale(.96); filter: brightness(.85); }
+            50% { transform: translateY(-8px) rotate(4deg) scale(1.06); filter: brightness(1.22); }
+        }
+        @keyframes runner-ring-spin { to { transform: rotate(360deg); } }
+
+        /* Continuous skills showcase: moving images + useful information */
+        .motion-showcase {
+            position: relative; z-index: 10; overflow: hidden;
+            padding: 1.1rem 0 1.35rem;
+            border-top: 1px solid rgba(212,175,55,.16);
+            border-bottom: 1px solid rgba(212,175,55,.16);
+            background: linear-gradient(90deg, rgba(3,3,3,.98), rgba(15,12,4,.82), rgba(3,3,3,.98));
+            box-shadow: 0 22px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.025);
+        }
+        .motion-showcase::before, .motion-showcase::after {
+            content: ''; position: absolute; z-index: 3; top: 0; bottom: 0; width: min(12vw, 9rem); pointer-events: none;
+        }
+        .motion-showcase::before { left: 0; background: linear-gradient(90deg, #030303, transparent); }
+        .motion-showcase::after { right: 0; background: linear-gradient(-90deg, #030303, transparent); }
+        .motion-eyebrow {
+            display: flex; align-items: center; justify-content: center; gap: .7rem;
+            margin: 0 0 .9rem; color: rgba(244,214,117,.72);
+            font: 800 .7rem/1.4 "Noto Sans Khmer", sans-serif; letter-spacing: .13em;
+        }
+        .motion-eyebrow::before, .motion-eyebrow::after { content: ''; width: 2.8rem; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,.7)); }
+        .motion-eyebrow::after { transform: rotate(180deg); }
+        .motion-track {
+            display: flex; width: max-content; gap: 1.3rem; padding-inline: .65rem;
+            animation: showcase-scroll 34s linear infinite; will-change: transform;
+        }
+        .motion-showcase:hover .motion-track { animation-play-state: paused; }
+        .motion-item {
+            display: grid; grid-template-columns: 4.25rem auto; align-items: center; gap: .9rem;
+            width: clamp(17rem, 24vw, 21rem); min-height: 5.35rem; padding: .55rem .9rem .55rem .55rem;
+            border: 1px solid rgba(255,255,255,.09); border-radius: 1.15rem;
+            background: rgba(255,255,255,.035); box-shadow: 0 14px 36px rgba(0,0,0,.28);
+            color: inherit; text-decoration: none; cursor: pointer; touch-action: manipulation;
+            backdrop-filter: blur(12px); transition: border-color .3s ease, background .3s ease, transform .3s ease, box-shadow .3s ease;
+        }
+        .motion-item:hover {
+            transform: translateY(-3px); border-color: rgba(244,214,117,.8); background: rgba(212,175,55,.09);
+            animation: moving-panel-gold-pulse .78s ease-in-out infinite alternate;
+        }
+        .motion-item:focus-visible {
+            outline: 2px solid #F4D675; outline-offset: 4px; border-color: rgba(212,175,55,.75);
+            animation: moving-panel-gold-pulse .78s ease-in-out infinite alternate;
+        }
+        .motion-item img { width: 4.25rem; height: 4.25rem; border-radius: .85rem; object-fit: cover; filter: saturate(.8) contrast(1.06); }
+        .motion-item strong { display: block; margin-bottom: .28rem; color: #fff; font-size: .9rem; line-height: 1.45; }
+        .motion-item span { display: block; color: #8f949d; font-size: .72rem; line-height: 1.5; }
+        @keyframes showcase-scroll { to { transform: translateX(calc(-50% - .65rem)); } }
+        @keyframes moving-panel-gold-pulse {
+            0% {
+                border-color: rgba(212,175,55,.42);
+                box-shadow: 0 16px 38px rgba(0,0,0,.38), 0 0 7px rgba(212,175,55,.28), inset 0 0 8px rgba(212,175,55,.035);
+            }
+            100% {
+                border-color: rgba(255,226,124,.98);
+                box-shadow: 0 18px 44px rgba(0,0,0,.46), 0 0 13px rgba(255,226,124,.88), 0 0 34px rgba(212,175,55,.58), inset 0 0 18px rgba(212,175,55,.12);
+            }
+        }
+
+        /* Readable section context and active navigation */
+        .section-kicker { margin-bottom: .8rem; color: #D4AF37; font-size: .72rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+        .section-copy { max-width: 46rem; margin: 1.15rem auto 0; color: #9ca3af; font-size: 1rem; line-height: 1.9; }
+        .card-meta { display: flex; flex-wrap: wrap; gap: .55rem 1rem; margin: -.2rem 0 1.35rem; color: #8f949d; font-size: .76rem; line-height: 1.55; }
+        .card-meta span { display: inline-flex; align-items: center; gap: .42rem; }
+        .card-meta i { color: rgba(244,214,117,.78); font-size: .68rem; }
+        .nav-link.is-active { color: #F4D675 !important; }
+        .nav-link.is-active > span { width: 100% !important; }
+        .mobile-nav-link.is-active { color: #F4D675 !important; background: rgba(212,175,55,.08); }
+
+        /* Refined sections and cards — original three-column structure preserved */
+        .academy-section { position: relative; scroll-margin-top: 6rem; }
+        .academy-section::before {
+            content: ''; position: absolute; inset: 5% 0;
+            background: radial-gradient(circle at 50% 35%, rgba(212,175,55,.055), transparent 55%);
+            pointer-events: none;
+        }
+        .section-heading { text-wrap: balance; letter-spacing: -.025em; }
+        .academy-card {
+            isolation: isolate; min-height: 100%;
+            scroll-margin-top: 8.5rem;
+            border: 1px solid rgba(255,255,255,.075);
+            box-shadow: 0 30px 80px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.035);
+            transition: transform .55s cubic-bezier(.2,.8,.2,1), border-color .35s ease, box-shadow .45s ease;
+            animation: card-ambient 7s ease-in-out infinite;
+        }
+        .academy-card:nth-child(2) { animation-delay: -2.3s; }
+        .academy-card:nth-child(3) { animation-delay: -4.6s; }
+        .academy-card::after {
+            content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+            background: radial-gradient(420px circle at var(--mouse-x,50%) var(--mouse-y,0%), rgba(244,214,117,.11), transparent 42%);
+            opacity: 0; transition: opacity .35s ease;
+        }
+        .academy-card:hover {
+            transform: translateY(-10px);
+            animation: academy-gold-pulse .85s ease-in-out infinite alternate;
+        }
+        .academy-card.is-scroll-target {
+            transform: translateY(-8px);
+            animation: academy-arrival-gold .62s ease-in-out 4 alternate;
+        }
+        .academy-card.is-scroll-target::before { opacity: 1; animation-duration: .7s; }
+        .academy-card.is-scroll-target .glow-card-inner::before { transform: scaleX(1); opacity: 1; }
+        .academy-card:focus { outline: none; }
+        .academy-card:hover::after { opacity: 1; }
+        .academy-card .glow-card-inner {
+            background: linear-gradient(155deg, rgba(17,17,17,.96), rgba(5,5,5,.98) 64%);
+        }
+        .academy-card .glow-card-inner::before {
+            content: ''; position: absolute; z-index: 3; top: 0; left: 12%; right: 12%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(244,214,117,.9), transparent);
+            box-shadow: 0 0 18px rgba(212,175,55,.45);
+            transform: scaleX(.38); opacity: .45;
+            transition: transform .5s ease, opacity .35s ease;
+        }
+        .academy-card:hover .glow-card-inner::before { transform: scaleX(1); opacity: 1; }
+        .academy-card h3 {
+            line-height: 1.5; transition: color .3s ease, text-shadow .35s ease, transform .35s ease;
+        }
+        .academy-card:hover h3 { color: #f3d66f; text-shadow: 0 0 24px rgba(212,175,55,.22); transform: translateX(3px); }
+        .academy-card p { font-size: .92rem; line-height: 1.85; }
+        .media-frame { isolation: isolate; }
+        .media-frame::before {
+            content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+            background: linear-gradient(125deg, transparent 28%, rgba(255,255,255,.14) 48%, transparent 68%);
+            transform: translateX(-130%); animation: media-shine 8s ease-in-out infinite;
+        }
+        .media-frame::after {
+            content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+            background: linear-gradient(180deg, rgba(212,175,55,.025), transparent 45%, rgba(0,0,0,.45));
+            box-shadow: inset 0 0 55px rgba(0,0,0,.38);
+        }
+        .media-frame img, .media-frame .course-photo {
+            animation: image-breathe 12s ease-in-out infinite;
+            will-change: transform;
+        }
+        .academy-card:nth-child(2) .media-frame img,
+        .academy-card:nth-child(2) .media-frame .course-photo { animation-delay: -4s; }
+        .academy-card:nth-child(3) .media-frame img,
+        .academy-card:nth-child(3) .media-frame .course-photo { animation-delay: -8s; }
+        .academy-card:hover .media-frame img,
+        .academy-card:hover .media-frame .course-photo { animation-play-state: paused; transform: scale(1.13); opacity: .82; }
+        .card-index {
+            position: absolute; top: 1rem; right: 1rem; z-index: 8;
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 2.75rem; height: 1.8rem; padding: 0 .72rem;
+            border: 1px solid rgba(244,214,117,.32); border-radius: 999px;
+            background: rgba(0,0,0,.52); color: #f3d66f;
+            font: 800 .7rem/1 "Noto Sans Khmer", sans-serif; letter-spacing: .12em;
+            box-shadow: 0 8px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
+            backdrop-filter: blur(10px); transition: transform .35s ease, background .35s ease;
+        }
+        .academy-card:hover .card-index { transform: translateY(-2px) scale(1.05); background: rgba(212,175,55,.14); }
+        .card-chip { position: relative; z-index: 7; backdrop-filter: blur(10px); }
+        .card-action {
+            position: relative; overflow: hidden; min-height: 3.5rem;
+            display: flex; align-items: center; justify-content: center;
+            letter-spacing: .02em; transform: translateZ(0);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 12px 28px rgba(0,0,0,.3);
+        }
+        .card-action::after {
+            content: ''; position: absolute; top: -40%; bottom: -40%; left: -35%; width: 24%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+            transform: skewX(-18deg); transition: left .65s ease;
+        }
+        .card-action:hover::after { left: 115%; }
+        .card-action:active { transform: translateY(1px) scale(.985); }
+        .card-action:focus-visible { outline: 2px solid #f3d66f; outline-offset: 3px; }
+        .card-action i { transition: transform .35s ease, filter .35s ease; }
+        .card-action:hover i { transform: translateY(-2px) scale(1.08); filter: drop-shadow(0 0 8px rgba(212,175,55,.55)); }
+        .course-icon { animation: icon-float 4.8s ease-in-out infinite; }
+        .brand-logo-core { animation: logo-pulse 5s ease-in-out infinite; }
+        @keyframes card-ambient {
+            0%,100% { box-shadow: 0 30px 80px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.035); }
+            50% { box-shadow: 0 34px 86px rgba(0,0,0,.58), 0 0 28px rgba(212,175,55,.045), inset 0 1px 0 rgba(255,255,255,.055); }
+        }
+        @keyframes academy-gold-pulse {
+            0% {
+                border-color: rgba(212,175,55,.35);
+                box-shadow: 0 34px 84px rgba(0,0,0,.6), 0 0 10px rgba(212,175,55,.24), inset 0 0 7px rgba(212,175,55,.035);
+            }
+            100% {
+                border-color: rgba(255,226,124,.95);
+                box-shadow: 0 40px 96px rgba(0,0,0,.7), 0 0 17px rgba(255,226,124,.8), 0 0 48px rgba(212,175,55,.48), inset 0 0 22px rgba(212,175,55,.11);
+            }
+        }
+        @keyframes academy-arrival-gold {
+            0% {
+                border-color: rgba(212,175,55,.36);
+                box-shadow: 0 36px 88px rgba(0,0,0,.64), 0 0 8px rgba(212,175,55,.25), inset 0 0 8px rgba(212,175,55,.04);
+            }
+            100% {
+                border-color: #FFE27C;
+                box-shadow: 0 42px 102px rgba(0,0,0,.72), 0 0 0 2px rgba(255,226,124,.38), 0 0 20px rgba(255,226,124,.96), 0 0 60px rgba(212,175,55,.68), inset 0 0 28px rgba(212,175,55,.14);
+            }
+        }
+        @keyframes media-shine { 0%,62%,100% { transform: translateX(-130%); } 78% { transform: translateX(130%); } }
+        @keyframes image-breathe { 0%,100% { transform: scale(1.035); } 50% { transform: scale(1.105); } }
+        @keyframes icon-float { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.04); } }
+        @keyframes logo-pulse { 0%,100% { transform: scale(1.08); filter: brightness(.96); } 50% { transform: scale(1.14); filter: brightness(1.16); } }
+
+        @media (max-width: 767px) {
+            .brand-a { --brand-size: 190px; left: -95px; }
+            .brand-b { --brand-size: 110px; right: -24px; }
+            .brand-c { --brand-size: 220px; right: -125px; }
+            .brand-d { display: none; }
+            .logo-runner { --runner-size: 58px; width: calc(var(--runner-size) + 125px); opacity: .13; }
+            .runner-middle { display: none; }
+            .runner-bottom { --runner-size: 70px; }
+            .runner-trail { width: 125px; right: calc(var(--runner-size) * .62); }
+            .academy-card:hover { transform: translateY(-5px); }
+            .motion-track { animation-duration: 27s; }
+            .motion-item { width: 17.2rem; }
+        }
+        @media (pointer: fine) { body { cursor: none; } }
 
         /* 3D Preserves */
         .preserve-3d { transform-style: preserve-3d; perspective: 1200px; }
@@ -131,6 +443,94 @@
         @media (min-width: 768px) {
             .mobile-nav-details { display: none !important; }
         }
+
+        /* Smart Redirect Experience */
+        body.redirecting { overflow: hidden; }
+        .redirect-overlay {
+            position: fixed; inset: 0; z-index: 10050;
+            display: flex; align-items: center; justify-content: center;
+            padding: 1.25rem; opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity 240ms ease, visibility 240ms ease;
+        }
+        .redirect-overlay.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+        .redirect-backdrop {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 38%, rgba(212,175,55,0.12), transparent 42%), rgba(0,0,0,0.86);
+            -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+        }
+        .redirect-dialog {
+            position: relative; width: min(100%, 29rem); overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.30); border-radius: 1.75rem;
+            background: linear-gradient(145deg, rgba(18,18,18,0.98), rgba(5,5,5,0.99));
+            box-shadow: 0 28px 90px rgba(0,0,0,0.75), 0 0 60px rgba(212,175,55,0.08);
+            padding: 2rem 1.5rem 1.5rem; text-align: center;
+            transform: translateY(14px) scale(0.97);
+            transition: transform 280ms cubic-bezier(.2,.8,.2,1);
+        }
+        .redirect-overlay.is-open .redirect-dialog { transform: translateY(0) scale(1); }
+        .redirect-dialog::before {
+            content: ''; position: absolute; top: 0; left: 14%; right: 14%; height: 1px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            box-shadow: 0 0 18px rgba(212,175,55,0.65);
+        }
+        .redirect-brand {
+            display: inline-flex; align-items: center; gap: .55rem; margin-bottom: 1.4rem;
+            color: rgba(255,255,255,.55); font-size: .7rem; font-weight: 800;
+            letter-spacing: .18em; text-transform: uppercase;
+        }
+        .redirect-brand-mark { width: .45rem; height: .45rem; border-radius: 999px; background: #D4AF37; box-shadow: 0 0 14px #D4AF37; }
+        .redirect-loader {
+            position: relative; display: grid; place-items: center; width: 6rem; height: 6rem;
+            margin: 0 auto 1.35rem; border-radius: 999px;
+            background: radial-gradient(circle, rgba(212,175,55,.14), rgba(212,175,55,.03) 55%, transparent 56%);
+        }
+        .redirect-loader::before, .redirect-loader::after {
+            content: ''; position: absolute; inset: 0; border-radius: inherit;
+            border: 2px solid transparent; border-top-color: #D4AF37; border-right-color: rgba(212,175,55,.42);
+            animation: redirect-spin 1.05s linear infinite;
+        }
+        .redirect-loader::after { inset: .55rem; animation-direction: reverse; animation-duration: 1.55s; opacity: .55; }
+        .redirect-loader i { color: #D4AF37; font-size: 1.45rem; filter: drop-shadow(0 0 10px rgba(212,175,55,.65)); }
+        .redirect-title { margin: 0 0 .65rem; color: #fff; font-size: clamp(1.25rem, 5vw, 1.55rem); font-weight: 900; line-height: 1.45; }
+        .redirect-copy { margin: 0 auto 1.15rem; max-width: 22rem; color: #9ca3af; font-size: .92rem; line-height: 1.75; }
+        .redirect-destination {
+            display: flex; align-items: center; justify-content: center; gap: .6rem;
+            min-height: 2.8rem; margin-bottom: 1.15rem; padding: .7rem 1rem;
+            border: 1px solid rgba(255,255,255,.08); border-radius: .9rem;
+            background: rgba(255,255,255,.035); color: #f5d879; font-size: .86rem; font-weight: 700;
+        }
+        .redirect-progress { height: .3rem; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.08); }
+        .redirect-progress-fill {
+            width: 0; height: 100%; border-radius: inherit;
+            background: linear-gradient(90deg, #8f6d13, #F4D675, #D4AF37);
+            box-shadow: 0 0 14px rgba(212,175,55,.65);
+        }
+        .redirect-status { min-height: 1.5rem; margin: .8rem 0 .4rem; color: #6b7280; font-size: .76rem; }
+        .redirect-cancel {
+            min-height: 2.75rem; width: 100%; margin-top: .45rem; border: 1px solid rgba(255,255,255,.10);
+            border-radius: .9rem; background: rgba(255,255,255,.035); color: #d1d5db;
+            font: inherit; font-size: .86rem; font-weight: 700; cursor: pointer;
+            transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+        }
+        .redirect-cancel:hover, .redirect-cancel:focus-visible { outline: none; border-color: rgba(212,175,55,.55); color: #F4D675; background: rgba(212,175,55,.08); }
+        .redirect-overlay.is-unavailable .redirect-loader::before,
+        .redirect-overlay.is-unavailable .redirect-loader::after { animation: none; border-color: rgba(239,68,68,.18); }
+        .redirect-overlay.is-unavailable .redirect-loader i { color: #f59e0b; filter: drop-shadow(0 0 10px rgba(245,158,11,.45)); }
+        .redirect-overlay.is-unavailable .redirect-progress { display: none; }
+        @keyframes redirect-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) {
+            .redirect-loader::before, .redirect-loader::after { animation-duration: 2.5s; }
+            .redirect-overlay, .redirect-dialog { transition-duration: 1ms; }
+            html { scroll-behavior: auto; }
+            .floating-brand, .floating-brand::before, .brand-sweep,
+            .logo-runner, .runner-orb, .runner-orb::before,
+            .site-brand-field::before, .media-frame::before,
+            .media-frame img, .media-frame .course-photo,
+            .course-icon, .brand-logo-core { animation: none !important; }
+            .motion-track { animation: none !important; transform: none !important; overflow-x: auto; }
+            .motion-item:hover, .motion-item:focus-visible,
+            .academy-card:hover, .academy-card.is-scroll-target { animation: none !important; }
+        }
     </style>
   	<style type="text/css">
     #navbar-iframe {
@@ -144,6 +544,18 @@
     <div id="ambient-aura"></div>
     <div id="scroll-progress"></div>
     <canvas id="particle-canvas"></canvas>
+
+    <!-- Animated brand atmosphere -->
+    <div class="site-brand-field" aria-hidden="true">
+        <span class="floating-brand brand-a"><img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt=""></span>
+        <span class="floating-brand brand-b"><img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt=""></span>
+        <span class="floating-brand brand-c"><img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt=""></span>
+        <span class="floating-brand brand-d"><img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt=""></span>
+        <span class="logo-runner runner-top"><span class="runner-trail"></span><span class="runner-orb"><img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt=""></span></span>
+        <span class="logo-runner runner-middle"><span class="runner-trail"></span><span class="runner-orb"><img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt=""></span></span>
+        <span class="logo-runner runner-bottom"><span class="runner-trail"></span><span class="runner-orb"><img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt=""></span></span>
+        <span class="brand-sweep"></span>
+    </div>
     
     <div class="cursor-dot hidden md:block"></div>
     <div class="cursor-ring hidden md:block"></div>
@@ -157,7 +569,7 @@
                 <div class="absolute inset-0 rounded-full border-t-[3px] border-r-[3px] border-gold animate-spin shadow-[0_0_24px_#D4AF37]"></div>
                 <div class="absolute inset-3 rounded-full border-b-[3px] border-l-[3px] border-gold-light animate-spin-slow" style="animation-direction: reverse;"></div>
                 <div class="relative z-10 flex h-28 w-28 md:h-32 md:w-32 items-center justify-center overflow-hidden rounded-full border border-gold/25 bg-black/95 p-2 shadow-[0_0_30px_rgba(212,175,55,0.25)]">
-                    <img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&sz=w1000" referrerpolicy="no-referrer" alt="KEOVOTHY Logo" class="h-full w-full rounded-full object-cover scale-[1.08]">
+                    <img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt="KEOVOTHY Logo" class="brand-logo-core h-full w-full rounded-full object-cover scale-[1.08]">
                 </div>
             </div>
             <h2 class="mb-3 text-center font-black text-3xl md:text-4xl tracking-[0.14em] text-white drop-shadow-[0_0_18px_rgba(255,255,255,0.2)]">KEOVOTHY<span class="text-gold">.</span></h2>
@@ -173,19 +585,19 @@
                 <div class="flex-shrink-0 cursor-pointer group magnetic-wrap">
                     <div class="magnetic p-1 rounded-full border border-gold/20 shadow-[0_0_15px_rgba(212,175,55,0.15)] bg-black/60 transition-all duration-500 hover:shadow-[0_0_30px_rgba(212,175,55,0.8)] hover:border-gold">
                         <div class="h-12 w-12 overflow-hidden rounded-full border border-gold/20 bg-black/95">
-                            <img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&sz=w1000" referrerpolicy="no-referrer" alt="Digital Academy Logo" class="h-full w-full rounded-full object-cover scale-[1.08]">
+                            <img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt="Digital Academy Logo" class="brand-logo-core h-full w-full rounded-full object-cover scale-[1.08]">
                         </div>
                     </div>
                 </div>
                 
                 <nav class="hidden md:flex space-x-10">
-                    <a href="#" class="text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
+                    <a href="#home" class="nav-link is-active text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
                         ទំព័រដើម <span class="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gold transition-all duration-300 group-hover:w-full -translate-x-1/2 shadow-[0_0_10px_#D4AF37]"></span>
                     </a>
-                    <a href="#books" class="text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
+                    <a href="#books" class="nav-link text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
                         សៀវភៅ <span class="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gold transition-all duration-300 group-hover:w-full -translate-x-1/2 shadow-[0_0_10px_#D4AF37]"></span>
                     </a>
-                    <a href="#courses" class="text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
+                    <a href="#courses" class="nav-link text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
                         វគ្គសិក្សា <span class="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gold transition-all duration-300 group-hover:w-full -translate-x-1/2 shadow-[0_0_10px_#D4AF37]"></span>
                     </a>
                     <a href="https://t.me/keovothy" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white text-[13px] uppercase tracking-[0.15em] font-bold transition duration-300 relative group">
@@ -194,9 +606,9 @@
                 </nav>
 
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="https://keovothy93.github.io/KEOVOTHY-CRM-ACADEMY" class="text-gray-400 text-[13px] tracking-widest font-bold hover:text-gold transition">ចូលគណនី</a>
+                    <a href="https://keovothy93.github.io/KEOVOTHY-CRM-ACADEMY" data-smart-redirect data-redirect-label="ប្រព័ន្ធគណនី" class="text-gray-400 text-[13px] tracking-widest font-bold hover:text-gold transition">ចូលគណនី</a>
                     <div class="magnetic-wrap">
-                        <button onclick="window.location.href='https://t.me/RKdigital_bot'" class="magnetic relative group overflow-hidden bg-white/5 backdrop-blur-sm border border-gold/50 text-gold px-7 py-2.5 rounded-full text-[13px] tracking-widest font-bold transition-all duration-300 hover:text-black hover:border-gold">
+                        <button type="button" data-smart-redirect data-redirect-url="https://t.me/RKdigital_bot" data-redirect-label="Telegram Bot" class="magnetic relative group overflow-hidden bg-white/5 backdrop-blur-sm border border-gold/50 text-gold px-7 py-2.5 rounded-full text-[13px] tracking-widest font-bold transition-all duration-300 hover:text-black hover:border-gold">
                             <span class="absolute inset-0 bg-gold translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"></span>
                             <span class="relative z-10">Telegram Bot</span>
                         </button>
@@ -213,13 +625,13 @@
 
                         <div class="mobile-nav-panel">
                             <nav class="px-6 py-6 flex flex-col gap-2">
-                                <a href="#" class="flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
+                                <a href="#home" class="mobile-nav-link is-active flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
                                     <span>ទំព័រដើម</span><i class="fa-solid fa-house text-xs text-gold/70"></i>
                                 </a>
-                                <a href="#books" class="flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
+                                <a href="#books" class="mobile-nav-link flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
                                     <span>សៀវភៅ</span><i class="fa-solid fa-book-open text-xs text-gold/70"></i>
                                 </a>
-                                <a href="#courses" class="flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
+                                <a href="#courses" class="mobile-nav-link flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
                                     <span>វគ្គសិក្សា</span><i class="fa-solid fa-graduation-cap text-xs text-gold/70"></i>
                                 </a>
                                 <a href="https://t.me/keovothy" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-gold transition">
@@ -228,10 +640,16 @@
 
                                 <div class="my-2 h-px bg-white/10"></div>
 
-                                <a href="https://t.me/rkdigitalchannel" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl bg-gold px-4 py-3.5 text-sm font-black text-black transition hover:brightness-110">
+                                <a href="https://keovothy93.github.io/KEOVOTHY-CRM-ACADEMY" data-smart-redirect data-redirect-label="ប្រព័ន្ធគណនី" class="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3.5 text-sm font-bold text-white transition hover:border-gold/40 hover:text-gold">
+                                    <i class="fa-solid fa-right-to-bracket"></i> ចូលគណនី
+                                </a>
+                                <button type="button" data-smart-redirect data-redirect-url="https://t.me/RKdigital_bot" data-redirect-label="Telegram Bot" class="flex items-center justify-center gap-2 rounded-2xl border border-gold/40 bg-gold/5 px-4 py-3.5 text-sm font-bold text-gold transition hover:bg-gold/10">
+                                    <i class="fa-brands fa-telegram"></i> Telegram Bot
+                                </button>
+                                <a href="https://t.me/rkdigitalchannel" target="_blank" rel="noopener noreferrer" data-smart-redirect data-redirect-label="Telegram Channel" class="flex items-center justify-center gap-2 rounded-2xl bg-gold px-4 py-3.5 text-sm font-black text-black transition hover:brightness-110">
                                     <i class="fa-brands fa-telegram"></i> Join Telegram Channel
                                 </a>
-                                <a href="https://www.facebook.com/keovothy.ros" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl border border-gold/40 bg-gold/5 px-4 py-3.5 text-sm font-bold text-gold transition hover:bg-gold/10">
+                                <a href="https://www.facebook.com/keovothy.ros" target="_blank" rel="noopener noreferrer" data-smart-redirect data-redirect-label="Facebook" class="flex items-center justify-center gap-2 rounded-2xl border border-gold/40 bg-gold/5 px-4 py-3.5 text-sm font-bold text-gold transition hover:bg-gold/10">
                                     <i class="fa-brands fa-facebook"></i> Follow Facebook
                                 </a>
                             </nav>
@@ -243,7 +661,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-24">
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-24 scroll-mt-28">
         <!-- Clean visual focus behind the hero content -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute left-1/2 top-[44%] h-[560px] w-[900px] max-w-[95vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.11)_0%,rgba(212,175,55,0.035)_38%,transparent_72%)]"></div>
@@ -267,12 +685,12 @@
 
                 <p class="hero-copy mx-auto mb-10 max-w-3xl text-base font-normal leading-8 text-gray-300 sm:text-lg sm:leading-9 md:text-xl">
                     សិក្សាជំនាញ និងបច្ចេកវិទ្យាថ្មីៗ
-                    ដែលផ្តោតលើគុណភាព ជំនាញអនុវត្ត និងមេរៀន។
+                    ដែលផ្តោតលើគុណភាព ការអនុវត្តជាក់ស្តែង និងមេរៀនងាយយល់។
                 </p>
 
                 <div class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
                     <div class="magnetic-wrap w-full sm:w-auto">
-                        <a href="https://t.me/rkdigitalchannel" target="_blank" rel="noopener noreferrer" class="magnetic group relative inline-flex min-h-[56px] w-full min-w-[230px] items-center justify-center overflow-hidden rounded-full bg-gold px-9 py-4 text-sm font-black tracking-wide text-black shadow-[0_12px_34px_rgba(212,175,55,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_45px_rgba(212,175,55,0.38)] sm:w-auto">
+                        <a href="https://t.me/rkdigitalchannel" target="_blank" rel="noopener noreferrer" data-smart-redirect data-redirect-label="Telegram Channel" class="magnetic group relative inline-flex min-h-[56px] w-full min-w-[230px] items-center justify-center overflow-hidden rounded-full bg-gold px-9 py-4 text-sm font-black tracking-wide text-black shadow-[0_12px_34px_rgba(212,175,55,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_45px_rgba(212,175,55,0.38)] sm:w-auto">
                             <span class="absolute inset-0 -translate-x-full bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.75),transparent)] group-hover:animate-[shine_1.2s_infinite]"></span>
                             <span class="relative z-10 flex items-center gap-3">
                                 Join Telegram Channel
@@ -282,7 +700,7 @@
                     </div>
 
                     <div class="magnetic-wrap w-full sm:w-auto">
-                        <a href="https://www.facebook.com/keovothy.ros" target="_blank" rel="noopener noreferrer" class="magnetic inline-flex min-h-[56px] w-full min-w-[210px] items-center justify-center rounded-full border border-white/20 bg-white/[0.035] px-9 py-4 text-sm font-bold tracking-wide text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/70 hover:bg-gold/10 hover:text-gold sm:w-auto">
+                        <a href="https://www.facebook.com/keovothy.ros" target="_blank" rel="noopener noreferrer" data-smart-redirect data-redirect-label="Facebook" class="magnetic inline-flex min-h-[56px] w-full min-w-[210px] items-center justify-center rounded-full border border-white/20 bg-white/[0.035] px-9 py-4 text-sm font-bold tracking-wide text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/70 hover:bg-gold/10 hover:text-gold sm:w-auto">
                             Follow Facebook
                         </a>
                     </div>
@@ -290,7 +708,7 @@
 
                 <div class="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-gray-500 sm:text-sm">
                     <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold/80"></i> មេរៀនអនុវត្តជាក់ស្តែង</span>
-                    <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold/80"></i> ង្រៀនតាមបទពិសោធន៍</span>
+                    <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold/80"></i> បង្រៀនតាមបទពិសោធន៍</span>
                     <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold/80"></i> ផ្តោតលើជំនាញ</span>
                 </div>
             </div>
@@ -305,31 +723,64 @@
         </button>
     </section>
 
+    <!-- Moving visual showcase: original learning topics, now easier to scan -->
+    <section class="motion-showcase" aria-label="ជំនាញដែលអាចសិក្សា">
+        <p class="motion-eyebrow"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> ជំនាញសម្រាប់ការងារឌីជីថល</p>
+        <div class="motion-track">
+            <a href="#course-digital-marketing" class="motion-item motion-link" aria-label="ទៅកាន់វគ្គ Digital Marketing">
+                <img src="https://images.unsplash.com/photo-1686061594225-3e92c0cd51b0?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async">
+                <div><strong>Digital Marketing</strong><span>យុទ្ធសាស្ត្រ Social Media និង Ads</span></div>
+            </a>
+            <a href="#book-content-creation" class="motion-item motion-link" aria-label="ទៅកាន់សៀវភៅ Content Creation">
+                <img src="https://images.unsplash.com/photo-1758553026412-bc1da0ebd366?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async">
+                <div><strong>Content Creation</strong><span>គំនិត ការសរសេរ និងការបង្កើតមាតិកា</span></div>
+            </a>
+            <a href="#book-graphic-design" class="motion-item motion-link" aria-label="ទៅកាន់សៀវភៅ Graphic Design">
+                <img src="https://images.unsplash.com/photo-1716471330463-f475b00f0506?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async">
+                <div><strong>Graphic Design</strong><span>ពណ៌ Layout និងការរចនាបែបអាជីព</span></div>
+            </a>
+            <a href="#course-crm-system" class="motion-item motion-link" aria-label="ទៅកាន់វគ្គ CRM System">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async">
+                <div><strong>CRM System</strong><span>គ្រប់គ្រងទិន្នន័យ និងទំនាក់ទំនងអតិថិជន</span></div>
+            </a>
+            <div aria-hidden="true" class="contents">
+                <a href="#course-digital-marketing" class="motion-item motion-link" tabindex="-1"><img src="https://images.unsplash.com/photo-1686061594225-3e92c0cd51b0?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async"><div><strong>Digital Marketing</strong><span>យុទ្ធសាស្ត្រ Social Media និង Ads</span></div></a>
+                <a href="#book-content-creation" class="motion-item motion-link" tabindex="-1"><img src="https://images.unsplash.com/photo-1758553026412-bc1da0ebd366?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async"><div><strong>Content Creation</strong><span>គំនិត ការសរសេរ និងការបង្កើតមាតិកា</span></div></a>
+                <a href="#book-graphic-design" class="motion-item motion-link" tabindex="-1"><img src="https://images.unsplash.com/photo-1716471330463-f475b00f0506?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async"><div><strong>Graphic Design</strong><span>ពណ៌ Layout និងការរចនាបែបអាជីព</span></div></a>
+                <a href="#course-crm-system" class="motion-item motion-link" tabindex="-1"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=360&amp;q=78" alt="" loading="lazy" decoding="async"><div><strong>CRM System</strong><span>គ្រប់គ្រងទិន្នន័យ និងទំនាក់ទំនងអតិថិជន</span></div></a>
+            </div>
+        </div>
+    </section>
+
     <!-- Books Section -->
-    <section id="books" class="py-32 relative z-10">
+    <section id="books" class="academy-section py-32 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-             <div class="text-center mb-24" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-black text-white mb-6">ទាញយសៀវភៅ(E-Books) <span class="text-shimmer">និងមើលវីដេអូមេរៀនផ្សេងៗ</span></h2>
+             <div class="text-center mb-16 md:mb-20" data-aos="fade-up">
+                <p class="section-kicker">Knowledge Library</p>
+                <h2 class="section-heading text-4xl md:text-5xl font-black text-white mb-6">ទាញយកសៀវភៅ (E-Books) <span class="text-shimmer">និងមើលវីដេអូមេរៀនផ្សេងៗ</span></h2>
                 <div class="w-20 h-1 bg-gold mx-auto rounded-full shadow-[0_0_15px_#D4AF37]"></div>
+                <p class="section-copy">ជ្រើសរើសប្រធានបទដែលអ្នកចង់អភិវឌ្ឍ ហើយសិក្សាតាមសៀវភៅណែនាំ និងមេរៀនដែលអាចយកទៅអនុវត្តបាន។</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
                 <!-- Book 1 -->
-                <div class="preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-2xl" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.5">
+                <div class="academy-card preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-2xl" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="11" data-tilt-speed="500" data-tilt-glare="true" data-tilt-max-glare="0.22">
                     <div class="glow-card-inner p-8 backdrop-blur-xl bg-black/60">
-                        <div class="h-72 w-full bg-black rounded-xl mb-8 overflow-hidden relative border border-white/5 group translate-z-50 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-                            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Marketing Book" class="w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-700">
+                        <div class="media-frame h-72 w-full bg-black rounded-xl mb-8 overflow-hidden relative border border-white/5 group translate-z-50 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+                            <img src="https://images.unsplash.com/photo-1686061594225-3e92c0cd51b0?auto=format&amp;fit=crop&amp;w=1200&amp;q=84" alt="ផ្ទាំងទិន្នន័យ និងយុទ្ធសាស្ត្រ Digital Marketing" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700">
+                            <span class="card-index">01</span>
                             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                             <div class="absolute bottom-4 left-4 translate-z-70">
-                                 <span class="bg-gold/90 backdrop-blur-md text-black text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.5)]">Marketing</span>
+                                 <span class="card-chip bg-gold/90 backdrop-blur-md text-black text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.5)]">Marketing</span>
                             </div>
                         </div>
                         <div class="translate-z-30 relative z-10 flex-grow flex flex-col">
                             <h3 class="text-2xl font-black text-white mb-4 drop-shadow-lg"> Digital Marketing</h3>
                             <p class="text-gray-400 text-sm mb-8 leading-relaxed font-light flex-grow">សៀវភៅណែនាំពីមូលដ្ឋានគ្រឹះ និងយុទ្ធសាស្ត្រទីផ្សារឌីជីថល សម្រាប់អាជីវកម្ម។</p>
+                            <div class="card-meta"><span><i class="fa-solid fa-file-pdf"></i> E-Book</span><span><i class="fa-solid fa-signal"></i> កម្រិតមូលដ្ឋាន</span></div>
     
                             <!-- ប្ដូរ button ទៅជា a រួចថែម href="..." -->
-                            <a href="https://keovothy93.github.io/Keovothy-E-Book" target="_blank" class="w-full py-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-lg flex justify-center items-center group">
+                            <a href="https://keovothy93.github.io/Keovothy-E-Book" target="_blank" rel="noopener noreferrer" data-smart-redirect data-redirect-label="E-Book Digital Marketing" class="card-action w-full py-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-lg flex justify-center items-center group">
                                 <i class="fa-solid fa-cloud-arrow-down mr-3 group-hover:animate-bounce text-gold group-hover:text-black"></i> ចូលទៅទាញយក
                              </a>
                         </div>
@@ -337,19 +788,21 @@
                 </div>
                 
                 <!-- Book 2 -->
-                <div class="preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-2xl" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.5">
+                <div id="book-content-creation" class="academy-card preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-2xl" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="11" data-tilt-speed="500" data-tilt-glare="true" data-tilt-max-glare="0.22">
                     <div class="glow-card-inner p-8 backdrop-blur-xl bg-black/60">
-                        <div class="h-72 w-full bg-black rounded-xl mb-8 overflow-hidden relative border border-white/5 group translate-z-50 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-                            <img src="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Content Book" class="w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-700">
+                        <div class="media-frame h-72 w-full bg-black rounded-xl mb-8 overflow-hidden relative border border-white/5 group translate-z-50 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+                            <img src="https://images.unsplash.com/photo-1758553026412-bc1da0ebd366?auto=format&amp;fit=crop&amp;w=1200&amp;q=84" alt="តុការងារអ្នកបង្កើត Content មានកាមេរ៉ា និងអេក្រង់កាត់ត" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700">
+                            <span class="card-index">02</span>
                             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                             <div class="absolute bottom-4 left-4 translate-z-70">
-                                 <span class="bg-gold/90 backdrop-blur-md text-black text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.5)]">Content</span>
+                                 <span class="card-chip bg-gold/90 backdrop-blur-md text-black text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.5)]">Content</span>
                             </div>
                         </div>
                         <div class="translate-z-30 relative z-10 flex-grow flex flex-col">
                             <h3 class="text-2xl font-black text-white mb-4 drop-shadow-lg">គន្លឹះបង្កើត Content ឱ្យផ្ទុះ</h3>
                             <p class="text-gray-400 text-sm mb-8 leading-relaxed font-light flex-grow">ស្វែងយល់ពីរូបមន្តនៃការសរសេរ និងបង្កើតមាតិកាដែលទាក់ទាញចំណាប់អារម្មណ៍។</p>
-                            <button onclick="showModal('ទាញយកសៀវភៅ', 'ឯកសារគន្លឹះបង្កើត Content កំពុងទាញយក...')" class="w-full py-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-lg flex justify-center items-center group">
+                            <div class="card-meta"><span><i class="fa-solid fa-file-pdf"></i> PDF Guide</span><span><i class="fa-solid fa-lightbulb"></i> អនុវត្តងាយ</span></div>
+                            <button type="button" data-smart-redirect data-redirect-label="PDF — Content" class="card-action w-full py-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-lg flex justify-center items-center group">
                                 <i class="fa-solid fa-cloud-arrow-down mr-3 group-hover:animate-bounce text-gold group-hover:text-black"></i> ទាញយក (PDF)
                             </button>
                         </div>
@@ -357,19 +810,21 @@
                 </div>
 
                 <!-- Book 3 -->
-                <div class="preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-2xl" data-aos="fade-up" data-aos-delay="500" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.5">
+                <div id="book-graphic-design" class="academy-card preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-2xl" data-aos="fade-up" data-aos-delay="500" data-tilt data-tilt-max="11" data-tilt-speed="500" data-tilt-glare="true" data-tilt-max-glare="0.22">
                     <div class="glow-card-inner p-8 backdrop-blur-xl bg-black/60">
-                        <div class="h-72 w-full bg-black rounded-xl mb-8 overflow-hidden relative border border-white/5 group translate-z-50 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Design Book" class="w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-700">
+                        <div class="media-frame h-72 w-full bg-black rounded-xl mb-8 overflow-hidden relative border border-white/5 group translate-z-50 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+                            <img src="https://images.unsplash.com/photo-1716471330463-f475b00f0506?auto=format&amp;fit=crop&amp;w=1200&amp;q=84" alt="តុអ្នករចនា Graphic Design មានក្តារពណ៌ និងឧបករណ៍រចនា" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700">
+                            <span class="card-index">03</span>
                             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                             <div class="absolute bottom-4 left-4 translate-z-70">
-                                 <span class="bg-gold/90 backdrop-blur-md text-black text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.5)]">Design</span>
+                                 <span class="card-chip bg-gold/90 backdrop-blur-md text-black text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.5)]">Design</span>
                             </div>
                         </div>
                         <div class="translate-z-30 relative z-10 flex-grow flex flex-col">
                             <h3 class="text-2xl font-black text-white mb-4 drop-shadow-lg">មូលដ្ឋានគ្រឹះ Graphic Design</h3>
                             <p class="text-gray-400 text-sm mb-8 leading-relaxed font-light flex-grow">ទ្រឹស្តីពណ៌ ការរៀបចំ Layout និងគន្លឹះរចនាឱ្យមើលទៅមានភាពអាជីព។</p>
-                            <button onclick="showModal('ទាញយកសៀវភៅ', 'ឯកសារមូលដ្ឋានគ្រឹះ Graphic Design កំពុងទាញយក...')" class="w-full py-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-lg flex justify-center items-center group">
+                            <div class="card-meta"><span><i class="fa-solid fa-file-pdf"></i> PDF Guide</span><span><i class="fa-solid fa-palette"></i> Design Basics</span></div>
+                            <button type="button" data-smart-redirect data-redirect-label="PDF — Graphic Design" class="card-action w-full py-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-lg flex justify-center items-center group">
                                 <i class="fa-solid fa-cloud-arrow-down mr-3 group-hover:animate-bounce text-gold group-hover:text-black"></i> ទាញយក (PDF)
                             </button>
                         </div>
@@ -380,30 +835,34 @@
     </section>
 
     <!-- Courses Section -->
-    <section id="courses" class="py-32 relative z-10">
+    <section id="courses" class="academy-section py-32 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-24" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-black text-white mb-6">វគ្គសិក្សា<span class="text-shimmer">ពេញនិយម</span></h2>
+            <div class="text-center mb-16 md:mb-20" data-aos="fade-up">
+                <p class="section-kicker">Practical Courses</p>
+                <h2 class="section-heading text-4xl md:text-5xl font-black text-white mb-6">វគ្គសិក្សា <span class="text-shimmer">ពេញនិយម</span></h2>
                 <div class="w-20 h-1 bg-gold mx-auto rounded-full shadow-[0_0_15px_#D4AF37]"></div>
+                <p class="section-copy">រៀនតាមជំហាន ជាមួយចំណុចសំខាន់ៗដែលផ្តោតលើជំនាញការងារ និងការប្រើប្រាស់ក្នុងអាជីវកម្មជាក់ស្តែង។</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
                 <!-- Course 1 -->
-                <div class="preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.8)]" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="12" data-tilt-glare="true" data-tilt-max-glare="0.3">
+                <div id="course-digital-marketing" class="academy-card preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.8)]" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="10" data-tilt-glare="true" data-tilt-max-glare="0.2">
                     <div class="glow-card-inner bg-black/50 backdrop-blur-lg">
-                        <div class="relative h-64 bg-black flex items-center justify-center overflow-hidden border-b border-white/5 group">
-                            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')] bg-cover bg-center opacity-30 group-hover:opacity-60 group-hover:scale-110 transition duration-1000"></div>
+                        <div class="media-frame relative h-64 bg-black flex items-center justify-center overflow-hidden border-b border-white/5 group">
+                            <div class="course-photo absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=84')] bg-cover bg-center opacity-45 group-hover:opacity-70 transition duration-1000"></div>
+                            <span class="card-index">01</span>
                             <div class="absolute inset-0 bg-gradient-to-t from-[#080808] to-transparent"></div>
-                            <i class="fa-solid fa-bullhorn text-7xl text-gold relative z-10 drop-shadow-[0_0_20px_rgba(212,175,55,0.8)] translate-z-70 group-hover:scale-125 transition-transform duration-500"></i>
+                            <i class="course-icon fa-solid fa-bullhorn text-7xl text-gold relative z-10 drop-shadow-[0_0_20px_rgba(212,175,55,0.8)] translate-z-70 group-hover:scale-125 transition-transform duration-500"></i>
                         </div>
                         <div class="p-10 translate-z-30 relative z-10">
                             <div class="flex justify-between items-center mb-6">
-                                <span class="bg-gold/10 text-gold text-xs font-black px-4 py-1.5 rounded-full border border-gold/30 uppercase tracking-widest shadow-[0_0_10px_rgba(212,175,55,0.2)]">Marketing</span>
+                                <span class="card-chip bg-gold/10 text-gold text-xs font-black px-4 py-1.5 rounded-full border border-gold/30 uppercase tracking-widest shadow-[0_0_10px_rgba(212,175,55,0.2)]">Marketing</span>
                                 <span class="text-white font-black text-2xl drop-shadow-md">FREE</span>
                             </div>
                             <h3 class="text-3xl font-black text-white mb-4 group-hover:text-gold transition-colors">Digital Marketing</h3>
-                            <p class="text-gray-400 text-sm mb-10 line-clamp-3 leading-relaxed font-light">រៀនពីយុទ្ធសាស្ត្រទីផ្សារឌីជីថល ការគ្រប់គ្រង Social Media និងការដំណើរការផ្ទាំងពាណិជ្ជកម្ម (Ads)។</p>
-                            <button onclick="showModal('Digital Marketing', 'សូមអរគុណដែលចាប់អារម្មណ៍វគ្គសិក្សា Digital Marketing។ យើងនឹងទាក់ទងទៅអ្នកឆាប់ៗនេះ!')" class="w-full bg-white/5 border border-white/10 text-white font-bold py-4 rounded-xl hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
+                            <p class="text-gray-400 text-sm mb-8 line-clamp-3 leading-relaxed font-light">រៀនពីយុទ្ធសាស្ត្រទីផ្សារឌីជីថល ការគ្រប់គ្រង Social Media និងការដំណើរការផ្ទាំងពាណិជ្ជកម្ម (Ads)។</p>
+                            <div class="card-meta"><span><i class="fa-solid fa-circle-play"></i> រៀនតាមអនឡាញ</span><span><i class="fa-solid fa-briefcase"></i> ជំនាញការងារ</span></div>
+                            <button type="button" data-smart-redirect data-redirect-label="វគ្គ Digital Marketing" class="card-action w-full bg-white/5 border border-white/10 text-white font-bold py-4 rounded-xl hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
                                 ចុចចូលទីនេះ
                             </button>
                         </div>
@@ -411,21 +870,23 @@
                 </div>
 
                 <!-- Course 2 -->
-                <div class="preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.8)]" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="12" data-tilt-glare="true" data-tilt-max-glare="0.3">
+                <div class="academy-card preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.8)]" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="10" data-tilt-glare="true" data-tilt-max-glare="0.2">
                     <div class="glow-card-inner bg-black/50 backdrop-blur-lg">
-                        <div class="relative h-64 bg-black flex items-center justify-center overflow-hidden border-b border-white/5 group">
-                            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')] bg-cover bg-center opacity-30 group-hover:opacity-60 group-hover:scale-110 transition duration-1000"></div>
+                        <div class="media-frame relative h-64 bg-black flex items-center justify-center overflow-hidden border-b border-white/5 group">
+                            <div class="course-photo absolute inset-0 bg-[url('https://images.unsplash.com/photo-1675557009285-b55f562641b9?auto=format&fit=crop&w=1200&q=84')] bg-cover bg-center opacity-45 group-hover:opacity-70 transition duration-1000"></div>
+                            <span class="card-index">02</span>
                             <div class="absolute inset-0 bg-gradient-to-t from-[#080808] to-transparent"></div>
-                            <i class="fa-solid fa-video text-7xl text-gold relative z-10 drop-shadow-[0_0_20px_rgba(212,175,55,0.8)] translate-z-70 group-hover:scale-125 transition-transform duration-500"></i>
+                            <i class="course-icon fa-solid fa-wand-magic-sparkles text-7xl text-gold relative z-10 drop-shadow-[0_0_20px_rgba(212,175,55,0.8)] translate-z-70 group-hover:scale-125 transition-transform duration-500"></i>
                         </div>
                         <div class="p-10 translate-z-30 relative z-10">
                             <div class="flex justify-between items-center mb-6">
-                                <span class="bg-gold/10 text-gold text-xs font-black px-4 py-1.5 rounded-full border border-gold/30 uppercase tracking-widest shadow-[0_0_10px_rgba(212,175,55,0.2)]">Media</span>
+                                <span class="card-chip bg-gold/10 text-gold text-xs font-black px-4 py-1.5 rounded-full border border-gold/30 uppercase tracking-widest shadow-[0_0_10px_rgba(212,175,55,0.2)]">AI Content</span>
                                 <span class="text-white font-black text-2xl drop-shadow-md">FREE</span>
                             </div>
                             <h3 class="text-3xl font-black text-white mb-4 group-hover:text-gold transition-colors">AI Agentic Copywriter</h3>
-                            <p class="text-gray-400 text-sm mb-10 line-clamp-3 leading-relaxed font-light"> What do you want to write today? Describe your product, writing workflow </p>
-                            <a href="https://keovothy93.github.io/AI-Agentic-Content" target="_blank" rel="noopener noreferrer" class="w-full bg-white/5 border border-white/10 text-white font-bold py-4 rounded-xl hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-[0_10px_20px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                            <p class="text-gray-400 text-sm mb-8 line-clamp-3 leading-relaxed font-light">រៀនប្រើ AI ដើម្បីស្រាវជ្រាវ គិតគំនិត និងសរសេរ Content បានលឿន ស្របតាម Brand Voice។</p>
+                            <div class="card-meta"><span><i class="fa-solid fa-circle-play"></i> រៀនតាមអនឡាញ</span><span><i class="fa-solid fa-wand-magic-sparkles"></i> AI Workflow</span></div>
+                            <a href="https://keovothy93.github.io/AI-Agentic-Content" target="_blank" rel="noopener noreferrer" data-smart-redirect data-redirect-label="AI Agentic Copywriter" class="card-action w-full bg-white/5 border border-white/10 text-white font-bold py-4 rounded-xl hover:bg-gold hover:text-black hover:border-gold transition-all duration-300 shadow-[0_10px_20px_rgba(0,0,0,0.5)] flex items-center justify-center">
                                 ចុចចូលទីនេះ
                             </a>
                         </div>
@@ -433,21 +894,23 @@
                 </div>
 
                 <!-- Course 3 (CRM Redirect) -->
-                <div class="preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.8)]" data-aos="fade-up" data-aos-delay="500" data-tilt data-tilt-max="12" data-tilt-glare="true" data-tilt-max-glare="0.3">
+                <div id="course-crm-system" class="academy-card preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.8)]" data-aos="fade-up" data-aos-delay="500" data-tilt data-tilt-max="10" data-tilt-glare="true" data-tilt-max-glare="0.2">
                     <div class="glow-card-inner bg-black/50 backdrop-blur-lg">
-                        <div class="relative h-64 bg-black flex items-center justify-center overflow-hidden border-b border-white/5 group">
-                            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')] bg-cover bg-center opacity-30 group-hover:opacity-60 group-hover:scale-110 transition duration-1000"></div>
+                        <div class="media-frame relative h-64 bg-black flex items-center justify-center overflow-hidden border-b border-white/5 group">
+                            <div class="course-photo absolute inset-0 bg-[url('https://images.unsplash.com/photo-1758873272714-4106a439de5c?auto=format&fit=crop&w=1200&q=84')] bg-cover bg-center opacity-45 group-hover:opacity-70 transition duration-1000"></div>
+                            <span class="card-index">03</span>
                             <div class="absolute inset-0 bg-gradient-to-t from-[#080808] to-transparent"></div>
-                            <i class="fa-solid fa-users-gear text-7xl text-gold relative z-10 drop-shadow-[0_0_20px_rgba(212,175,55,0.8)] translate-z-70 group-hover:scale-125 transition-transform duration-500"></i>
+                            <i class="course-icon fa-solid fa-users-gear text-7xl text-gold relative z-10 drop-shadow-[0_0_20px_rgba(212,175,55,0.8)] translate-z-70 group-hover:scale-125 transition-transform duration-500"></i>
                        </div>
                         <div class="p-10 translate-z-30 relative z-10">
                             <div class="flex justify-between items-center mb-6">
-                                <span class="bg-gold/10 text-gold text-xs font-black px-4 py-1.5 rounded-full border border-gold/30 uppercase tracking-widest shadow-[0_0_10px_rgba(212,175,55,0.2)]">Business</span>
+                                <span class="card-chip bg-gold/10 text-gold text-xs font-black px-4 py-1.5 rounded-full border border-gold/30 uppercase tracking-widest shadow-[0_0_10px_rgba(212,175,55,0.2)]">Business</span>
                                 <span class="text-white font-black text-2xl drop-shadow-md">FREE</span>
                             </div>
                             <h3 class="text-3xl font-black text-white mb-4 group-hover:text-gold transition-colors">CRM System</h3>
-                            <p class="text-gray-400 text-sm mb-10 line-clamp-3 leading-relaxed font-light">រៀនពីការគ្រប់គ្រងទំនាក់ទំនងអតិថិជន (CRM) ការប្រើប្រាស់ប្រព័ន្ធទិន្នន័យដើម្បីបង្កើនការលក់។</p>
-                            <button onclick="redirectToUrl('https://keovothy93.github.io/KEOVOTHY-CRM-ACADEMY/')" class="w-full relative overflow-hidden group/btn bg-gold text-black font-black py-4 rounded-xl hover:shadow-[0_0_30px_rgba(212,175,55,0.7)] transition-all duration-300">
+                            <p class="text-gray-400 text-sm mb-8 line-clamp-3 leading-relaxed font-light">រៀនពីការគ្រប់គ្រងទំនាក់ទំនងអតិថិជន (CRM) ការប្រើប្រាស់ប្រព័ន្ធទិន្នន័យដើម្បីបង្កើនការលក់។</p>
+                            <div class="card-meta"><span><i class="fa-solid fa-circle-play"></i> រៀនតាមអនឡាញ</span><span><i class="fa-solid fa-chart-line"></i> Business System</span></div>
+                            <button type="button" data-smart-redirect data-redirect-url="https://keovothy93.github.io/KEOVOTHY-CRM-ACADEMY/" data-redirect-label="CRM Academy" class="card-action w-full relative overflow-hidden group/btn bg-gold text-black font-black py-4 rounded-xl hover:shadow-[0_0_30px_rgba(212,175,55,0.7)] transition-all duration-300">
                                 <div class="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.6),transparent)] -translate-x-full group-hover/btn:animate-[shine_1s_infinite]"></div>
                                 <span class="relative z-10 flex items-center justify-center">ចុចចូលទីនេះ <i class="fa-solid fa-arrow-up-right-from-square ml-3 text-sm"></i></span>
                             </button>
@@ -476,23 +939,18 @@
         </div>
     </footer>
 
-    <!-- Custom Modal -->
-    <div id="custom-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity" onclick="closeModal()"></div>
-        <div class="bg-dark-card p-10 rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.15)] relative z-10 max-w-md w-full mx-4 border border-gold/20 transform scale-95 transition-all duration-300" id="modal-panel">
-            <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-500 hover:text-gold transition">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            <div class="text-center">
-                <div class="w-20 h-20 bg-gold/10 text-gold rounded-full flex items-center justify-center mx-auto mb-6 border border-gold/30 shadow-[0_0_30px_rgba(212,175,55,0.3)]">
-                    <i class="fa-solid fa-check text-4xl animate-pulse"></i>
-                </div>
-                <h3 id="modal-title" class="text-2xl font-black text-white mb-4">ចំណងជើង</h3>
-                <p id="modal-desc" class="text-gray-400 mb-8 text-sm leading-relaxed font-light">ការពិពណ៌នាទីនេះ...</p>
-                <button onclick="closeModal()" class="bg-gradient-to-r from-gold to-gold-dark text-black px-8 py-3.5 rounded-xl font-black text-sm tracking-widest uppercase hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all w-full">
-                    យល់ព្រម
-                </button>
-            </div>
+    <!-- Unified Loading & Redirect Modal -->
+    <div id="redirect-modal" class="redirect-overlay" role="dialog" aria-modal="true" aria-labelledby="redirect-title" aria-describedby="redirect-copy" aria-hidden="true">
+        <div class="redirect-backdrop"></div>
+        <div class="redirect-dialog" tabindex="-1">
+            <div class="redirect-brand"><span class="redirect-brand-mark"></span> Digital Academy</div>
+            <div class="redirect-loader" aria-hidden="true"><i id="redirect-icon" class="fa-solid fa-arrow-up-right-from-square"></i></div>
+            <h3 id="redirect-title" class="redirect-title">កំពុងរៀបចំបើកតំណភ្ជាប់</h3>
+            <p id="redirect-copy" class="redirect-copy">សូមរង់ចាំបន្តិច ប្រព័ន្ធកំពុងបញ្ជូនលោកអ្នកទៅកាន់ទំព័របន្ទាប់។</p>
+            <div class="redirect-destination"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span id="redirect-destination">ទំព័របន្ទាប់</span></div>
+            <div class="redirect-progress" aria-hidden="true"><div id="redirect-progress-fill" class="redirect-progress-fill"></div></div>
+            <p id="redirect-status" class="redirect-status" role="status" aria-live="polite">កំពុងតភ្ជាប់ដោយសុវត្ថិភាព...</p>
+            <button id="redirect-cancel" type="button" class="redirect-cancel">បោះបង់</button>
         </div>
     </div>
 
@@ -501,8 +959,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
     <script>
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         // Init AOS Animation
-        if (window.AOS) { AOS.init({ once: true, offset: 50, duration: 1000, easing: 'ease-out-cubic' }); }
+        if (window.AOS) { AOS.init({ once: true, offset: 50, duration: prefersReducedMotion ? 0 : 1000, easing: 'ease-out-cubic', disable: prefersReducedMotion }); }
 
         // Cinematic Split Preloader Reveal
         window.addEventListener('load', () => {
@@ -510,7 +970,7 @@
             setTimeout(() => {
                 preloader.classList.add('split-active');
                 setTimeout(() => { preloader.style.display = 'none'; }, 1000);
-            }, 800);
+            }, prefersReducedMotion ? 50 : 800);
         });
 
         // Floating Smart Header (Hide on scroll down, show on up)
@@ -533,6 +993,57 @@
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (currentScroll / height) * 100;
             document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Keep desktop and mobile navigation aligned with the visible section
+        const observedSections = [...document.querySelectorAll('#home, #books, #courses')];
+        const updateActiveNavigation = (sectionId) => {
+            document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+                const active = link.getAttribute('href') === `#${sectionId}`;
+                link.classList.toggle('is-active', active);
+                if (active) link.setAttribute('aria-current', 'page');
+                else link.removeAttribute('aria-current');
+            });
+        };
+        const sectionObserver = new IntersectionObserver((entries) => {
+            const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (visible) updateActiveNavigation(visible.target.id);
+        }, { rootMargin: '-28% 0px -58% 0px', threshold: [0, .2, .55] });
+        observedSections.forEach(section => sectionObserver.observe(section));
+        document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', () => {
+            document.getElementById('mobile-nav-details')?.removeAttribute('open');
+        }));
+
+        // Smooth in-page navigation for the moving showcase and menu links
+        document.addEventListener('click', (event) => {
+            const link = event.target.closest('a[href^="#"]');
+            if (!link || link.hasAttribute('data-smart-redirect')) return;
+
+            const hash = link.getAttribute('href');
+            if (!hash || hash === '#') return;
+
+            const target = document.querySelector(hash);
+            if (!target) return;
+
+            event.preventDefault();
+            document.getElementById('mobile-nav-details')?.removeAttribute('open');
+            const isCardTarget = target.classList.contains('academy-card');
+
+            target.scrollIntoView({
+                behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                block: isCardTarget ? 'center' : 'start'
+            });
+
+            if (window.location.hash !== hash) history.pushState(null, '', hash);
+
+            if (isCardTarget) {
+                window.setTimeout(() => {
+                    target.classList.add('is-scroll-target');
+                    target.setAttribute('tabindex', '-1');
+                    target.focus({ preventScroll: true });
+                    window.setTimeout(() => target.classList.remove('is-scroll-target'), 2600);
+                }, prefersReducedMotion ? 0 : 450);
+            }
         });
 
         // Spotlight & Parallax Depth for Cards
@@ -635,7 +1146,7 @@
                     let dx = globalMouse.x - this.x;
                     let dy = globalMouse.y - this.y;
                     let distance = Math.sqrt(dx*dx + dy*dy);
-                    if (distance < globalMouse.radius) {
+                    if (distance > 0 && distance < globalMouse.radius) {
                         const forceDirectionX = dx / distance;
                         const forceDirectionY = dy / distance;
                         const force = (globalMouse.radius - distance) / globalMouse.radius;
@@ -654,8 +1165,10 @@
 
         function initParticles() {
             particlesArray = [];
-            let num = (canvas.height * canvas.width) / 10000;
-            if (num > 150) num = 150;
+            if (prefersReducedMotion) return;
+            let num = (canvas.height * canvas.width) / 14000;
+            const particleLimit = window.innerWidth < 768 ? 55 : 110;
+            if (num > particleLimit) num = particleLimit;
             for (let i = 0; i < num; i++) {
                 let size = (Math.random() * 2) + 0.2;
                 let x = Math.random() * innerWidth; let y = Math.random() * innerHeight;
@@ -689,39 +1202,104 @@
 
         function animateParticles() {
             requestAnimationFrame(animateParticles);
+            if (document.hidden || prefersReducedMotion) return;
             ctx.clearRect(0, 0, innerWidth, innerHeight);
             for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
             connectParticles();
         }
         initParticles(); animateParticles();
 
-        // Modal & CRM Redirect Logic
-        const modal = document.getElementById('custom-modal');
-        const modalPanel = document.getElementById('modal-panel');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDesc = document.getElementById('modal-desc');
+        // Unified Loading & Redirect Logic
+        const redirectModal = document.getElementById('redirect-modal');
+        const redirectDialog = redirectModal.querySelector('.redirect-dialog');
+        const redirectTitle = document.getElementById('redirect-title');
+        const redirectCopy = document.getElementById('redirect-copy');
+        const redirectDestination = document.getElementById('redirect-destination');
+        const redirectProgressFill = document.getElementById('redirect-progress-fill');
+        const redirectStatus = document.getElementById('redirect-status');
+        const redirectIcon = document.getElementById('redirect-icon');
+        const redirectCancel = document.getElementById('redirect-cancel');
+        let redirectTimer = null;
+        let redirectFrame = null;
+        let redirectStartedAt = 0;
+        const redirectDelay = 1500;
 
-        function showModal(title, description) {
-            modalTitle.innerText = title; modalDesc.innerText = description;
-            modal.classList.remove('hidden');
-            setTimeout(() => { modalPanel.classList.remove('scale-95'); modalPanel.classList.add('scale-100'); }, 10);
+        function isSafeRedirectUrl(url) {
+            try {
+                const parsed = new URL(url, window.location.href);
+                return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+            } catch (error) {
+                return false;
+            }
         }
 
-        function closeModal() {
-            modalPanel.classList.remove('scale-100'); modalPanel.classList.add('scale-95');
-            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        function openRedirectModal(label, url) {
+            const hasValidUrl = Boolean(url) && isSafeRedirectUrl(url);
+            clearTimeout(redirectTimer);
+            cancelAnimationFrame(redirectFrame);
+            redirectModal.classList.toggle('is-unavailable', !hasValidUrl);
+            redirectModal.classList.add('is-open');
+            redirectModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('redirecting');
+            redirectDestination.textContent = label || 'ទំព័របន្ទាប់';
+            redirectProgressFill.style.width = '0%';
+
+            if (!hasValidUrl) {
+                redirectTitle.textContent = 'តំណភ្ជាប់មិនទាន់បានកំណត់';
+                redirectCopy.textContent = 'សូមបន្ថែម URL សម្រាប់ប៊ូតុងនេះសិន ដើម្បីអាចបន្តទៅកាន់ទំព័របន្ទាប់បាន។';
+                redirectStatus.textContent = 'មិនមានការបញ្ជូនទំព័រទេ';
+                redirectIcon.className = 'fa-solid fa-link-slash';
+                redirectCancel.textContent = 'បិទ';
+                setTimeout(() => redirectDialog.focus(), 30);
+                return;
+            }
+
+            redirectTitle.textContent = 'កំពុងរៀបចំបើកតំណភ្ជាប់';
+            redirectCopy.textContent = 'សូមរង់ចាំបន្តិច ប្រព័ន្ធកំពុងបញ្ជូនលោកអ្នកទៅកាន់ទំព័របន្ទាប់។';
+            redirectStatus.textContent = 'កំពុងតភ្ជាប់ដោយសុវត្ថិភាព...';
+            redirectIcon.className = 'fa-solid fa-arrow-up-right-from-square';
+            redirectCancel.textContent = 'បោះបង់';
+            redirectStartedAt = performance.now();
+
+            function updateRedirectProgress(now) {
+                const progress = Math.min(((now - redirectStartedAt) / redirectDelay) * 100, 100);
+                redirectProgressFill.style.width = progress + '%';
+                if (progress < 100) redirectFrame = requestAnimationFrame(updateRedirectProgress);
+            }
+
+            redirectFrame = requestAnimationFrame(updateRedirectProgress);
+            redirectTimer = setTimeout(() => {
+                redirectStatus.textContent = 'រួចរាល់ — កំពុងបើកទំព័រ...';
+                redirectProgressFill.style.width = '100%';
+                window.location.assign(url);
+            }, redirectDelay);
+            setTimeout(() => redirectDialog.focus(), 30);
         }
 
-        function redirectToUrl(url) {
-            const preloader = document.getElementById('preloader');
-            preloader.querySelector('p').innerText = "កំពុងបញ្ជូនទៅកាន់ប្រព័ន្ធ CRM...";
-            preloader.style.display = 'flex';
-            setTimeout(() => { 
-                preloader.classList.remove('split-active'); 
-                preloader.style.opacity = '1';
-                setTimeout(() => { window.location.href = url; }, 1200);
-            }, 10);
+        function closeRedirectModal() {
+            clearTimeout(redirectTimer);
+            cancelAnimationFrame(redirectFrame);
+            redirectModal.classList.remove('is-open', 'is-unavailable');
+            redirectModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('redirecting');
         }
+
+        document.addEventListener('click', (event) => {
+            const trigger = event.target.closest('[data-smart-redirect]');
+            if (!trigger) return;
+            event.preventDefault();
+            const url = trigger.dataset.redirectUrl || trigger.getAttribute('href') || '';
+            const label = trigger.dataset.redirectLabel || trigger.textContent.trim();
+            const mobileMenu = trigger.closest('details');
+            if (mobileMenu) mobileMenu.removeAttribute('open');
+            openRedirectModal(label, url);
+        });
+
+        redirectCancel.addEventListener('click', closeRedirectModal);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && redirectModal.classList.contains('is-open')) closeRedirectModal();
+        });
+        window.addEventListener('pageshow', closeRedirectModal);
     </script>
 </body>
 </html>
