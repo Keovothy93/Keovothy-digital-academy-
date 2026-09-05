@@ -3,89 +3,390 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="វគ្គ Digital Marketing ឥតគិតថ្លៃ — Strategy, Content, Social Media, Ads និងការវាស់លទ្ធផល។">
-  <meta name="theme-color" content="#030303">
-  <title>Digital Marketing Course | KEOVOTHY Digital Academy</title>
+  <meta name="description" content="វគ្គ Digital Marketing ភាសាខ្មែរ៖ Strategy, Content, Ads, Analytics និង AI Marketing Toolkit ឥតគិតថ្លៃ។">
+  <meta name="theme-color" content="#08152f">
+  <title>Digital Growth Lab | KEOVOTHY Academy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@400;700;900&family=Noto+Sans+Khmer:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../css/pages.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Kantumruy+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #08152f;
+      --ink-2: #10254d;
+      --paper: #f6f8fc;
+      --white: #ffffff;
+      --blue: #2864ff;
+      --blue-2: #5a86ff;
+      --coral: #ff6b4a;
+      --mint: #36d6a0;
+      --yellow: #ffd166;
+      --muted: #62708a;
+      --line: #dce3ef;
+      --shadow: 0 24px 80px rgba(8,21,47,.13);
+      --radius: 22px;
+      --shell: min(1180px, calc(100% - 40px));
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: "Kantumruy Pro", sans-serif; line-height: 1.75; overflow-x: hidden; }
+    body::selection { background: var(--yellow); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    img { max-width: 100%; display: block; }
+    :focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; }
+    .shell { width: var(--shell); margin-inline: auto; }
+    .skip-link { position: fixed; z-index: 1000; top: 12px; left: 12px; transform: translateY(-150%); background: var(--white); padding: 10px 16px; border-radius: 10px; }
+    .skip-link:focus { transform: none; }
+    .progress { position: fixed; inset: 0 auto auto 0; width: 0; height: 3px; z-index: 999; background: linear-gradient(90deg,var(--coral),var(--yellow)); }
+
+    .top-note { background: var(--ink); color: #c9d5ec; text-align: center; padding: 8px 20px; font-size: 13px; letter-spacing: .02em; }
+    .top-note strong { color: var(--mint); }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(246,248,252,.86); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(8,21,47,.08); }
+    .nav { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-family: Manrope, sans-serif; font-weight: 800; letter-spacing: -.03em; }
+    .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; color: white; background: var(--blue); box-shadow: 5px 5px 0 var(--coral); }
+    .brand-mark svg { width: 20px; }
+    .brand small { display: block; color: var(--muted); font: 500 9px/1.1 "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 600; }
+    .nav-links a { color: #3c4b68; transition: color .2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta { color: white !important; background: var(--ink); padding: 10px 18px; border-radius: 12px; box-shadow: 4px 4px 0 var(--coral); }
+    .menu-btn { display: none; border: 0; background: var(--ink); color: white; width: 42px; height: 42px; border-radius: 12px; cursor: pointer; }
+
+    .hero { position: relative; padding: 86px 0 94px; background: var(--ink); color: white; isolation: isolate; overflow: hidden; }
+    .hero::before { content:""; position:absolute; inset:0; opacity:.28; z-index:-1; background-image: linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(to bottom,black,transparent 92%); }
+    .hero::after { content:""; position:absolute; width:580px; height:580px; right:-240px; top:-310px; border:110px solid var(--blue); border-radius:50%; opacity:.32; z-index:-1; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 70px; }
+    .kicker { display: inline-flex; align-items: center; gap: 9px; color: #b9c9e9; font: 500 12px/1.4 "DM Mono",monospace; text-transform: uppercase; letter-spacing: .12em; }
+    .kicker::before { content:""; width: 22px; height: 2px; background: var(--coral); }
+    h1 { margin: 22px 0 22px; font-size: clamp(45px, 6vw, 82px); line-height: 1.14; letter-spacing: -.055em; max-width: 760px; }
+    .hero h1 em { position: relative; color: var(--yellow); font-style: normal; white-space: nowrap; }
+    .hero h1 em::after { content:""; position:absolute; left:2%; right:0; bottom:-3px; height:8px; border-radius:50%; background:var(--coral); transform:rotate(-1.5deg); }
+    .hero-copy { max-width: 630px; color: #c6d2e9; font-size: 18px; line-height: 1.85; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:13px; margin:34px 0 38px; }
+    .btn { border: 0; cursor: pointer; min-height: 50px; display: inline-flex; align-items: center; justify-content:center; gap:10px; padding: 12px 21px; border-radius: 13px; font-weight: 700; transition: transform .2s, box-shadow .2s, background .2s; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: var(--coral); color: white; box-shadow: 5px 5px 0 rgba(255,209,102,.9); }
+    .btn-secondary { background: rgba(255,255,255,.08); color: white; border: 1px solid rgba(255,255,255,.2); }
+    .btn-dark { background: var(--ink); color: white; box-shadow: 5px 5px 0 var(--blue-2); }
+    .trust-row { display:flex; flex-wrap:wrap; gap:20px; color:#98a9c8; font-size:13px; }
+    .trust-row span { display:flex; align-items:center; gap:7px; }
+    .trust-row svg { width:17px; color:var(--mint); }
+
+    .dash-wrap { position: relative; perspective: 1200px; }
+    .dashboard { position: relative; background: #fff; color: var(--ink); padding: 16px; border-radius: 24px; transform: rotateY(-5deg) rotateX(3deg); box-shadow: 24px 30px 0 rgba(40,100,255,.24), 0 35px 80px rgba(0,0,0,.3); animation: enterDash .9s .2s cubic-bezier(.2,.8,.2,1) both; }
+    .dash-head { display:flex; align-items:center; justify-content:space-between; padding:6px 4px 14px; }
+    .dash-dots { display:flex; gap:5px; }.dash-dots i{display:block;width:7px;height:7px;border-radius:50%;background:#d5dce8}.dash-dots i:first-child{background:var(--coral)}
+    .live { font:500 9px "DM Mono",monospace; color:#238664; background:#dff9ef; padding:5px 8px; border-radius:20px; }
+    .chart-card { background:#eef3ff; border-radius:16px; padding:18px; overflow:hidden; }
+    .chart-title { display:flex; justify-content:space-between; font-size:12px; font-weight:700; }
+    .chart-title strong { font:800 26px Manrope,sans-serif; }
+    .chart { height:170px; display:flex; align-items:end; gap:9px; padding-top:20px; border-bottom:1px solid #bfcce8; }
+    .bar { flex:1; border-radius:7px 7px 0 0; background:var(--blue); height:var(--h); transform-origin:bottom; animation:grow .8s calc(.45s + var(--d)) both; }
+    .bar.hot { background:var(--coral); }
+    .mini-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:10px; }
+    .metric { padding:13px; border:1px solid #e7eaf1; border-radius:13px; }
+    .metric span { color:var(--muted); font-size:9px; }.metric strong{display:block;font:800 17px Manrope,sans-serif}.metric small{color:#24916d;font-size:9px}
+    .floating-note { position:absolute; right:-34px; top:78px; background:var(--yellow); color:var(--ink); padding:12px 15px; border-radius:12px; box-shadow:var(--shadow); font-weight:800; transform:rotate(4deg); animation:float 3.5s ease-in-out infinite; }
+    .floating-note small { display:block; font:500 9px "DM Mono",monospace; text-transform:uppercase; }
+
+    .signal-strip { margin-top:-1px; background:var(--blue); color:white; overflow:hidden; }
+    .ticker { display:flex; width:max-content; gap:40px; padding:13px 0; animation: ticker 24s linear infinite; font:500 11px "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
+    .ticker span::before { content:"✦"; color:var(--yellow); margin-right:40px; }
+
+    .section { padding: 104px 0; }
+    .section.white { background: var(--white); }
+    .section.dark { background: var(--ink); color: white; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:40px; margin-bottom:45px; }
+    .eyebrow { margin:0 0 12px; color:var(--blue); font:500 11px "DM Mono",monospace; letter-spacing:.12em; text-transform:uppercase; }
+    .dark .eyebrow { color:var(--mint); }
+    h2 { margin:0; font-size:clamp(32px,4.5vw,56px); line-height:1.25; letter-spacing:-.045em; }
+    .section-head > p:last-child { max-width:480px; margin:0; color:var(--muted); }
+    .dark .section-head > p:last-child { color:#aab9d4; }
+
+    .outcomes { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+    .outcome { min-height:260px; padding:28px; background:white; border-right:1px solid var(--line); border-bottom:1px solid var(--line); transition:transform .25s,box-shadow .25s; }
+    .outcome:hover { position:relative; z-index:2; transform:translateY(-8px); box-shadow:var(--shadow); }
+    .outcome-num { color:var(--coral); font:500 11px "DM Mono",monospace; }
+    .outcome svg { width:30px; margin:35px 0 20px; color:var(--blue); }
+    .outcome h3 { margin:0 0 10px; font-size:19px; }.outcome p{margin:0;color:var(--muted);font-size:14px}
+
+    .learning-layout { display:grid; grid-template-columns:350px 1fr; gap:38px; align-items:start; }
+    .track { position:sticky; top:105px; padding:28px; border-radius:var(--radius); background:var(--ink); color:white; }
+    .track h3 { margin:0 0 8px;font-size:22px}.track p{color:#aebdda;font-size:14px;margin:0 0 23px}
+    .track-progress { height:8px;background:#22385e;border-radius:20px;overflow:hidden}.track-progress i{display:block;width:16.6%;height:100%;background:var(--mint);transition:width .3s}
+    .track-meta { display:flex;justify-content:space-between;margin-top:9px;color:#91a4c8;font:500 10px "DM Mono",monospace; }
+    .roadmap { margin-top:26px;display:grid;gap:5px}.roadmap a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:#aebdda;font-size:13px}.roadmap a:hover,.roadmap a.active{background:#1c3563;color:white}.roadmap b{width:22px;height:22px;display:grid;place-items:center;border:1px solid #3c5680;border-radius:50%;font:500 9px Manrope,sans-serif}.roadmap a.active b{background:var(--coral);border-color:var(--coral)}
+    .modules { display:grid;gap:14px; }
+    .module { background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:box-shadow .25s; }
+    .module[open]{box-shadow:0 18px 50px rgba(8,21,47,.08);border-color:#c8d5ee}
+    .module summary { list-style:none;cursor:pointer;padding:22px 24px;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:18px; }
+    .module summary::-webkit-details-marker{display:none}.module-id{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:#edf2ff;color:var(--blue);font:800 14px Manrope,sans-serif}.module summary h3{margin:0 0 2px;font-size:18px}.module summary p{margin:0;color:var(--muted);font-size:12px}.toggle{width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:var(--paper);font-size:19px;transition:transform .25s}.module[open] .toggle{transform:rotate(45deg);background:var(--ink);color:white}
+    .module-body { padding:0 24px 25px 90px;display:grid;grid-template-columns:1.3fr .7fr;gap:25px;color:#43516c;font-size:14px}.module-body ul{padding-left:20px;margin:0}.module-body li{margin:6px 0}.deliverable{background:#fff7e6;border-left:3px solid var(--yellow);padding:14px 16px;border-radius:0 10px 10px 0}.deliverable strong{display:block;color:var(--ink)}
+
+    .framework-grid { display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#2c426a;border:1px solid #2c426a;border-radius:20px;overflow:hidden}.stage{padding:26px 20px;background:#10254d;min-height:250px;position:relative}.stage::after{content:"→";position:absolute;right:-11px;top:40px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--coral);z-index:2;font:700 12px Manrope}.stage:last-child::after{display:none}.stage .tag{font:500 10px "DM Mono",monospace;color:var(--mint)}.stage h3{font-size:18px;margin:35px 0 11px}.stage p{font-size:13px;color:#aebdda;margin:0}.stage small{display:block;margin-top:20px;color:var(--yellow)}
+
+    .ai-section { background:linear-gradient(135deg,#e9efff 0%,#f8f3ff 48%,#fff0e8 100%); }
+    .ai-app { display:grid;grid-template-columns:.8fr 1.2fr;background:white;border:1px solid rgba(40,100,255,.16);border-radius:28px;overflow:hidden;box-shadow:var(--shadow); }
+    .ai-form { padding:34px;border-right:1px solid var(--line); }
+    .ai-badge {display:inline-flex;align-items:center;gap:8px;background:#e7fff6;color:#167556;border:1px solid #b9f3de;border-radius:30px;padding:7px 11px;font:500 10px "DM Mono",monospace}.ai-badge i{width:7px;height:7px;background:var(--mint);border-radius:50%;box-shadow:0 0 0 4px rgba(54,214,160,.2);animation:pulse 1.8s infinite}.ai-form h3{font-size:27px;margin:20px 0 6px}.ai-form>p{color:var(--muted);font-size:14px;margin:0 0 22px}.field{margin-top:14px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid #d8dfeb;border-radius:11px;padding:11px 13px;background:#fbfcff;color:var(--ink);outline:none}.field textarea{resize:vertical;min-height:78px}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,100,255,.1)}
+    .ai-form .btn { width:100%;margin-top:18px; }
+    .privacy-note{font-size:10px;color:#8793a9;margin-top:12px;text-align:center}.privacy-note svg{width:11px;vertical-align:-2px}
+    .ai-output { min-height:590px;padding:34px;background:#0d1c3b;color:white;position:relative;overflow:hidden}.ai-output::after{content:"AI";position:absolute;right:-20px;bottom:-80px;font:800 220px Manrope;color:rgba(255,255,255,.025)}.output-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29416e;padding-bottom:15px}.output-head span{font:500 10px "DM Mono",monospace;color:#94a8cb}.copy-btn{border:1px solid #3a527d;background:transparent;color:#b9c7df;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px}.result{position:relative;z-index:1;padding-top:22px;color:#c3cee1;font-size:14px;white-space:pre-line}.result h4{color:white;margin:18px 0 5px;font-size:16px}.result strong{color:var(--yellow)}.empty-state{height:440px;display:grid;place-items:center;text-align:center;color:#7387aa}.empty-icon{width:70px;height:70px;margin:auto;border-radius:20px;display:grid;place-items:center;background:#172d55;color:var(--mint)}.empty-icon svg{width:30px}.loading{display:none;padding-top:50px}.thinking{display:flex;gap:7px;justify-content:center}.thinking i{width:9px;height:9px;background:var(--mint);border-radius:50%;animation:bounce .8s infinite}.thinking i:nth-child(2){animation-delay:.12s}.thinking i:nth-child(3){animation-delay:.24s}
+
+    .calculator-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}.calc-card{background:white;border:1px solid var(--line);border-radius:20px;padding:28px}.calc-card h3{margin:0 0 6px}.calc-card>p{color:var(--muted);font-size:13px;margin:0 0 20px}.calc-inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px}.calc-results{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px}.calc-result{background:var(--paper);border-radius:12px;padding:14px}.calc-result span{display:block;color:var(--muted);font-size:10px}.calc-result strong{font:800 21px Manrope,sans-serif}.good{color:#17865e}.warning{color:#d5593e}
+    .checklist {display:grid;gap:10px}.check{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:.2s}.check:hover{border-color:var(--blue)}.check input{accent-color:var(--blue);margin-top:5px}.check.done{background:#edfff8;border-color:#b9eedc}.check.done span{text-decoration:line-through;color:var(--muted)}
+
+    .faq-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px}.faq-intro p{color:var(--muted)}.faq-list details{border-bottom:1px solid var(--line);padding:18px 0}.faq-list summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;font-weight:700}.faq-list summary::-webkit-details-marker{display:none}.faq-list summary::after{content:"+";font:400 25px Manrope;color:var(--blue)}.faq-list details[open] summary::after{content:"−"}.faq-list details p{color:var(--muted);font-size:14px;padding-right:50px}
+
+    .final-cta{margin-bottom:80px}.cta-box{position:relative;overflow:hidden;background:var(--blue);color:white;border-radius:28px;padding:55px;display:flex;align-items:center;justify-content:space-between;gap:30px}.cta-box::before{content:"";position:absolute;width:300px;height:300px;border:60px solid rgba(255,255,255,.1);border-radius:50%;right:17%;top:-170px}.cta-box h2{font-size:clamp(30px,4vw,48px)}.cta-box p{margin:10px 0 0;color:#d5e0ff}.cta-box .btn{position:relative;background:white;color:var(--blue);min-width:180px}
+    footer{background:var(--ink);color:#8497ba;padding:45px 0}.footer-row{display:flex;justify-content:space-between;align-items:center;gap:30px}.footer-row .brand{color:white}.footer-links{display:flex;gap:24px;font-size:13px}.footer-bottom{margin-top:30px;padding-top:20px;border-top:1px solid #24395f;display:flex;justify-content:space-between;font-size:11px}
+    .toast{position:fixed;z-index:500;right:20px;bottom:20px;padding:13px 18px;border-radius:12px;background:var(--ink);color:white;box-shadow:var(--shadow);transform:translateY(150%);transition:.3s;font-size:13px}.toast.show{transform:none}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s,transform .65s}.reveal.visible{opacity:1;transform:none}
+
+    @keyframes grow{from{height:0}}@keyframes float{50%{transform:translateY(-9px) rotate(2deg)}}@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(54,214,160,0)}}@keyframes bounce{50%{transform:translateY(-10px)}}@keyframes enterDash{from{opacity:0;transform:translateX(60px) rotateY(-12deg) rotateX(5deg)}}@keyframes ticker{to{transform:translateX(-50%)}}
+    @media(max-width:980px){.nav-links{display:none}.menu-btn{display:grid;place-items:center}.nav-links.open{display:flex;position:absolute;top:72px;left:20px;right:20px;flex-direction:column;align-items:stretch;background:white;padding:18px;border-radius:16px;box-shadow:var(--shadow)}.hero-grid{grid-template-columns:1fr;gap:60px}.dash-wrap{max-width:590px}.outcomes{grid-template-columns:repeat(2,1fr)}.learning-layout{grid-template-columns:1fr}.track{position:relative;top:auto}.roadmap{display:none}.framework-grid{grid-template-columns:1fr 1fr}.stage::after{display:none}.ai-app{grid-template-columns:1fr}.ai-form{border-right:0;border-bottom:1px solid var(--line)}.faq-grid{grid-template-columns:1fr;gap:30px}}
+    @media(max-width:680px){:root{--shell:min(100% - 28px,1180px)}.top-note{font-size:11px}.hero{padding:62px 0 75px}.hero-copy{font-size:16px}.floating-note{right:-5px;top:65px}.dashboard{transform:none;box-shadow:12px 15px 0 rgba(40,100,255,.24)}.mini-grid{grid-template-columns:1fr}.metric:nth-child(n+2){display:none}.section{padding:76px 0}.section-head{display:block}.section-head>p:last-child{margin-top:16px}.outcomes{grid-template-columns:1fr}.outcome{min-height:auto}.module summary{grid-template-columns:42px 1fr auto;padding:18px 14px;gap:12px}.module-id{width:42px;height:42px}.module-body{padding:0 18px 22px;grid-template-columns:1fr}.framework-grid{grid-template-columns:1fr}.stage{min-height:auto}.ai-form,.ai-output{padding:23px}.ai-output{min-height:520px}.calculator-grid{grid-template-columns:1fr}.calc-inputs{grid-template-columns:1fr}.cta-box{padding:34px 25px;display:block}.cta-box .btn{margin-top:25px}.footer-row,.footer-bottom{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}.trust-row{display:grid;gap:8px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+  </style>
+  <style>
+    .access-locked, .access-locked body { overflow: hidden; }
+    .access-locked body > :not(#accessGate) { visibility: hidden; }
+    .access-gate { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 22px; visibility: visible !important; background: #08152f; color: #fff; overflow: auto; }
+    .access-gate[hidden] { display: none; }
+    .access-gate::before { content: ""; position: absolute; inset: 0; opacity: .24; background-image: linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px); background-size: 54px 54px; mask-image: radial-gradient(circle at center,black,transparent 82%); }
+    .access-gate::after { content: ""; position: absolute; width: 430px; height: 430px; right: -190px; top: -220px; border: 88px solid #2864ff; border-radius: 50%; opacity: .25; }
+    .access-card { position: relative; z-index: 1; width: min(100%, 460px); padding: 38px; border: 1px solid rgba(255,255,255,.14); border-radius: 26px; background: rgba(16,37,77,.88); box-shadow: 0 35px 100px rgba(0,0,0,.42); backdrop-filter: blur(18px); text-align: center; }
+    .access-lock { width: 68px; height: 68px; margin: 0 auto 22px; display: grid; place-items: center; border-radius: 20px; background: #2864ff; color: #fff; box-shadow: 7px 7px 0 #ff6b4a; }
+    .access-lock svg { width: 30px; }
+    .access-card .access-label { margin: 0 0 9px; color: #36d6a0; font: 500 10px "DM Mono",monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .access-card h1 { margin: 0 0 9px; font-size: clamp(27px,5vw,38px); line-height: 1.35; letter-spacing: -.035em; }
+    .access-card > p { margin: 0 auto 24px; color: #aebdda; font-size: 14px; }
+    .password-wrap { position: relative; }
+    .password-wrap input { width: 100%; min-height: 54px; padding: 12px 52px 12px 15px; border: 1px solid #3b527d; border-radius: 13px; outline: none; color: #fff; background: #0a1935; }
+    .password-wrap input:focus { border-color: #5a86ff; box-shadow: 0 0 0 4px rgba(90,134,255,.16); }
+    .password-wrap input::placeholder { color: #7184a7; }
+    .password-toggle { position: absolute; right: 8px; top: 8px; width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 9px; background: transparent; color: #93a6c8; cursor: pointer; }
+    .password-toggle:hover { color: #fff; background: #172d55; }
+    .access-submit { width: 100%; margin-top: 13px; border: 0; min-height: 52px; border-radius: 13px; color: #fff; background: #ff6b4a; box-shadow: 5px 5px 0 #ffd166; font-weight: 800; cursor: pointer; transition: transform .2s, opacity .2s; }
+    .access-submit:hover { transform: translateY(-2px); }
+    .access-submit:disabled { opacity: .65; cursor: wait; }
+    .access-error { min-height: 22px; margin: 13px 0 0; color: #ff9a82; font-size: 12px; }
+    .access-secure { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 16px; color: #8194b7; font: 500 9px "DM Mono",monospace; text-transform: uppercase; letter-spacing: .08em; }
+    .access-secure svg { width: 12px; color: #36d6a0; }
+    .access-card.shake { animation: accessShake .34s ease; }
+    .access-gate.unlocking { opacity: 0; transform: scale(1.015); transition: opacity .42s, transform .42s; }
+    .lesson-video { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(210px,330px) 1fr; align-items: center; gap: 24px; margin-top: 8px; padding: 20px; border-radius: 17px; background: #0d1c3b; color: #fff; }
+    .lesson-video-frame { position: relative; aspect-ratio: 9 / 16; max-height: 480px; overflow: hidden; border-radius: 14px; background: #050b18; box-shadow: 0 18px 45px rgba(0,0,0,.28); }
+    .lesson-video-frame iframe { width: 100%; height: 100%; display: block; border: 0; }
+    .lesson-video-launch { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer; background: #050b18; overflow: hidden; }
+    .lesson-video-launch img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s, filter .35s; }
+    .lesson-video-launch::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top,rgba(5,11,24,.68),transparent 58%); }
+    .lesson-video-launch:hover img { transform: scale(1.035); filter: brightness(.82); }
+    .lesson-play-icon { position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 66px; height: 66px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #ff1744; box-shadow: 0 13px 35px rgba(0,0,0,.35); transition: transform .2s; }
+    .lesson-video-launch:hover .lesson-play-icon { transform: translate(-50%,-50%) scale(1.08); }
+    .lesson-play-icon svg { width: 27px; margin-left: 4px; }
+    .lesson-play-label { position: absolute; z-index: 2; left: 15px; right: 15px; bottom: 14px; color: #fff; font-size: 12px; font-weight: 800; text-align: center; text-shadow: 0 2px 9px rgba(0,0,0,.8); }
+    .module-video-chip { display: inline-flex; align-items: center; gap: 6px; width: max-content; margin-top: 7px; padding: 4px 9px; border-radius: 20px; color: #d93025 !important; background: #fff0ee; font: 700 9px "DM Mono",monospace !important; letter-spacing: .04em; }
+    .module-video-chip i { width: 17px; height: 17px; display: grid; place-items: center; border-radius: 50%; background: #ff1744; color: #fff; font-style: normal; font-size: 8px; }
+    .lesson-video-copy span { color: #36d6a0; font: 500 10px "DM Mono",monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .lesson-video-copy h4 { margin: 12px 0 7px; font-size: 21px; line-height: 1.4; }
+    .lesson-video-copy p { margin: 0 0 19px; color: #9fb0cf; font-size: 13px; }
+    .lesson-video-link { display: inline-flex; align-items: center; gap: 8px; padding: 9px 13px; border: 1px solid #38517d; border-radius: 10px; color: #fff; font-size: 12px; font-weight: 700; }
+    .lesson-video-link:hover { border-color: #ff6b4a; background: #172d55; }
+    @keyframes accessShake { 25% { transform: translateX(-9px); } 50% { transform: translateX(8px); } 75% { transform: translateX(-5px); } }
+    @media (max-width: 680px) { .access-card { padding: 30px 21px; } .lesson-video { grid-template-columns: 1fr; padding: 15px; } .lesson-video-frame { width: min(100%,290px); margin-inline: auto; } }
+    @media (prefers-reduced-motion: reduce) { .access-card.shake { animation: none; } }
+  </style>
+  <script>if(sessionStorage.getItem('keovothy_access')!=='granted')document.documentElement.classList.add('access-locked');</script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">រំលងទៅមាតិកា</a>
-  <div class="scroll-progress" aria-hidden="true"></div>
-  <header class="site-header">
-    <div class="nav-shell">
-      <a class="brand" href="../index.html#home" aria-label="ត្រឡប់ទៅ KEOVOTHY Digital Academy"><span class="brand-logo"><img src="https://drive.google.com/thumbnail?id=1hc4jjgW0Q4I-NN54nkwh2xOfeC9xEE8f&amp;sz=w1000" referrerpolicy="no-referrer" alt="KEOVOTHY Logo"></span><span class="brand-word">KEOVOTHY<span>.</span></span></a>
-      <nav class="desktop-nav" aria-label="ម៉ឺនុយមេ"><a class="nav-link" href="../index.html#home">ទំព័រដើម</a><a class="nav-link" href="../index.html#books">សៀវភៅ</a><a class="nav-link" href="../index.html#courses">វគ្គសិក្សា</a><a class="nav-link nav-cta" href="https://t.me/keovothy" target="_blank" rel="noopener noreferrer">ទំនាក់ទំនង</a></nav>
-      <details class="mobile-menu"><summary aria-label="បើកម៉ឺនុយ"><i class="fa-solid fa-bars" aria-hidden="true"></i></summary><nav aria-label="ម៉ឺនុយទូរសព្ទ"><a class="nav-link" href="../index.html#home">ទំព័រដើម</a><a class="nav-link" href="../index.html#books">សៀវភៅ</a><a class="nav-link" href="../index.html#courses">វគ្គសិក្សា</a><a class="nav-link" href="https://t.me/keovothy" target="_blank" rel="noopener noreferrer">ទំនាក់ទំនង</a></nav></details>
-    </div>
-  </header>
+  <a class="skip-link" href="#main">រំលងទៅមាតិកា</a><div class="progress" aria-hidden="true"></div>
+  <div class="top-note"><strong>FREE LEARNING LAB</strong> · រៀនតាមល្បឿនរបស់អ្នក + ប្រើ AI Toolkit ដោយឥតគិតថ្លៃ</div>
+  <header><div class="shell nav">
+    <a class="brand" href="#top" aria-label="KEOVOTHY Digital Growth Lab"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 19 5-5 4 3 5-7"/><path d="M15 10h4v4"/></svg></span><span>KEOVOTHY<small>Digital Growth Lab</small></span></a>
+    <nav class="nav-links" id="navLinks" aria-label="ម៉ឺនុយមេ"><a href="#outcomes">លទ្ធផល</a><a href="#curriculum">មេរៀន</a><a href="#framework">Framework</a><a href="#ai-lab">AI Lab</a><a href="#toolkit">Tools</a><a class="nav-cta" href="#curriculum">ចាប់ផ្តើមរៀន</a></nav>
+    <button class="menu-btn" id="menuBtn" aria-label="បើកម៉ឺនុយ" aria-expanded="false"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div></header>
 
-  <main id="main-content">
-    <section class="hero">
-      <div class="page-shell">
-        <div class="breadcrumbs"><a href="../index.html">Digital Academy</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span>Digital Marketing Course</span></div>
-        <div class="hero-grid">
-          <div>
-            <p class="eyebrow">Free Online Course</p>
-            <h1>វគ្គសិក្សា <span class="gold-text">Digital Marketing</span></h1>
-            <p class="hero-copy">រៀនបង្កើតយុទ្ធសាស្ត្រ គ្រប់គ្រង Social Media រៀបចំ Content និងវាស់លទ្ធផល Ads តាមជំហានដែលអាចយកទៅប្រើក្នុងអាជីវកម្មបាន។</p>
-            <div class="action-row"><a class="button button-primary" href="#curriculum"><i class="fa-solid fa-circle-play" aria-hidden="true"></i> មើលកម្មវិធីសិក្សា</a><a class="button button-secondary" href="https://t.me/keovothy" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram" aria-hidden="true"></i> សួរព័ត៌មាន</a></div>
-            <div class="quick-stats" aria-label="ព័ត៌មានវគ្គសិក្សា"><div class="stat"><strong>6</strong><span>មេរៀន</span></div><div class="stat"><strong>Online</strong><span>របៀបរៀន</span></div><div class="stat"><strong>FREE</strong><span>តម្លៃវគ្គ</span></div></div>
-          </div>
-          <div class="hero-media"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=1200&amp;q=84" alt="ផ្ទាំងទិន្នន័យសម្រាប់ការងារ Digital Marketing"><div class="media-card"><strong>Marketing System</strong><span>Strategy → Content → Ads → Measure</span></div></div>
+  <main id="main">
+    <section class="hero" id="top"><div class="shell hero-grid">
+      <div><span class="kicker">Khmer Digital Marketing Masterclass</span><h1>បម្លែងការរៀន<br>ទៅជា <em>លទ្ធផល</em></h1><p class="hero-copy">កម្មវិធីសិក្សាអនុវត្តជាក់ស្តែងពី Strategy រហូតដល់ Ads និង Analytics — រៀបចំជាប្រព័ន្ធ ងាយយល់ ងាយចាំ និងអាចយកទៅប្រើលើអាជីវកម្មបានភ្លាមៗ។</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#curriculum"><svg width="19" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> ចាប់ផ្តើមមេរៀនទី ១</a><a class="btn btn-secondary" href="#ai-lab">សាកល្បង AI Coach <span>✦</span></a></div>
+        <div class="trust-row"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>៦ Modules ពេញលេញ</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Project-Based Learning</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>ឥតគិតថ្លៃ ១០០%</span></div>
+      </div>
+      <div class="dash-wrap" aria-label="ផ្ទាំងគ្រប់គ្រងលទ្ធផល Marketing"><div class="dashboard"><div class="dash-head"><div class="dash-dots"><i></i><i></i><i></i></div><span class="live">● LIVE CAMPAIGN</span></div><div class="chart-card"><div class="chart-title"><span>Revenue Growth<br><strong>+184%</strong></span><span>30 days ↗</span></div><div class="chart"><i class="bar" style="--h:32%;--d:.05s"></i><i class="bar" style="--h:45%;--d:.1s"></i><i class="bar" style="--h:39%;--d:.15s"></i><i class="bar" style="--h:58%;--d:.2s"></i><i class="bar" style="--h:65%;--d:.25s"></i><i class="bar hot" style="--h:83%;--d:.3s"></i><i class="bar" style="--h:72%;--d:.35s"></i><i class="bar hot" style="--h:95%;--d:.4s"></i></div></div><div class="mini-grid"><div class="metric"><span>ROAS</span><strong>4.8x</strong><small>↑ 1.2x</small></div><div class="metric"><span>CTR</span><strong>3.24%</strong><small>↑ 0.8%</small></div><div class="metric"><span>CPA</span><strong>$2.16</strong><small>↓ 18%</small></div></div></div><div class="floating-note"><small>Next goal</small>Scale the winner ↗</div></div>
+    </div></section>
+    <div class="signal-strip" aria-hidden="true"><div class="ticker"><span>Strategy</span><span>Audience Research</span><span>Content System</span><span>Meta Ads</span><span>Analytics</span><span>AI Workflow</span><span>Strategy</span><span>Audience Research</span><span>Content System</span><span>Meta Ads</span><span>Analytics</span><span>AI Workflow</span></div></div>
+
+    <section class="section" id="outcomes"><div class="shell"><div class="section-head reveal"><div><p class="eyebrow">Your transformation</p><h2>រៀនចប់ អ្នកអាចធ្វើបានពិត</h2></div><p>មិនមែនរៀនត្រឹមពាក្យបច្ចេកទេសទេ។ អ្នកនឹងបង្កើត Marketing System ដែលមានគោលដៅ ដំណើរការ និងការវាស់លទ្ធផលច្បាស់លាស់។</p></div>
+      <div class="outcomes reveal">
+        <article class="outcome"><span class="outcome-num">01 / STRATEGY</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="m18 6 3-3M17 3h4v4"/></svg><h3>ចាប់ Strategy ឲ្យត្រូវ</h3><p>ភ្ជាប់ Business Goal ទៅ Campaign Objective, Funnel និង KPI ដែលត្រូវវាស់។</p></article>
+        <article class="outcome"><span class="outcome-num">02 / AUDIENCE</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><h3>ស្គាល់អ្នកទិញ</h3><p>បង្កើត Persona តាម Pain, Desire, Objection និង Buying Trigger មិនមែនតែអាយុ។</p></article>
+        <article class="outcome"><span class="outcome-num">03 / CONTENT</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5V4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5"/><path d="M8 7h8M8 11h6"/></svg><h3>ផលិត Content មានគោលដៅ</h3><p>ប្រើ Hook–Value–Proof–CTA និង Content Pillars ដើម្បីទាក់ទាញ និងបម្លែង។</p></article>
+        <article class="outcome"><span class="outcome-num">04 / DATA</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="m7 16 4-5 4 3 5-8"/></svg><h3>សម្រេចចិត្តតាម Data</h3><p>អាន CTR, CPC, CPA, CVR និង ROAS ដើម្បីដឹងថាត្រូវ Stop, Fix ឬ Scale។</p></article>
+      </div>
+    </div></section>
+
+    <section class="section white" id="curriculum"><div class="shell"><div class="section-head reveal"><div><p class="eyebrow">The complete curriculum</p><h2>ផ្លូវរៀន ៦ ជំហាន</h2></div><p>រៀនតាមលំដាប់ពីការគិត ដល់ការអនុវត្ត។ មេរៀននីមួយៗមាន Framework, Checklist និង Project ដែលត្រូវធ្វើ។</p></div>
+      <div class="learning-layout"><aside class="track reveal"><h3>Progress របស់អ្នក</h3><p>បើកមេរៀននីមួយៗ ដើម្បីឲ្យប្រព័ន្ធកត់ត្រាការសិក្សានៅក្នុង browser នេះ។</p><div class="track-progress"><i id="lessonProgress"></i></div><div class="track-meta"><span id="progressText">1 / 6 MODULES</span><span id="progressPercent">17%</span></div><nav class="roadmap"><a class="active" href="#m1"><b>1</b>Marketing Foundation</a><a href="#m2"><b>2</b>Audience & Offer</a><a href="#m3"><b>3</b>Content Engine</a><a href="#m4"><b>4</b>Distribution System</a><a href="#m5"><b>5</b>Paid Ads</a><a href="#m6"><b>6</b>Measure & Scale</a></nav></aside>
+        <div class="modules reveal">
+          <details class="module" id="m1" open><summary><span class="module-id">M01</span><span><h3>Marketing Foundation & Funnel</h3><p>Mindset · Customer Journey · Objective · KPI</p></span><span class="toggle">+</span></summary><div class="module-body"><ul><li>បម្លែង Business Goal ទៅ Marketing Objective</li><li>យល់ពី TOFU, MOFU, BOFU និង Customer Journey</li><li>Owned, Earned និង Paid Media</li><li>កំណត់ North-Star Metric និង KPI Tree</li></ul><div class="deliverable"><strong>Project 01</strong>គូរ Funnel ១ ទំព័រ និងកំណត់ KPI សម្រាប់គ្រប់ដំណាក់កាល។</div></div></details>
+          <details class="module" id="m2"><summary><span class="module-id">M02</span><span><h3>Audience Research & Irresistible Offer</h3><p>Persona · JTBD · Pain · Promise · Proof</p></span><span class="toggle">+</span></summary><div class="module-body"><ul><li>Research ពី Comment, Review, Inbox និង Competitor</li><li>Jobs-to-be-Done: អតិថិជន “ជួល” ផលិតផលទៅធ្វើអ្វី?</li><li>សរសេរ Value Proposition ដែលច្បាស់</li><li>Offer Stack: Core + Bonus + Guarantee + Urgency</li></ul><div class="deliverable"><strong>Project 02</strong>បង្កើត Persona Card និង Offer Statement មួយប្រយោគ។</div></div></details>
+          <details class="module" id="m3"><summary><span class="module-id">M03</span><span><h3>Content Engine That Converts</h3><p>Pillars · Hooks · Story · CTA · Calendar</p></span><span class="toggle">+</span></summary><div class="module-body"><ul><li>Content 4 ប្រភេទ៖ Educate, Engage, Prove, Convert</li><li>Hook Formula: Problem, Curiosity, Result, Contrarian</li><li>Story Framework: Before–Bridge–After</li><li>Repurpose 1 Idea ទៅ Video, Carousel, Post និង Email</li></ul><div class="deliverable"><strong>Project 03</strong>រៀប Content Calendar ៧ ថ្ងៃ និងផលិត Content ៣ ទម្រង់។</div></div></details>
+          <details class="module" id="m4"><summary><span class="module-id">M04</span><span><h3>Social Distribution & Community</h3><p>Channel Fit · SEO · Workflow · Community</p></span><span class="toggle">+</span></summary><div class="module-body"><ul><li>ជ្រើស Platform តាម Audience Behavior</li><li>Optimize Profile, Keyword, Caption និង Hashtag</li><li>Publishing + Approval Workflow សម្រាប់ក្រុម</li><li>Response Playbook សម្រាប់ Comment និង Inbox</li></ul><div class="deliverable"><strong>Project 04</strong>រៀប SOP ផ្សព្វផ្សាយ និង Community Response Matrix។</div></div></details>
+          <details class="module" id="m5"><summary><span class="module-id">M05</span><span><h3>Paid Ads: Test Before You Scale</h3><p>Campaign · Creative · Budget · Experiment</p></span><span class="toggle">+</span></summary><div class="module-body"><ul><li>ជ្រើស Objective និង Conversion Event ឲ្យត្រូវ</li><li>Broad vs Interest vs Retargeting Audience</li><li>Creative Testing: Hook, Visual, Offer, CTA</li><li>Budget Rules: Test → Validate → Scale</li></ul><div class="deliverable"><strong>Project 05</strong>បង្កើត Testing Matrix 3×3 និង Budget Plan ៧ ថ្ងៃ។</div></div></details>
+          <details class="module" id="m6"><summary><span class="module-id">M06</span><span><h3>Analytics, Optimization & Scale</h3><p>Dashboard · Diagnosis · Report · Scale</p></span><span class="toggle">+</span></summary><div class="module-body"><ul><li>គណនា CPM, CTR, CPC, CVR, CPA និង ROAS</li><li>Diagnostic Tree: Ads, Landing Page ឬ Offer?</li><li>សរសេរ Report: What → Why → Next Action</li><li>Scale ដោយ Budget, Audience ឬ Creative</li></ul><div class="deliverable"><strong>Project 06</strong>បង្កើត Weekly Performance Report និង Action Plan។</div></div></details>
         </div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="section" id="outcomes">
-      <div class="page-shell">
-        <p class="eyebrow">Learning Outcomes</p>
-        <h2 class="section-heading">អ្វីដែលអ្នកនឹងអាចធ្វើបាន</h2>
-        <p class="section-copy">វគ្គនេះផ្តោតលើ Framework និងការអនុវត្តសម្រាប់អ្នកចាប់ផ្តើម អ្នកបង្កើត Content និងម្ចាស់អាជីវកម្មតូច។</p>
-        <div class="grid-3">
-          <article class="info-card"><span class="card-icon"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></span><h3>កំណត់ Audience</h3><p>រៀបចំ Customer Persona និងជ្រើស Message ដែលត្រូវនឹងបញ្ហា និងតម្រូវការរបស់អតិថិជន។</p></article>
-          <article class="info-card"><span class="card-icon"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i></span><h3>បង្កើត Content Plan</h3><p>កំណត់ Content Pillar, Format, Frequency និង CTA សម្រាប់ផែនការមាតិកាដែលអាចអនុវត្តបាន។</p></article>
-          <article class="info-card"><span class="card-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span><h3>អាន KPI</h3><p>យល់ពី Reach, CTR, CPC, Conversion និង ROAS ដើម្បីសម្រេចចិត្តដោយផ្អែកលើទិន្នន័យ។</p></article>
-        </div>
+    <section class="section dark" id="framework"><div class="shell"><div class="section-head reveal"><div><p class="eyebrow">The G.R.O.W.T.H. loop</p><h2>Framework ងាយចាំ<br>សម្រាប់គ្រប់ Campaign</h2></div><p>កុំចាប់ផ្តើមពី “តើ Post អ្វីថ្ងៃនេះ?” ចាប់ផ្តើមពីគោលដៅ ហើយប្រើ loop នេះជាប្រព័ន្ធធ្វើការរបស់អ្នក។</p></div>
+      <div class="framework-grid reveal"><article class="stage"><span class="tag">G / GOAL</span><h3>កំណត់លទ្ធផល</h3><p>កំណត់ Business Goal, Target, Timeline និង KPI មួយដែលសំខាន់បំផុត។</p><small>Ask: ជោគជ័យមានរូបរាងដូចម្តេច?</small></article><article class="stage"><span class="tag">R / RESEARCH</span><h3>ស្វែងយល់ទីផ្សារ</h3><p>ប្រមូល Voice of Customer, Competitor Gap និង Buying Trigger។</p><small>Ask: អ្នកទិញខ្លាច និងចង់បានអ្វី?</small></article><article class="stage"><span class="tag">O / OFFER</span><h3>បង្កើតតម្លៃ</h3><p>ផ្គុំ Message, Promise, Proof និង CTA ដែលងាយសម្រេចចិត្ត។</p><small>Ask: ហេតុអ្វីត្រូវទិញឥឡូវ?</small></article><article class="stage"><span class="tag">W / WORK</span><h3>ផលិត និងផ្សព្វផ្សាយ</h3><p>ផលិត Creative, ជ្រើស Channel និងចែកចាយតាម Calendar។</p><small>Ask: Format ណាដែល audience ចូលចិត្ត?</small></article><article class="stage"><span class="tag">T+H / TEST + HARVEST</span><h3>វាស់ សាក និង Scale</h3><p>រក Bottleneck, សាកល្បង Variable មួយ និងពង្រីក Winner។</p><small>Ask: ត្រូវ Stop, Fix ឬ Scale?</small></article></div>
+    </div></section>
+
+    <section class="section ai-section" id="ai-lab"><div class="shell"><div class="section-head reveal"><div><p class="eyebrow">Free AI marketing coach</p><h2>បម្លែង Idea ទៅ Content Plan</h2></div><p>បញ្ចូលព័ត៌មានអាជីវកម្មរបស់អ្នក។ AI Coach នឹងបង្កើត Strategy, Content Ideas និង Caption Draft ជាភាសាខ្មែរ។</p></div>
+      <div class="ai-app reveal"><form class="ai-form" id="aiForm"><span class="ai-badge"><i></i> FREE · NO ACCOUNT</span><h3>AI Content Strategist</h3><p>ផ្តល់ព័ត៌មានឲ្យច្បាស់ លទ្ធផលនឹងកាន់តែល្អ។</p><div class="field"><label for="business">អាជីវកម្ម / ផលិតផល</label><input id="business" required placeholder="ឧ. ហាងកាហ្វេនៅភ្នំពេញ"></div><div class="field"><label for="audience">អតិថិជនគោលដៅ</label><input id="audience" required placeholder="ឧ. និស្សិត និងបុគ្គលិកអាយុ 18–35"></div><div class="field"><label for="goal">គោលដៅ Campaign</label><select id="goal"><option value="awareness">បង្កើនការស្គាល់ Brand</option><option value="engagement">បង្កើន Engagement</option><option value="leads">រក Leads / Inbox</option><option value="sales">បង្កើនការលក់</option></select></div><div class="field"><label for="tone">សម្លេង Brand</label><select id="tone"><option>រួសរាយ និងងាយយល់</option><option>ជំនាញ និងទុកចិត្តបាន</option><option>សប្បាយ និងទាន់សម័យ</option><option>ប្រណិត និងមានតម្លៃ</option></select></div><button class="btn btn-dark" type="submit">✦ បង្កើតផែនការជាមួយ AI</button><div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> កុំបញ្ចូលលេខសម្ងាត់ ឬទិន្នន័យឯកជន</div></form>
+        <div class="ai-output" aria-live="polite"><div class="output-head"><span>STRATEGY OUTPUT</span><button class="copy-btn" id="copyBtn" type="button" hidden>ចម្លងលទ្ធផល</button></div><div class="empty-state" id="emptyState"><div><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3 9.7 8.7 4 11l5.7 2.3L12 19l2.3-5.7L20 11l-5.7-2.3z"/></svg></div><h3>រង់ចាំ Brief របស់អ្នក</h3><p>AI នឹងបង្កើតផែនការដែលអាចយកទៅប្រើបាន<br>មិនមែនចម្លើយទូទៅ។</p></div></div><div class="loading" id="loading"><div class="thinking"><i></i><i></i><i></i></div><p style="text-align:center;color:#7589ae">កំពុងវិភាគ Audience និង Goal...</p></div><div class="result" id="aiResult"></div></div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="section" id="curriculum">
-      <div class="page-shell">
-        <p class="eyebrow">Course Curriculum</p>
-        <h2 class="section-heading">កម្មវិធីសិក្សា ៦ មេរៀន</h2>
-        <p class="section-copy">ចុចលើមេរៀននីមួយៗដើម្បីមើលចំណុចសិក្សា។</p>
-        <div class="curriculum">
-          <details open><summary><span>មេរៀនទី ១ — មូលដ្ឋាន Digital Marketing</span></summary><div class="lesson-body"><p>យល់ពី Customer Journey, Funnel និងតួនាទីរបស់ Channel ដូចជា Facebook, TikTok, Website និង Messaging។</p><ul><li>Awareness, Consideration និង Conversion</li><li>Organic និង Paid Media</li><li>ការកំណត់ Objective ឱ្យត្រូវនឹងអាជីវកម្ម</li></ul></div></details>
-          <details><summary><span>មេរៀនទី ២ — Audience & Positioning</span></summary><div class="lesson-body"><p>បង្កើត Persona ពីបញ្ហា តម្រូវការ ទីតាំង អាយុ អាកប្បកិរិយា និងហេតុផលដែលពួកគេទិញ។</p></div></details>
-          <details><summary><span>មេរៀនទី ៣ — Content Strategy</span></summary><div class="lesson-body"><p>បង្កើត Content Pillar និងប្រើរូបមន្ត Hook–Value–Proof–CTA សម្រាប់ Poster, Video និង Carousel។</p></div></details>
-          <details><summary><span>មេរៀនទី ៤ — Social Media Management</span></summary><div class="lesson-body"><p>រៀប Calendar, Workflow អនុម័ត, Community Response និងរក្សា Brand Voice ឱ្យស៊ីគ្នា។</p></div></details>
-          <details><summary><span>មេរៀនទី ៥ — Ads Fundamentals</span></summary><div class="lesson-body"><p>ស្គាល់ Campaign Objective, Audience, Placement, Budget និង Creative Testing។ ចាប់ផ្តើមតូច វាស់លទ្ធផល និង Scale តាមទិន្នន័យ។</p></div></details>
-          <details><summary><span>មេរៀនទី ៦ — Measurement & Optimization</span></summary><div class="lesson-body"><p>កំណត់ KPI តាម Funnel ប្រៀបធៀប Creative និងបង្កើតរបាយការណ៍ដែលបង្ហាញ Insight និង Next Action។</p></div></details>
-        </div>
-      </div>
-    </section>
+    <section class="section" id="toolkit"><div class="shell"><div class="section-head reveal"><div><p class="eyebrow">Practical toolkit</p><h2>Tools សម្រាប់ការងារពិត</h2></div><p>ប្រើ Calculator ដើម្បីពិនិត្យ Campaign និង Checklist ដើម្បីរក្សាវិន័យ ៣០ ថ្ងៃ។ ទិន្នន័យរក្សាតែនៅលើ browser របស់អ្នក។</p></div>
+      <div class="calculator-grid reveal"><article class="calc-card"><h3>Ads Performance Calculator</h3><p>បញ្ចូល Spend, Clicks, Leads និង Revenue ដើម្បីមើល KPI សំខាន់ៗ។</p><div class="calc-inputs"><div class="field"><label for="spend">Ad Spend ($)</label><input type="number" id="spend" min="0" value="100"></div><div class="field"><label for="clicks">Clicks</label><input type="number" id="clicks" min="0" value="850"></div><div class="field"><label for="leads">Leads / Sales</label><input type="number" id="leads" min="0" value="42"></div><div class="field"><label for="revenue">Revenue ($)</label><input type="number" id="revenue" min="0" value="480"></div></div><div class="calc-results"><div class="calc-result"><span>CPC</span><strong id="cpc">$0.12</strong></div><div class="calc-result"><span>CPA</span><strong id="cpa">$2.38</strong></div><div class="calc-result"><span>CVR</span><strong id="cvr">4.94%</strong></div><div class="calc-result"><span>ROAS</span><strong class="good" id="roas">4.80x</strong></div></div></article>
+        <article class="calc-card"><h3>30-Day Execution Checklist</h3><p>បញ្ចប់ជំហានសំខាន់ៗ មុនពេលបង្កើន Budget។</p><div class="checklist" id="checklist"><label class="check"><input type="checkbox"><span>កំណត់ Goal និង KPI ចម្បង ១</span></label><label class="check"><input type="checkbox"><span>សម្ភាស ឬ Research Audience ៥ នាក់</span></label><label class="check"><input type="checkbox"><span>បង្កើត Content Pillars ៤</span></label><label class="check"><input type="checkbox"><span>ផលិត Creative Variations ៣</span></label><label class="check"><input type="checkbox"><span>Review Data និងកត់ Next Action រៀងរាល់សប្តាហ៍</span></label></div></article></div>
+    </div></section>
 
-    <section class="section" id="framework">
-      <div class="page-shell">
-        <p class="eyebrow">Simple Framework</p>
-        <h2 class="section-heading">ផែនការអនុវត្ត ៣០ ថ្ងៃ</h2>
-        <div class="grid-2">
-          <article class="info-card"><span class="card-number">W1</span><h3>សប្តាហ៍ទី ១ — Foundation</h3><p>កំណត់ Goal, Persona, Offer និង KPI ចម្បងមួយសម្រាប់ Campaign។</p></article>
-          <article class="info-card"><span class="card-number">W2</span><h3>សប្តាហ៍ទី ២ — Content</h3><p>រៀបចំ Content Pillar ៣ និងផលិត Creative យ៉ាងហោចណាស់ ៣ Format។</p></article>
-          <article class="info-card"><span class="card-number">W3</span><h3>សប្តាហ៍ទី ៣ — Test</h3><p>សាកល្បង Hook, Visual ឬ Audience មួយ Variable ក្នុងមួយពេល និងកត់ត្រាលទ្ធផល។</p></article>
-          <article class="info-card"><span class="card-number">W4</span><h3>សប្តាហ៍ទី ៤ — Improve</h3><p>រក Top Performer, បញ្ឈប់អ្វីដែលមិនដំណើរការ និងបង្កើត Version ថ្មីពី Insight។</p></article>
-        </div>
-      </div>
-    </section>
+    <section class="section white"><div class="shell faq-grid reveal"><div class="faq-intro"><p class="eyebrow">Quick clarity</p><h2>សំណួរដែលគេសួរញឹកញាប់</h2><p>ចាប់ផ្តើមពីអ្វីដែលអ្នកមាន។ កុំពន្យារពេលរង់ចាំ Tool ថ្លៃ ឬ Equipment ល្អឥតខ្ចោះ។</p></div><div class="faq-list"><details><summary>ខ្ញុំគ្មានបទពិសោធន៍ អាចរៀនបានទេ?</summary><p>បាន។ វគ្គនេះរៀបពីមូលដ្ឋានទៅការអនុវត្ត។ ចាប់ផ្តើម M01 ហើយធ្វើ Project តូចមួយមុនពេលទៅមេរៀនបន្ទាប់។</p></details><details><summary>តើត្រូវមាន Budget សម្រាប់ Ads ដែរឬទេ?</summary><p>មិនចាំបាច់សម្រាប់មេរៀនដំបូងទេ។ អ្នកអាចរៀន Strategy, Audience និង Content ជាមុន។ ពេល Test Ads ចាប់ផ្តើមតូច ហើយ Scale តែ Winner។</p></details><details><summary>AI Coach ពិតជាឥតគិតថ្លៃមែនទេ?</summary><p>មែន។ អ្នកមិនត្រូវបង្កើត Account ឬបញ្ចូល Card ទេ។ ប្រសិនបើសេវា AI សាធារណៈមិនឆ្លើយតប ប្រព័ន្ធ Offline Coach នឹងបង្កើតផែនការជំនួស។</p></details><details><summary>តើរៀនចប់ក្នុងរយៈពេលប៉ុន្មាន?</summary><p>រៀន ៣–៥ ម៉ោងក្នុងមួយសប្តាហ៍ អ្នកអាចបញ្ចប់ក្នុង ៤–៦ សប្តាហ៍។ សំខាន់គឺធ្វើ Project រាល់ Module មិនមែនត្រឹមអាន។</p></details></div></div></section>
 
-    <section class="section"><div class="page-shell"><div class="cta-panel"><div><h2>ត្រៀមចាប់ផ្តើមរៀន?</h2><p>ទាក់ទងគ្រូតាម Telegram សម្រាប់ព័ត៌មានមេរៀន និងការចូលរួមវគ្គ។</p></div><a class="button button-primary" href="https://t.me/keovothy" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram" aria-hidden="true"></i> ទាក់ទងឥឡូវនេះ</a></div></div></section>
+    <section class="final-cta"><div class="shell cta-box reveal"><div><h2>ការរៀនល្អបំផុត គឺការចាប់ផ្តើមធ្វើ។</h2><p>បើក Module 01 · គូរ Funnel · កំណត់ KPI · ធ្វើវាថ្ងៃនេះ។</p></div><a href="#curriculum" class="btn">ចាប់ផ្តើមឥឡូវនេះ →</a></div></section>
   </main>
+  <footer><div class="shell"><div class="footer-row"><a class="brand" href="#top"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 19 5-5 4 3 5-7"/><path d="M15 10h4v4"/></svg></span><span>KEOVOTHY<small>Digital Growth Lab</small></span></a><nav class="footer-links"><a href="#curriculum">កម្មវិធីសិក្សា</a><a href="#ai-lab">AI Coach</a><a href="#toolkit">Tools</a><a href="#top">ឡើងលើ ↑</a></nav></div><div class="footer-bottom"><span>© <span id="year"></span> KEOVOTHY Digital Academy</span><span>Learn → Apply → Measure → Grow</span></div></div></footer>
+  <div class="toast" id="toast" role="status"></div>
+  <script>
+    const $ = (s, p=document) => p.querySelector(s), $$ = (s,p=document) => [...p.querySelectorAll(s)];
+    const toast = (msg) => { const t=$('#toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); };
+    $('#year').textContent = new Date().getFullYear();
+    addEventListener('scroll',()=>{$('.progress').style.width=(scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%'});
+    $('#menuBtn').addEventListener('click',()=>{const n=$('#navLinks'),open=n.classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',open)});
+    $$('#navLinks a').forEach(a=>a.addEventListener('click',()=>$('#navLinks').classList.remove('open')));
+    const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12}); $$('.reveal').forEach(el=>observer.observe(el));
 
-  <footer class="site-footer"><div class="footer-shell"><p>© <span data-year>2026</span> KEOVOTHY Digital Academy</p><nav class="footer-links" aria-label="តំណភ្ជាប់បាតទំព័រ"><a href="privacy.html">ឯកជនភាព</a><a href="terms.html">លក្ខខណ្ឌ</a><a href="../index.html#tutorial">ជំនួយ</a></nav></div></footer>
-  <script src="../js/pages.js"></script>
+    const modules=$$('.module');
+    function updateLessons(current){
+      const idx=modules.indexOf(current)+1, pct=Math.round(idx/modules.length*100);
+      $('#lessonProgress').style.width=pct+'%'; $('#progressText').textContent=`${idx} / 6 MODULES`; $('#progressPercent').textContent=pct+'%';
+      $$('.roadmap a').forEach((a,i)=>a.classList.toggle('active',i===idx-1)); localStorage.setItem('dmLesson',idx);
+    }
+    modules.forEach(m=>m.addEventListener('toggle',()=>{if(m.open)updateLessons(m)}));
+    const saved=Math.min(6,Math.max(1,+(localStorage.getItem('dmLesson')||1))); updateLessons(modules[saved-1]);
+
+    const goalMap={awareness:'ការស្គាល់ Brand',engagement:'Engagement និង Community',leads:'Leads និង Inbox',sales:'ការលក់'};
+    const safe = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+    function offlinePlan(business,audience,goal,tone){
+      business=safe(business); audience=safe(audience); tone=safe(tone);
+      const hooks={awareness:['មនុស្សភាគច្រើនមិនដឹងថា…','រឿង ៣ ដែលអ្នកគួរដឹងមុន…','ពីក្រោយ Brand របស់យើងមានរឿងមួយ…'],engagement:['តើអ្នកជាក្រុម A ឬ B?','Comment ចម្លើយរបស់អ្នក៖ …','ចំណុចណាមួយដែលអ្នកធ្លាប់ជួប?'],leads:['ទាញយក Checklist ឥតគិតថ្លៃ','ផ្ញើពាក្យ “START” ដើម្បីទទួល…','ចង់បាន Template នេះមែនទេ?'],sales:['បញ្ហានេះកំពុងធ្វើឲ្យអ្នកខាត…','ពី Before ទៅ After ក្នុង…','Offer ពិសេសសម្រាប់អ្នកដែលចង់…']}[goal];
+      return `<h4>01 · Campaign Direction</h4><strong>អាជីវកម្ម៖</strong> ${business}\n<strong>Audience៖</strong> ${audience}\n<strong>Goal៖</strong> ${goalMap[goal]}\n<strong>Brand Voice៖</strong> ${tone}\n\n<strong>Core Message:</strong> “${business} ជួយ ${audience} ទទួលបានលទ្ធផលដែលពួកគេចង់បាន ដោយសាមញ្ញ ច្បាស់ និងទុកចិត្តបាន។”\n<h4>02 · Content Pillars</h4>• EDUCATE — បង្រៀនរបៀបដោះស្រាយបញ្ហាចម្បង ១\n• PROOF — បង្ហាញលទ្ធផល Review ឬ Behind-the-scenes\n• ENGAGE — សួរសំណួរ Poll ឬ Myth vs Fact\n• CONVERT — បង្ហាញ Offer, Benefit និង CTA ច្បាស់\n<h4>03 · Hook Ideas</h4>1. ${hooks[0]}\n2. ${hooks[1]}\n3. ${hooks[2]}\n<h4>04 · 7-Day Action Plan</h4>ថ្ងៃ 1: Post បញ្ហាដែល Audience កំពុងជួប\nថ្ងៃ 2: Video បង្រៀន Quick Win មួយ\nថ្ងៃ 3: Poll / Question ដើម្បីប្រមូល Insight\nថ្ងៃ 4: Case Study ឬ Customer Story\nថ្ងៃ 5: Behind-the-scenes បង្កើន Trust\nថ្ងៃ 6: Offer + Benefit + Proof + CTA\nថ្ងៃ 7: Review Reach, CTR, Leads និង Next Action\n<h4>05 · Caption Draft</h4>${hooks[0]}\n\nបើអ្នកជា ${audience} អ្នកប្រហែលជាកំពុងស្វែងរកដំណោះស្រាយដែលងាយធ្វើ និងឃើញលទ្ធផល។ ${business} ត្រូវបានរៀបចំដើម្បីជួយអ្នកចាប់ផ្តើមដោយទំនុកចិត្ត។\n\n👉 សរសេរ “INFO” ក្នុង Comment ឬ Inbox មកយើងដើម្បីដឹងបន្ថែម។`;
+    }
+    $('#aiForm').addEventListener('submit',async e=>{
+      e.preventDefault(); const business=$('#business').value.trim(),audience=$('#audience').value.trim(),goal=$('#goal').value,tone=$('#tone').value;
+      $('#emptyState').hidden=true; $('#aiResult').innerHTML=''; $('#loading').style.display='block'; $('#copyBtn').hidden=true;
+      const prompt=`You are a practical Khmer digital marketing strategist. Create a concise, highly actionable marketing plan in Khmer for business: ${business}. Target audience: ${audience}. Campaign goal: ${goalMap[goal]}. Brand tone: ${tone}. Structure exactly: 1 Campaign Direction, 2 Four Content Pillars, 3 Three Hook Ideas, 4 Seven-Day Action Plan, 5 One ready-to-post Khmer caption. Keep English marketing terms where useful. No markdown tables.`;
+      let output='';
+      try{const c=new AbortController();setTimeout(()=>c.abort(),12000);const r=await fetch('https://text.pollinations.ai/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:prompt}],model:'openai',seed:42}),signal:c.signal});if(!r.ok)throw Error();output=await r.text();output=output.replace(/[<>]/g,m=>({'<':'&lt;','>':'&gt;'}[m])).replace(/\n/g,'<br>');}
+      catch(err){output=offlinePlan(business,audience,goal,tone);toast('ប្រើ Offline Smart Coach ដើម្បីបង្កើតលទ្ធផល');}
+      $('#loading').style.display='none'; $('#aiResult').innerHTML=output; $('#copyBtn').hidden=false;
+    });
+    $('#copyBtn').addEventListener('click',async()=>{await navigator.clipboard.writeText($('#aiResult').innerText);toast('បានចម្លងលទ្ធផលរួចរាល់')});
+
+    function calc(){const s=+$('#spend').value,c=+$('#clicks').value,l=+$('#leads').value,r=+$('#revenue').value;$('#cpc').textContent=c?'$'+(s/c).toFixed(2):'$0.00';$('#cpa').textContent=l?'$'+(s/l).toFixed(2):'$0.00';$('#cvr').textContent=c?(l/c*100).toFixed(2)+'%':'0.00%';const roas=s?r/s:0;$('#roas').textContent=roas.toFixed(2)+'x';$('#roas').className=roas>=3?'good':'warning';}
+    $$('#spend,#clicks,#leads,#revenue').forEach(i=>i.addEventListener('input',calc)); calc();
+    const checks=$$('#checklist input');
+    checks.forEach((c,i)=>{c.checked=localStorage.getItem('dmCheck'+i)==='1';c.closest('.check').classList.toggle('done',c.checked);c.addEventListener('change',()=>{c.closest('.check').classList.toggle('done',c.checked);localStorage.setItem('dmCheck'+i,c.checked?'1':'0');if(checks.every(x=>x.checked))toast('អស្ចារ្យ! អ្នកបានបញ្ចប់ Checklist ទាំងអស់ 🎉')})});
+  </script>
+  <section class="access-gate" id="accessGate" aria-labelledby="accessTitle" aria-modal="true" role="dialog" hidden>
+    <form class="access-card" id="accessForm" novalidate>
+      <div class="access-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1"/></svg></div>
+      <p class="access-label">Private learning portal</p>
+      <h1 id="accessTitle">សូមវាយពាក្យសម្ងាត់</h1>
+      <p>បញ្ចូលពាក្យសម្ងាត់ដើម្បីចូលរៀន Digital Marketing និងប្រើ AI Toolkit។</p>
+      <div class="password-wrap"><input id="accessPassword" type="password" autocomplete="current-password" placeholder="ពាក្យសម្ងាត់" aria-describedby="accessError" required><button class="password-toggle" id="passwordToggle" type="button" aria-label="បង្ហាញពាក្យសម្ងាត់"><svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+      <button class="access-submit" id="accessSubmit" type="submit">ចូលទៅកាន់វគ្គសិក្សា →</button>
+      <p class="access-error" id="accessError" role="alert"></p>
+      <div class="access-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Protected course access</div>
+    </form>
+  </section>
+  <script>
+    (() => {
+      const gate = document.getElementById('accessGate');
+      const form = document.getElementById('accessForm');
+      const input = document.getElementById('accessPassword');
+      const error = document.getElementById('accessError');
+      const submit = document.getElementById('accessSubmit');
+      const toggle = document.getElementById('passwordToggle');
+      const expectedHash = 'f5c2c33c95d8cfa0da58acd8c8022ad5d3193553a781d9969a08dcf9606bc9b1';
+      if (document.documentElement.classList.contains('access-locked')) {
+        gate.hidden = false;
+        setTimeout(() => input.focus(), 80);
+      }
+      toggle.addEventListener('click', () => {
+        const reveal = input.type === 'password';
+        input.type = reveal ? 'text' : 'password';
+        toggle.setAttribute('aria-label', reveal ? 'លាក់ពាក្យសម្ងាត់' : 'បង្ហាញពាក្យសម្ងាត់');
+        input.focus();
+      });
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        error.textContent = '';
+        if (!input.value) { error.textContent = 'សូមបញ្ចូលពាក្យសម្ងាត់។'; input.focus(); return; }
+        submit.disabled = true;
+        submit.textContent = 'កំពុងផ្ទៀងផ្ទាត់...';
+        const data = new TextEncoder().encode(input.value);
+        const digest = await crypto.subtle.digest('SHA-256', data);
+        const hash = [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2,'0')).join('');
+        if (hash === expectedHash) {
+          sessionStorage.setItem('keovothy_access','granted');
+          gate.classList.add('unlocking');
+          document.documentElement.classList.remove('access-locked');
+          setTimeout(() => { gate.hidden = true; input.value = ''; }, 430);
+        } else {
+          error.textContent = 'ពាក្យសម្ងាត់មិនត្រឹមត្រូវ។ សូមព្យាយាមម្តងទៀត។';
+          form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake');
+          input.select(); submit.disabled = false; submit.textContent = 'ចូលទៅកាន់វគ្គសិក្សា →';
+        }
+      });
+
+      const lessonVideos = [
+        { id:'VUdDxi1PfrY', title:'How to Implement a Digital Marketing Strategy', note:'ពង្រឹងការយល់ដឹងអំពី Strategy និងការចាប់ផ្តើម Campaign ឲ្យមានទិសដៅ។' },
+        { id:'DJU_ot1W7kI', title:'What Is a Marketing Persona and How to Create One?', note:'ស្គាល់ Persona និងព័ត៌មានសំខាន់ៗដែលត្រូវប្រមូលពីអតិថិជនគោលដៅ។' },
+        { id:'s7EQXqSEvvs', title:'8 Content Marketing Tips for Small Businesses', note:'គន្លឹះ Content Marketing ដែលអាចយកទៅអនុវត្តសម្រាប់អាជីវកម្មតូច។' },
+        { id:'P-4mLqC511I', title:'Create a Social Media Strategy in 90 Seconds', note:'សង្ខេបការរៀបចំ Social Media Strategy ឲ្យច្បាស់ និងងាយអនុវត្ត។' },
+        { id:'2wZaVKLC1u8', title:'The 80/20 Meta Ads Testing Framework', note:'យល់ពីការបែងចែក Budget រវាង Creative Testing និងការពង្រីក Winner។' },
+        { id:'psL0LqxWy9Y', title:'Top KPIs for an eCommerce Business', note:'ស្គាល់ KPI ដែលជួយវាស់ប្រសិទ្ធភាព និងសម្រេចចិត្តលើ Campaign។' }
+      ];
+      document.querySelectorAll('.module').forEach((module, index) => {
+        const video = lessonVideos[index];
+        const body = module.querySelector('.module-body');
+        if (!video || !body || body.querySelector('.lesson-video')) return;
+        const block = document.createElement('div');
+        block.className = 'lesson-video';
+        block.innerHTML = `<div class="lesson-video-frame"><button class="lesson-video-launch" type="button" aria-label="ចាក់វីដេអូ ${video.title}"><img loading="lazy" src="https://i.ytimg.com/vi/${video.id}/hqdefault.jpg" alt="Thumbnail: ${video.title}"><span class="lesson-play-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="lesson-play-label">ចុចដើម្បីមើលក្នុងវេបសាយ</span></button></div><div class="lesson-video-copy"><span>Module ${String(index+1).padStart(2,'0')} · YouTube Short</span><h4>${video.title}</h4><p>${video.note}</p><a class="lesson-video-link" href="https://www.youtube.com/shorts/${video.id}" target="_blank" rel="noopener noreferrer">មើលក្នុង YouTube Shorts ↗</a></div>`;
+        body.appendChild(block);
+        const summaryText = module.querySelector('summary > span:nth-child(2)');
+        const chip = document.createElement('span');
+        chip.className = 'module-video-chip';
+        chip.innerHTML = '<i>▶</i> VIDEO ក្នុងមេរៀន';
+        summaryText.appendChild(chip);
+        chip.addEventListener('click', event => {
+          event.preventDefault();
+          module.open = true;
+          setTimeout(() => block.scrollIntoView({ behavior:'smooth', block:'center' }), 80);
+        });
+        block.querySelector('.lesson-video-launch').addEventListener('click', event => {
+          const frame = event.currentTarget.parentElement;
+          frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&playsinline=1" title="${video.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
