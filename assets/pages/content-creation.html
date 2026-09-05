@@ -55,6 +55,54 @@
   </style>
 </head>
 <body>
+  <style id="kv-password-gate-style">
+    html:not(.kv-site-unlocked) body > :not(#kv-password-gate):not(#kv-password-gate-style){display:none!important}
+    #kv-password-gate{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 20%,rgba(245,196,81,.16),transparent 34%),#080808;color:#f8f5ec;font-family:"Noto Sans Khmer",sans-serif}
+    .kv-password-card{width:min(100%,430px);padding:34px;border:1px solid rgba(245,196,81,.28);border-radius:24px;background:#111;box-shadow:0 24px 80px rgba(0,0,0,.55);text-align:center}
+    .kv-password-icon{width:64px;height:64px;margin:0 auto 18px;border-radius:18px;display:grid;place-items:center;background:#f5c451;color:#171208;font-size:1.35rem}
+    .kv-password-card h1{margin:0 0 8px;font-size:1.65rem;line-height:1.5;letter-spacing:0}
+    .kv-password-card p{margin:0 0 22px;color:#aaa69d;font-size:.9rem}
+    .kv-password-field{display:flex;gap:10px}
+    #kv-site-password{min-width:0;flex:1;height:50px;padding:0 15px;border:1px solid #39362e;border-radius:13px;background:#080808;color:#fff;outline:0}
+    #kv-site-password:focus{border-color:#f5c451;box-shadow:0 0 0 3px rgba(245,196,81,.1)}
+    .kv-password-submit{height:50px;padding:0 20px;border:0;border-radius:13px;background:#f5c451;color:#171208;font-weight:900;cursor:pointer}
+    #kv-password-message{min-height:24px;margin:12px 0 0;color:#ff9d9d;font-size:.78rem}
+    @media(max-width:520px){.kv-password-card{padding:26px 19px}.kv-password-field{display:grid}.kv-password-submit{width:100%}}
+  </style>
+  <section id="kv-password-gate" aria-labelledby="kv-password-title">
+    <form class="kv-password-card" id="kv-password-form">
+      <div class="kv-password-icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></div>
+      <h1 id="kv-password-title">សូមបញ្ចូលពាក្យសម្ងាត់</h1>
+      <p>បញ្ចូលពាក្យសម្ងាត់ដើម្បីចូលទៅកាន់ Website</p>
+      <div class="kv-password-field">
+        <input id="kv-site-password" type="password" placeholder="ពាក្យសម្ងាត់" autocomplete="current-password" required autofocus aria-describedby="kv-password-message">
+        <button class="kv-password-submit" type="submit">ចូល Website</button>
+      </div>
+      <div id="kv-password-message" role="alert" aria-live="polite"></div>
+    </form>
+  </section>
+  <script>
+    (() => {
+      const expectedHash = '54ca80b3f3c22da513d05cf1460df132d38833f8b580182959ae5eb3b7b4378d';
+      const form = document.querySelector('#kv-password-form');
+      const input = document.querySelector('#kv-site-password');
+      const message = document.querySelector('#kv-password-message');
+      const toHex = buffer => Array.from(new Uint8Array(buffer), byte => byte.toString(16).padStart(2, '0')).join('');
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        const hash = toHex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input.value)));
+        if (hash === expectedHash) {
+          document.documentElement.classList.add('kv-site-unlocked');
+          document.querySelector('#kv-password-gate').remove();
+          document.querySelector('#kv-password-gate-style').remove();
+          document.querySelector('#main-content')?.focus({preventScroll:true});
+          return;
+        }
+        message.textContent = 'ពាក្យសម្ងាត់មិនត្រឹមត្រូវ។ សូមព្យាយាមម្ដងទៀត។';
+        input.select();
+      });
+    })();
+  </script>
   <a class="skip-link" href="#main-content">រំលងទៅមាតិកា</a>
   <div class="scroll-progress" aria-hidden="true"></div>
 
