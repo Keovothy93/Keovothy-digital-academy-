@@ -604,6 +604,14 @@ body.dark #lessonModal .lesson-record-example{
 .auth-heading{margin-bottom:18px}
 .auth-heading h2{font-size:26px;line-height:1.38;margin:8px 0 10px;letter-spacing:-.2px}
 .auth-heading p{font-size:13px;line-height:1.85;color:var(--muted);margin:0}
+.auth-local-form{display:grid;gap:11px;margin:2px 0 4px}
+.auth-field label{display:block;font:700 11px Inter,sans-serif;color:var(--muted);margin-bottom:5px}
+.auth-field input{width:100%;border:1px solid var(--line);border-radius:13px;background:var(--white);color:var(--ink);padding:13px 14px;outline:none;font:inherit;font-size:13px;transition:.18s}
+.auth-field input:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(11,139,143,.09)}
+.auth-field input[aria-invalid="true"]{border-color:var(--danger);box-shadow:0 0 0 4px rgba(200,88,88,.08)}
+.auth-form-error{min-height:16px;margin:0;font-size:11px;line-height:1.6;color:var(--danger);font-weight:600}
+.auth-form-hint{margin:0;font-size:10px;line-height:1.7;color:var(--muted)}
+.auth-form-hint b{color:var(--teal)}
 #authLoginPanel{padding:18px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#fcfdff 0%,#f7fafc 100%)}
 .google-button-shell{width:100%;min-height:58px;display:grid;place-items:center;position:relative;padding:0}
 .google-button-shell>div:first-child{width:100%;display:flex;justify-content:center}
@@ -1850,22 +1858,43 @@ body.dark .auth-tabs button.active,body.dark .auth-account-benefits>div,body.dar
       <div class="auth-heading" id="authHeading">
         <span class="eyebrow" id="authEyebrow">LEARNER SIGN IN</span>
         <h2 id="authTitle">ចូលគណនីអ្នកសិក្សា</h2>
-        <p id="authDescription">ចូលជាមួយ Google Account ដើម្បីបង្កើត និងគ្រប់គ្រងគណនីអ្នកសិក្សា រក្សាវឌ្ឍនភាព និងប្រើប្រាស់វិញ្ញាបនបត្រផ្ទាល់ខ្លួនបានយ៉ាងងាយស្រួល។</p>
+        <p id="authDescription">ចុះឈ្មោះ ឬ ចូល ដោយ Gmail និង Password ដើម្បី បង្កើត Learner Account រក្សា វឌ្ឍនភាព រៀន និង ប្រើ ប្រាស់ វិញ្ញាបនបត្រ ផ្ទាល់ ខ្លួន បាន យ៉ាង ងាយ ស្រួល។</p>
       </div>
 
       <div id="authLoginPanel">
-        <div class="google-button-shell" id="googleButtonShell">
+        <form class="auth-local-form" id="localAuthForm" autocomplete="on" novalidate>
+          <div class="auth-field" id="localNameField">
+            <label for="localNameInput">ឈ្មោះពេញ (Full Name)</label>
+            <input id="localNameInput" type="text" placeholder="ឧ. សុខ ដារ៉ា" autocomplete="name">
+          </div>
+          <div class="auth-field">
+            <label for="localEmailInput">Gmail / អ៊ីមែល</label>
+            <input id="localEmailInput" type="email" placeholder="username@gmail.com" autocomplete="email">
+          </div>
+          <div class="auth-field">
+            <label for="localPasswordInput">Password</label>
+            <input id="localPasswordInput" type="password" placeholder="យ៉ាងតិច ៦ ខ្ទង់" autocomplete="new-password">
+          </div>
+          <div class="auth-field" id="localConfirmField">
+            <label for="localConfirmInput">បញ្ជាក់ Password</label>
+            <input id="localConfirmInput" type="password" placeholder="វាយ Password ម្តងទៀត" autocomplete="new-password">
+          </div>
+          <p class="auth-form-error" id="authFormError" role="alert"></p>
+          <button class="primary-btn full" id="localAuthSubmit" type="submit">បង្កើតគណនី និងចាប់ផ្តើមរៀន</button>
+          <p class="auth-form-hint">✓ គណនីនេះរក្សាទុក <b>មេរៀន បានបញ្ចប់, Quiz, Notes, Bookmark និងវិញ្ញាបនបត្រ</b> ។ ពេលចូលមករៀនលើកក្រោយ គ្រាន់តែ Sign in ដោយ Gmail និង Password ដើមឡើយវឌ្ឍនភាពរបស់អ្នកនឹងត្រឡប់មកវិញ (ក្នុង Browser នេះ)។</p>
+        </form>
+
+        <div class="auth-divider" id="googleAuthDivider" hidden><span>GOOGLE ACCOUNT</span></div>
+        <div class="google-button-shell" id="googleButtonShell" hidden>
           <div id="googleButtonContainer" aria-label="Sign in with Google"></div>
           <div class="auth-loading" id="authLoading"><span></span> កំពុងភ្ជាប់ Google Account…</div>
           <button class="outline-btn full" id="googleAuthFallback" type="button" hidden>Google Login Setup</button>
         </div>
 
-        <div class="auth-divider"><span>GOOGLE ACCOUNT</span></div>
-
         <div class="auth-account-benefits" id="authBenefits">
-          <div><span>✓</span><p><b>បង្កើត Learner Account</b><small>Google Login ដំបូងនឹងបង្កើត Account ក្នុង Browser នេះ</small></p></div>
-          <div><span>✓</span><p><b>រក្សាវឌ្ឍនភាពក្នុង Browser</b><small>មេរៀន Quiz Notes និង Bookmark នៅលើឧបករណ៍នេះ</small></p></div>
-          <div><span>✓</span><p><b>វិញ្ញាបនបត្រផ្ទាល់ខ្លួន</b><small>ឈ្មោះ Google ត្រូវបានបំពេញទៅ Certificate ដោយស្វ័យប្រវត្តិ</small></p></div>
+          <div><span>✓</span><p><b>បង្កើត Learner Account</b><small>Sign up ដំបូងនឹងបង្កើត Account ក្នុង Browser នេះ ភ្លាមៗ</small></p></div>
+          <div><span>✓</span><p><b>រក្សាទុកវឌ្ឍនភាពតាមគណនី</b><small>មេរៀន Quiz Notes និង Bookmark នៅសល់ពេលចូលមករៀនលើកក្រោយ</small></p></div>
+          <div><span>✓</span><p><b>វិញ្ញាបនបត្រផ្ទាល់ខ្លួន</b><small>ឈ្មោះដែលចុះឈ្មោះ ត្រូវបានបំពេញទៅ Certificate ដោយស្វ័យប្រវត្តិ</small></p></div>
         </div>
       </div>
 
@@ -1937,7 +1966,9 @@ const GOOGLE_CLIENT_ID = "935141615808-s4eeptjh70o9uu6elq6fddcs74gn2ogr.apps.goo
 const GOOGLE_SIGN_IN_ENABLED = false;
 const AUTH_STORAGE = {
   accounts: "crmAcademyGoogleAccountsV1",
-  currentAccount: "crmAcademyCurrentGoogleAccountV1"
+  currentAccount: "crmAcademyCurrentGoogleAccountV1",
+  emailIndex: "crmAcademyEmailIndexV1",
+  profiles: "crmAcademyProgressProfilesV1"
 };
 
 const STORAGE = {
@@ -2053,7 +2084,17 @@ const els = {
   authAccountCreated: document.getElementById("authAccountCreated"),
   authAccountId: document.getElementById("authAccountId"),
   authAccountDate: document.getElementById("authAccountDate"),
-  authContinueBtn: document.getElementById("authContinueBtn")
+  authContinueBtn: document.getElementById("authContinueBtn"),
+  localAuthForm: document.getElementById("localAuthForm"),
+  localNameField: document.getElementById("localNameField"),
+  localNameInput: document.getElementById("localNameInput"),
+  localEmailInput: document.getElementById("localEmailInput"),
+  localPasswordInput: document.getElementById("localPasswordInput"),
+  localConfirmField: document.getElementById("localConfirmField"),
+  localConfirmInput: document.getElementById("localConfirmInput"),
+  authFormError: document.getElementById("authFormError"),
+  localAuthSubmit: document.getElementById("localAuthSubmit"),
+  googleAuthDivider: document.getElementById("googleAuthDivider")
 };
 
 const dailyQuizzes = {
@@ -2376,6 +2417,9 @@ function bindEvents(){
   els.authModal.addEventListener("click", event => { if(event.target === els.authModal) els.authModal.close(); });
   els.authSignInTab.addEventListener("click", () => setAuthMode("signin"));
   els.authSignUpTab.addEventListener("click", () => setAuthMode("signup"));
+  els.localAuthForm.addEventListener("submit", handleLocalAuthSubmit);
+  [els.localNameInput, els.localEmailInput, els.localPasswordInput, els.localConfirmInput].forEach(input =>
+    input.addEventListener("input", () => setAuthFormError("")));
   els.googleAuthFallback?.addEventListener("click", showGoogleIntegrationNotice);
   els.accountProfileBtn.addEventListener("click", event => {
     event.stopPropagation();
@@ -2400,6 +2444,7 @@ function openAuthModal(mode="signin"){
   if(mode === "account" && state.currentUser){
     showAccountProfile(state.currentUser, false);
   } else {
+    resetLocalAuthForm();
     setAuthMode(mode === "signup" ? "signup" : "signin");
   }
   if(!els.authModal.open) els.authModal.showModal();
@@ -2419,8 +2464,13 @@ function setAuthMode(mode){
   els.authEyebrow.textContent = isSignUp ? "CREATE LEARNER ACCOUNT" : "LEARNER SIGN IN";
   els.authTitle.textContent = isSignUp ? "បង្កើតគណនីសិក្សា" : "ចូលគណនីសិក្សា";
   els.authDescription.textContent = isSignUp
-    ? "ជ្រើស Google Account របស់អ្នក។ ការចូលលើកដំបូងនឹងបង្កើត Learner Account និងបំពេញឈ្មោះសម្រាប់វិញ្ញាបនបត្រ។"
-    : "ចូលជាមួយ Gmail ដើម្បីសម្គាល់គណនីអ្នកសិក្សា និងបន្តវឌ្ឍនភាពដែលបានរក្សាទុកក្នុង Browser នេះ។";
+    ? "បំពេញឈ្មោះ Gmail និង Password ដើម្បីបង្កើត Learner Account។ ការចុះឈ្មោះលើកដំបូងនឹងរក្សាទុកវឌ្ឍនភាពរៀន និងបំពេញឈ្មោះសម្រាប់វិញ្ញាបនបត្រដោយស្វ័យប្រវត្តិ។"
+    : "បញ្ចូល Gmail និង Password ដែលបានចុះឈ្មោះ ដើម្បីបន្ត វឌ្ឍនភាព រៀនដែលបាន រក្សាទុក ក្នុង Browser នេះ។";
+  if(els.localNameField) els.localNameField.hidden = !isSignUp;
+  if(els.localConfirmField) els.localConfirmField.hidden = !isSignUp;
+  if(els.localPasswordInput) els.localPasswordInput.setAttribute("autocomplete", isSignUp ? "new-password" : "current-password");
+  if(els.localAuthSubmit) els.localAuthSubmit.textContent = isSignUp ? "បង្កើតគណនី និងចាប់ផ្តើមរៀន" : "ចូលគណនី ដើម្បីបន្តរៀន";
+  if(els.authFormError) els.authFormError.textContent = "";
   updateGoogleConnectionNote();
   if(state.googleInitialized) renderGoogleButton();
 }
@@ -2428,7 +2478,10 @@ function setAuthMode(mode){
 function initializeGoogleIdentity(attempt=0){
   if(state.googleInitialized) return;
   if(!GOOGLE_SIGN_IN_ENABLED){
-    showGoogleUnavailable("Google Sign-In ត្រូវបានផ្អាករហូតដល់ Authorized JavaScript Origin ត្រូវបានកំណត់ក្នុង Google Cloud Console។");
+    els.authLoading.hidden = true;
+    if(els.googleButtonShell) els.googleButtonShell.hidden = true;
+    if(els.googleAuthDivider) els.googleAuthDivider.hidden = true;
+    updateGoogleConnectionNote();
     return;
   }
   if(window.google?.accounts?.id){
@@ -2442,6 +2495,8 @@ function initializeGoogleIdentity(attempt=0){
       state.googleInitialized = true;
       els.authLoading.hidden = true;
       if(els.googleAuthFallback) els.googleAuthFallback.hidden = true;
+      if(els.googleButtonShell) els.googleButtonShell.hidden = false;
+      if(els.googleAuthDivider) els.googleAuthDivider.hidden = false;
       renderGoogleButton();
       updateGoogleConnectionNote();
     } catch(error){
@@ -2507,10 +2562,14 @@ function handleGoogleCredential(response){
     };
     accounts[profile.sub] = account;
     saveJson(AUTH_STORAGE.accounts, accounts);
-    store.setItem(AUTH_STORAGE.currentAccount, profile.sub);
-    state.currentUser = account;
+    if(account.email){
+      const index = readJson(AUTH_STORAGE.emailIndex, {});
+      index[normalizeEmail(account.email)] = account.id;
+      saveJson(AUTH_STORAGE.emailIndex, index);
+    }
+    activateAccount(account, !existing);
 
-    if(account.name){
+    if(account.name && !store.getItem(STORAGE.learnerName)){
       store.setItem(STORAGE.learnerName, account.name);
       if(els.learnerName) els.learnerName.value = account.name;
     }
@@ -2568,14 +2627,16 @@ function showAccountProfile(account, isNewAccount=false){
   els.authSuccessAvatar.src = avatar;
   els.authSuccessName.textContent = account.name;
   els.authSuccessEmail.textContent = account.email;
-  els.authAccountCreated.textContent = isNewAccount ? "✓ Learner Account បានបង្កើតជោគជ័យ" : "✓ Google Account បានភ្ជាប់រួច";
+  els.authAccountCreated.textContent = isNewAccount
+    ? "✓ Learner Account បានបង្កើតជោគជ័យ"
+    : (account.provider === "google" ? "✓ Google Account បានភ្ជាប់រួច" : "✓ Learner Account បានចូលរួច");
   els.authAccountId.textContent = `…${String(account.id).slice(-8)}`;
   els.authAccountDate.textContent = formatAccountDate(account.createdAt);
   setAuthStatus(
     isNewAccount ? "ACCOUNT CREATED" : "ACCOUNT ACTIVE",
     isNewAccount
-      ? "Google Login ជោគជ័យ។ Account ត្រូវបានបង្កើតក្នុង Browser នេះ ហើយឈ្មោះត្រូវបានភ្ជាប់ទៅវិញ្ញាបនបត្រ។"
-      : "បងកំពុងចូលជាមួយ Google Account នេះ។ វឌ្ឍនភាពបច្ចុប្បន្នរក្សាទុកក្នុង Browser របស់ឧបករណ៍នេះ។",
+      ? "គណនី និង វឌ្ឍនភាព រៀន របស់ បង ត្រូវបាន រក្សាទុក ហើយ។ ពេល ចូល មក រៀន លើក ក្រោយ គ្រាន់តែ Sign in ដោយ Gmail និង Password គណនី នេះ ទិន្នន័យ ទាំងអស់ នឹង ត្រឡប់ មក វិញ។"
+      : "វឌ្ឍនភាព រៀន តាម គណនី នេះ បាន ដំណើរការ ឡើង វិញ ហើយ នឹង បន្ត រក្សាទុក ក្នុង Browser នេះ។",
     "success"
   );
   if(!els.authModal.open) els.authModal.showModal();
@@ -2583,19 +2644,30 @@ function showAccountProfile(account, isNewAccount=false){
 
 function signOutGoogleAccount(){
   try { window.google?.accounts?.id?.disableAutoSelect(); } catch(error){ console.warn(error); }
+  if(state.currentUser) stashCurrentProgress();
   store.removeItem(AUTH_STORAGE.currentAccount);
   state.currentUser = null;
+  const guest = readProfiles()["guest"];
+  applyProgressSnapshot(guest || emptySnapshot(""));
   els.accountMenu.hidden = true;
   els.accountProfileBtn.setAttribute("aria-expanded", "false");
   updateAccountUI();
+  resetLocalAuthForm();
   setAuthMode("signin");
+  els.localEmailInput.focus();
+}
+function signOutAccount(){ signOutGoogleAccount(); }
+function resetLocalAuthForm(){
+  if(!els.localAuthForm) return;
+  els.localAuthForm.reset();
+  setAuthFormError("");
 }
 
 function showGoogleUnavailable(message){
   els.authLoading.hidden = true;
   els.googleButtonContainer.innerHTML = "";
-  if(els.googleAuthFallback) els.googleAuthFallback.hidden = false;
-  setAuthStatus("GOOGLE LOGIN NOT READY", message, "error");
+  if(els.googleButtonShell) els.googleButtonShell.hidden = els.googleAuthFallback.hidden = els.googleAuthDivider.hidden = false;
+  setAuthStatus("GOOGLE LOGIN NOT READY", `${message} បង នៅ អាច ប្រើ ទម្រង់ Gmail + Password ខាងលើ ដើម្បី Sign up / Sign in និង រក្សាទុក វឌ្ឍនភាព រៀន បាន ឡើយ។`, "warning");
 }
 
 function showGoogleIntegrationNotice(){
@@ -2607,9 +2679,9 @@ function updateGoogleConnectionNote(highlight=false){
   let message = `Client ID បានបញ្ចូលរួច។ Current origin: ${location.protocol === "file:" ? "file://" : location.origin}`;
   let type = "success";
   if(!GOOGLE_SIGN_IN_ENABLED){
-    title = "GOOGLE LOGIN SETUP REQUIRED";
-    message = `បន្ថែម ${location.origin} ទៅ Authorized JavaScript Origins ក្នុង Google Cloud Console រួចប្តូរ GOOGLE_SIGN_IN_ENABLED ទៅ true។`;
-    type = "warning";
+    title = "SIGN UP ដោយ EMAIL កំពុង ដំណើរការ";
+    message = "បង អាច ចុះឈ្មោះ និង ចូល ដោយ Gmail + Password នៅ ខាងលើ ឥឡូវ នេះ។ វឌ្ឍនភាព រៀន (មេរៀន, Quiz, Notes, Bookmark, Certificate) ត្រូវបាន រក្សាទុក តាម គណនី។ Google Login ស្វ័យប្រវត្តិនឹង បើក ពេល កំណត់ Authorized JavaScript Origins ហើយ ប្តូរ GOOGLE_SIGN_IN_ENABLED ទៅ true។";
+    type = "success";
   } else if(location.protocol === "file:"){
     title = "HOSTING REQUIRED FOR GOOGLE LOGIN";
     message = "Google Sign-In មិនដំណើរការពី File ដែលបើកដោយ double-click (file://) ទេ។ Upload ទៅ HTTPS ឬប្រើ localhost ហើយ Add Origin នោះក្នុង Google Cloud Console។";
@@ -2632,6 +2704,156 @@ function setAuthStatus(title, message, type="info", highlight=false){
 
 function firstAccountName(name="Learner"){
   return String(name).trim().split(/\s+/)[0] || "Learner";
+}
+
+/* ---------- Per-account progress profiles (save & restore learner data) ---------- */
+function progressSnapshot(){
+  return {
+    completed: [...state.completed],
+    bookmarks: [...state.bookmarks],
+    notes: state.notes,
+    quizScores: state.quizScores,
+    finalBest: state.finalBest,
+    lastLesson: store.getItem(STORAGE.lastLesson) || "",
+    studySeconds: state.studySeconds,
+    learnerName: store.getItem(STORAGE.learnerName) || "",
+    savedAt: new Date().toISOString()
+  };
+}
+function emptySnapshot(name=""){
+  return { completed:[], bookmarks:[], notes:{}, quizScores:{}, finalBest:0, lastLesson:"", studySeconds:0, learnerName:name };
+}
+function readProfiles(){ return readJson(AUTH_STORAGE.profiles, {}); }
+function writeProfiles(profiles){ saveJson(AUTH_STORAGE.profiles, profiles); }
+function stashCurrentProgress(){
+  const key = state.currentUser ? state.currentUser.id : "guest";
+  const profiles = readProfiles();
+  profiles[key] = progressSnapshot();
+  writeProfiles(profiles);
+}
+function applyProgressSnapshot(snapshot){
+  const data = snapshot && typeof snapshot === "object" ? snapshot : emptySnapshot();
+  state.completed = new Set(Array.isArray(data.completed) ? data.completed : []);
+  state.bookmarks = new Set(Array.isArray(data.bookmarks) ? data.bookmarks : []);
+  state.notes = data.notes && typeof data.notes === "object" ? data.notes : {};
+  state.quizScores = data.quizScores && typeof data.quizScores === "object" ? data.quizScores : {};
+  state.finalBest = Number(data.finalBest) || 0;
+  state.studySeconds = Number(data.studySeconds) || 0;
+  const learnerName = String(data.learnerName || "");
+  saveSet(STORAGE.completed, state.completed);
+  saveSet(STORAGE.bookmarks, state.bookmarks);
+  saveJson(STORAGE.notes, state.notes);
+  saveJson(STORAGE.quizScores, state.quizScores);
+  store.setItem(STORAGE.finalBest, String(state.finalBest));
+  store.setItem(STORAGE.lastLesson, String(data.lastLesson || ""));
+  store.setItem(STORAGE.studySeconds, String(state.studySeconds));
+  store.setItem(STORAGE.learnerName, learnerName);
+  if(els.learnerName) els.learnerName.value = learnerName;
+  renderTabs(); renderDay(); renderQuizCards(); updateAllProgress();
+}
+function activateAccount(account, isNew){
+  stashCurrentProgress();
+  const profiles = readProfiles();
+  let snapshot = profiles[account.id];
+  if(!snapshot){
+    const guest = profiles["guest"];
+    const guestHasData = guest && (Array.isArray(guest.completed) ? guest.completed.length : 0);
+    snapshot = (isNew && guestHasData) ? guest : (isNew ? null : emptySnapshot(account.name));
+    if(!snapshot) snapshot = emptySnapshot(account.name);
+  }
+  if(!snapshot.learnerName) snapshot = { ...snapshot, learnerName: account.name || "" };
+  profiles[account.id] = snapshot;
+  writeProfiles(profiles);
+  store.setItem(AUTH_STORAGE.currentAccount, account.id);
+  state.currentUser = account;
+  applyProgressSnapshot(snapshot);
+  updateAccountUI();
+}
+
+/* ---------- Local (email + password) learner accounts ---------- */
+function normalizeEmail(value){ return String(value || "").trim().toLowerCase(); }
+function isValidEmail(value){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value); }
+function setAuthFormError(message){
+  els.authFormError.textContent = message || "";
+  [els.localNameInput, els.localEmailInput, els.localPasswordInput, els.localConfirmInput]
+    .forEach(input => input.removeAttribute("aria-invalid"));
+  if(message) els.localEmailInput.setAttribute("aria-invalid","true");
+}
+function upsertAccountRecord(account){
+  const accounts = readJson(AUTH_STORAGE.accounts, {});
+  accounts[account.id] = account;
+  saveJson(AUTH_STORAGE.accounts, accounts);
+  if(account.email){
+    const index = readJson(AUTH_STORAGE.emailIndex, {});
+    index[normalizeEmail(account.email)] = account.id;
+    saveJson(AUTH_STORAGE.emailIndex, index);
+  }
+}
+async function signUpLocalAccount(){
+  const name = els.localNameInput.value.trim();
+  const email = normalizeEmail(els.localEmailInput.value);
+  const password = els.localPasswordInput.value;
+  const confirm = els.localConfirmInput.value;
+  if(name.length < 2){ setAuthFormError("សូមបញ្ចូលឈ្មោះពេញ (យ៉ាងតិច ២ តួអក្សរ)។"); els.localNameInput.setAttribute("aria-invalid","true"); return; }
+  if(!isValidEmail(email)){ setAuthFormError("សូមបញ្ចូល Gmail ឬ Email ឱ្យត្រឹមត្រូវ (ឧ. name@gmail.com)។"); els.localEmailInput.setAttribute("aria-invalid","true"); return; }
+  if(password.length < 6){ setAuthFormError("សូមបញ្ចូល Password យ៉ាងតិច ៦ ខ្ទង់។"); els.localPasswordInput.setAttribute("aria-invalid","true"); return; }
+  if(password !== confirm){ setAuthFormError("Password ទាំងពីរមិនដូចគ្នាទេ។ សូមពិនិត្យម្ដងទៀត។"); els.localConfirmInput.setAttribute("aria-invalid","true"); return; }
+  const index = readJson(AUTH_STORAGE.emailIndex, {});
+  const accounts = readJson(AUTH_STORAGE.accounts, {});
+  if(index[email] && accounts[index[email]]){
+    setAuthFormError("អ៊ីមែលនេះបានចុះឈ្មោះរួចហើយ។ សូមប្ដូរទៅ Tab “Sign in” ដើម្បីចូលរៀនបន្ត។");
+    return;
+  }
+  els.localAuthSubmit.disabled = true;
+  try{
+    const id = `local-${(await hashAccessPassword(`crm-academy:${email}`)).slice(0,24)}`;
+    const now = new Date().toISOString();
+    const account = {
+      id, name, givenName: firstAccountName(name), familyName: "",
+      email, picture: "", passHash: await hashAccessPassword(`${id}|${password}`),
+      createdAt: now, lastLoginAt: now, provider: "local"
+    };
+    upsertAccountRecord(account);
+    activateAccount(account, true);
+    showAccountProfile(account, true);
+  } catch(error){
+    console.error("Sign up failed", error);
+    setAuthFormError("មិនអាចបង្កើតគណនីបានទេ។ សូម Refresh ហើយព្យាយាមម្ដងទៀត។");
+  } finally {
+    els.localAuthSubmit.disabled = false;
+  }
+}
+async function signInLocalAccount(){
+  const email = normalizeEmail(els.localEmailInput.value);
+  const password = els.localPasswordInput.value;
+  if(!isValidEmail(email)){ setAuthFormError("សូមបញ្ចូល Gmail/Email របស់អ្នក។"); return; }
+  if(!password){ setAuthFormError("សូមបញ្ចូល Password។"); els.localPasswordInput.setAttribute("aria-invalid","true"); return; }
+  const index = readJson(AUTH_STORAGE.emailIndex, {});
+  const accounts = readJson(AUTH_STORAGE.accounts, {});
+  const account = index[email] ? accounts[index[email]] : null;
+  if(!account){ setAuthFormError("មិនទាន់មានគណនីសម្រាប់អ៊ីមែលនេះទេ។ សូមប្ដូរទៅ Tab “Sign up” ដើម្បីចុះឈ្មោះ។"); return; }
+  if(account.provider === "google"){ setAuthFormError("គណនីនេះបង្កើតដោយ Google Login។ សូមចុចប៊ូតុង Google ខាងក្រោម។"); return; }
+  els.localAuthSubmit.disabled = true;
+  try{
+    const passHash = await hashAccessPassword(`${account.id}|${password}`);
+    if(passHash !== account.passHash){
+      setAuthFormError("Password មិនត្រឹមត្រូវទេ។ សូមព្យាយាមម្ដងទៀត។");
+      els.localPasswordInput.setAttribute("aria-invalid","true");
+      return;
+    }
+    const updated = { ...account, lastLoginAt: new Date().toISOString() };
+    upsertAccountRecord(updated);
+    activateAccount(updated, false);
+    showAccountProfile(updated, false);
+  } finally {
+    els.localAuthSubmit.disabled = false;
+  }
+}
+async function handleLocalAuthSubmit(event){
+  event.preventDefault();
+  setAuthFormError("");
+  if(state.authMode === "signup") await signUpLocalAccount();
+  else await signInLocalAccount();
 }
 
 function formatAccountDate(value){
@@ -3058,6 +3280,9 @@ function hashName(name){
 function resetProgress(){
   if(!confirm("តើបងចង់លុបវឌ្ឍនភាព Quiz Notes និង Bookmark ទាំងអស់មែនទេ?")) return;
   Object.values(STORAGE).forEach(key => { if(key !== STORAGE.theme) store.removeItem(key); });
+  const profiles = readProfiles();
+  delete profiles[state.currentUser ? state.currentUser.id : "guest"];
+  writeProfiles(profiles);
   state.completed.clear(); state.bookmarks.clear(); state.notes = {}; state.quizScores = {}; state.finalBest = 0; state.studySeconds = 0;
   renderTabs(); renderDay(); renderQuizCards(); updateAllProgress();
 }
