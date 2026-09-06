@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="Keovothy is an agentic AI copywriting workspace for marketing teams." />
+  <title>Keovothy — Agentic AI Copywriter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <button class="brand" data-page-link="overview" aria-label="Keovothy home">
+          <span class="brand-mark">K</span>
+          <span class="brand-copy">
+            <strong>Keovothy</strong>
+            <small>Agentic Copywriter</small>
+          </span>
+        </button>
+        <button class="icon-btn sidebar-close" id="sidebarClose" aria-label="Close menu">×</button>
+      </div>
+
+      <button class="primary-btn new-project" id="newProjectBtn">
+        <span class="btn-icon">＋</span>
+        <span>New copy</span>
+      </button>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <div class="nav-group-label">Workspace</div>
+        <button class="nav-item active" data-page-link="overview">
+          <span class="nav-icon">⌂</span><span>Overview</span>
+        </button>
+        <button class="nav-item" data-page-link="writer">
+          <span class="nav-icon">✦</span><span>AI Writer</span>
+          <span class="nav-badge">AI</span>
+        </button>
+        <button class="nav-item" data-page-link="templates">
+          <span class="nav-icon">▦</span><span>Templates</span>
+        </button>
+        <button class="nav-item" data-page-link="brand">
+          <span class="nav-icon">◈</span><span>Brand Voice</span>
+        </button>
+        <button class="nav-item" data-page-link="projects">
+          <span class="nav-icon">□</span><span>Projects</span>
+        </button>
+        <button class="nav-item" data-page-link="analytics">
+          <span class="nav-icon">↗</span><span>Analytics</span>
+        </button>
+
+        <div class="nav-group-label nav-group-space">Account</div>
+        <button class="nav-item" data-page-link="settings">
+          <span class="nav-icon">⚙</span><span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="usage-card">
+          <div class="usage-top">
+            <span>Monthly words</span>
+            <strong>28%</strong>
+          </div>
+          <div class="usage-track"><span></span></div>
+          <small>14,120 of 50,000 words</small>
+        </div>
+        <button class="profile-card" data-page-link="settings">
+          <span class="avatar">KV</span>
+          <span class="profile-copy">
+            <strong>Keovothy Team</strong>
+            <small>Workspace admin</small>
+          </span>
+          <span class="profile-more">•••</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+          <div class="page-crumb">
+            <span>Keovothy</span><span>/</span><strong id="pageCrumb">Overview</strong>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button class="search-btn" id="searchBtn"><span>⌕</span><span>Search</span><kbd>⌘ K</kbd></button>
+          <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">☾</button>
+          <button class="icon-btn notification-btn" aria-label="Notifications">♢<span></span></button>
+          <button class="avatar top-avatar" data-page-link="settings">KV</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- OVERVIEW -->
+        <section class="page active" data-page="overview">
+          <div class="page-heading overview-heading">
+            <div>
+              <span class="eyebrow">COPYWRITING WORKSPACE</span>
+              <h1>Good afternoon 👋</h1>
+              <p>Create conversion-focused copy with a team of AI writing agents.</p>
+            </div>
+            <button class="secondary-btn" data-page-link="projects">View projects <span>→</span></button>
+          </div>
+
+          <section class="hero-composer card">
+            <div class="hero-glow hero-glow-one"></div>
+            <div class="hero-glow hero-glow-two"></div>
+            <div class="hero-copy">
+              <span class="ai-pill"><i></i> Keovothy Agent</span>
+              <h2>What do you want to write today?</h2>
+              <p>Describe your product, campaign or idea. Keovothy will choose the right writing workflow.</p>
+            </div>
+            <div class="quick-compose">
+              <textarea id="quickPrompt" rows="3" placeholder="Example: Create a Facebook awareness caption for a perfume body wash with a fresh rainy-season mood..."></textarea>
+              <div class="quick-compose-bottom">
+                <div class="quick-options">
+                  <button class="chip active" data-quick-mode="caption">Caption</button>
+                  <button class="chip" data-quick-mode="ad">Ad Copy</button>
+                  <button class="chip" data-quick-mode="script">Video Script</button>
+                </div>
+                <button class="generate-mini" id="quickGenerateBtn">Generate <span>✦</span></button>
+              </div>
+            </div>
+          </section>
+
+          <section class="stat-grid">
+            <article class="stat-card card">
+              <div class="stat-icon purple">✦</div>
+              <div><span>Copies generated</span><strong id="statGenerated">128</strong><small><b>+18%</b> this month</small></div>
+            </article>
+            <article class="stat-card card">
+              <div class="stat-icon blue">□</div>
+              <div><span>Saved projects</span><strong id="statProjects">0</strong><small>Across your workspace</small></div>
+            </article>
+            <article class="stat-card card">
+              <div class="stat-icon amber">◈</div>
+              <div><span>Brand score</span><strong>94%</strong><small><b>Excellent</b> consistency</small></div>
+            </article>
+            <article class="stat-card card">
+              <div class="stat-icon green">↗</div>
+              <div><span>Avg. quality</span><strong>92%</strong><small><b>+4%</b> vs last month</small></div>
+            </article>
+          </section>
+
+          <div class="overview-grid">
+            <section class="card content-card">
+              <div class="section-head">
+                <div><h2>Popular templates</h2><p>Start faster with a proven structure.</p></div>
+                <button class="text-btn" data-page-link="templates">View all</button>
+              </div>
+              <div class="template-mini-grid" id="popularTemplates"></div>
+            </section>
+
+            <section class="card content-card activity-card">
+              <div class="section-head">
+                <div><h2>Recent activity</h2><p>Your latest saved work.</p></div>
+                <button class="text-btn" data-page-link="projects">See projects</button>
+              </div>
+              <div class="activity-list" id="overviewActivity"></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- WRITER -->
+        <section class="page" data-page="writer">
+          <div class="page-heading writer-heading">
+            <div>
+              <span class="eyebrow">AI WRITER</span>
+              <h1>Create high-performing copy</h1>
+              <p>Give Keovothy your brief. Four agents will plan, write, review and optimize it.</p>
+            </div>
+            <div class="heading-actions">
+              <select id="languageSelect" class="control-select" aria-label="Output language">
+                <option value="km">ខ្មែរ</option>
+                <option value="en">English</option>
+                <option value="both">Khmer + English</option>
+              </select>
+              <button class="secondary-btn" id="exportBtn">⇩ Export</button>
+            </div>
+          </div>
+
+          <div class="writer-layout">
+            <section class="card brief-card">
+              <div class="panel-head">
+                <div>
+                  <span class="panel-step">01</span>
+                  <div><h2>Creative brief</h2><p>Tell Keovothy what you need.</p></div>
+                </div>
+                <span class="ready-pill"><i></i> Ready</span>
+              </div>
+
+              <div class="mode-tabs" id="modeTabs">
+                <button class="mode-tab active" data-mode="caption">Caption</button>
+                <button class="mode-tab" data-mode="hook">Hook</button>
+                <button class="mode-tab" data-mode="ad">Ad Copy</button>
+                <button class="mode-tab" data-mode="product">Product</button>
+                <button class="mode-tab" data-mode="script">Script</button>
+                <button class="mode-tab" data-mode="email">Email</button>
+              </div>
+
+              <div class="form-grid">
+                <label class="field full">
+                  <span>Product / campaign <em>Required</em></span>
+                  <input id="productInput" type="text" value="Cellina Perfume Body Wash 900g" placeholder="e.g. Cellina Perfume Body Wash 900g" />
+                </label>
+                <label class="field full">
+                  <span>Main benefit / key message <em>Required</em></span>
+                  <textarea id="benefitInput" rows="3" placeholder="What should the audience remember?">សម្អាតស្បែកទន់ភ្លន់ ក្លិនក្រអូប និងជួយរក្សាសំណើមស្បែក</textarea>
+                </label>
+                <label class="field">
+                  <span>Target audience</span>
+                  <input id="audienceInput" type="text" value="នារី និងបុរសអាយុ 18–35 ឆ្នាំ" placeholder="e.g. Women 18–35" />
+                </label>
+                <label class="field">
+                  <span>Marketing goal</span>
+                  <select id="goalSelect">
+                    <option value="awareness">Awareness</option>
+                    <option value="engagement">Engagement</option>
+                    <option value="conversion">Conversion</option>
+                    <option value="education">Education</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Brand voice</span>
+                  <select id="voiceSelect">
+                    <option value="modern">Modern & Friendly</option>
+                    <option value="premium">Premium & Elegant</option>
+                    <option value="bold">Bold & Sales-driven</option>
+                    <option value="warm">Warm & Natural</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Platform</span>
+                  <select id="platformSelect">
+                    <option>Facebook</option>
+                    <option>TikTok</option>
+                    <option>Instagram</option>
+                    <option>Website</option>
+                    <option>Telegram</option>
+                    <option>Email</option>
+                  </select>
+                </label>
+                <label class="field full">
+                  <span>Call to action</span>
+                  <input id="ctaInput" type="text" value="សាកល្បងក្លិនដែលអ្នកចូលចិត្តថ្ងៃនេះ" placeholder="e.g. Shop now" />
+                </label>
+                <div class="field full advanced-wrap">
+                  <button class="advanced-toggle" id="advancedToggle" type="button">Advanced options <span>⌄</span></button>
+                  <div class="advanced-fields" id="advancedFields">
+                    <label class="field"><span>Length</span><select id="lengthSelect"><option value="short">Short</option><option value="medium" selected>Medium</option><option value="long">Long</option></select></label>
+                    <label class="field"><span>Variations</span><select id="variationSelect"><option value="2">2 variations</option><option value="3" selected>3 variations</option><option value="4">4 variations</option></select></label>
+                  </div>
+                </div>
+              </div>
+
+              <button class="primary-btn run-btn" id="runBtn"><span>✦</span><span>Generate with Keovothy</span><span class="shortcut">⌘ ↵</span></button>
+              <p class="panel-helper">Demo engine • Generation happens locally in this prototype</p>
+            </section>
+
+            <section class="card agent-card">
+              <div class="panel-head compact">
+                <div>
+                  <span class="panel-step">02</span>
+                  <div><h2>Agent workflow</h2><p>Live multi-agent process.</p></div>
+                </div>
+                <span class="agent-count">4 agents</span>
+              </div>
+              <div class="agent-flow">
+                <div class="agent-row" data-agent="strategist"><span class="agent-avatar">S</span><div><strong>Strategist</strong><small>Angle & message priority</small></div><span class="agent-state">Waiting</span></div>
+                <span class="agent-line"></span>
+                <div class="agent-row" data-agent="writer"><span class="agent-avatar">W</span><div><strong>Writer</strong><small>Drafts multiple directions</small></div><span class="agent-state">Waiting</span></div>
+                <span class="agent-line"></span>
+                <div class="agent-row" data-agent="reviewer"><span class="agent-avatar">R</span><div><strong>Reviewer</strong><small>Clarity & brand checks</small></div><span class="agent-state">Waiting</span></div>
+                <span class="agent-line"></span>
+                <div class="agent-row" data-agent="optimizer"><span class="agent-avatar">O</span><div><strong>Optimizer</strong><small>Platform & CTA polish</small></div><span class="agent-state">Waiting</span></div>
+              </div>
+              <div class="agent-note" id="agentInsight"><span>✦</span><div><strong>Agent note</strong><p>Add a product benefit and CTA, then generate.</p></div></div>
+            </section>
+          </div>
+
+          <section class="card output-section">
+            <div class="panel-head output-panel-head">
+              <div>
+                <span class="panel-step">03</span>
+                <div><h2>Generated copy</h2><p>Review, copy, save or export your best version.</p></div>
+              </div>
+              <div class="panel-actions"><button class="secondary-btn small" id="saveBtn">♡ Save</button><button class="secondary-btn small" id="copyAllBtn">□ Copy all</button></div>
+            </div>
+            <div class="quality-row">
+              <div><span>Clarity</span><strong id="clarityScore">—</strong><i><b id="clarityBar"></b></i></div>
+              <div><span>Brand fit</span><strong id="brandScore">—</strong><i><b id="brandBar"></b></i></div>
+              <div><span>CTA strength</span><strong id="ctaScore">—</strong><i><b id="ctaBar"></b></i></div>
+              <div><span>Platform fit</span><strong id="platformScore">—</strong><i><b id="platformBar"></b></i></div>
+            </div>
+            <div class="outputs-grid" id="outputs">
+              <div class="empty-state output-empty">
+                <span class="empty-icon">✦</span>
+                <h3>Your copy will appear here</h3>
+                <p>Complete the creative brief and let Keovothy generate several directions.</p>
+                <button class="text-btn" id="loadExampleBtn">Load an example brief</button>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- TEMPLATES -->
+        <section class="page" data-page="templates">
+          <div class="page-heading">
+            <div><span class="eyebrow">TEMPLATE LIBRARY</span><h1>Start with the right framework</h1><p>Pre-built copy structures for common marketing tasks.</p></div>
+          </div>
+          <div class="toolbar card">
+            <div class="toolbar-search"><span>⌕</span><input id="templateSearch" type="search" placeholder="Search templates..." /></div>
+            <div class="filter-chips" id="templateFilters">
+              <button class="chip active" data-filter="all">All</button><button class="chip" data-filter="social">Social</button><button class="chip" data-filter="ads">Ads</button><button class="chip" data-filter="video">Video</button><button class="chip" data-filter="web">Website</button><button class="chip" data-filter="email">Email</button>
+            </div>
+          </div>
+          <div class="template-grid" id="templateGrid"></div>
+        </section>
+
+        <!-- BRAND VOICE -->
+        <section class="page" data-page="brand">
+          <div class="page-heading">
+            <div><span class="eyebrow">BRAND VOICE</span><h1>Teach Keovothy how your brand sounds</h1><p>Create a consistent writing profile your whole team can reuse.</p></div>
+            <button class="primary-btn compact-btn" id="saveBrandBtn">Save brand voice</button>
+          </div>
+          <div class="brand-layout">
+            <section class="card brand-form-card">
+              <div class="section-head"><div><h2>Brand profile</h2><p>Core information Keovothy should know.</p></div><span class="status-badge">Default</span></div>
+              <div class="form-grid brand-form">
+                <label class="field full"><span>Brand name</span><input id="brandNameInput" value="Cellina Cambodia" /></label>
+                <label class="field full"><span>Brand description</span><textarea id="brandDescInput" rows="4">Beauty and personal care brand focused on accessible everyday self-care products.</textarea></label>
+                <label class="field"><span>Primary audience</span><input id="brandAudienceInput" value="Cambodian consumers age 18–35" /></label>
+                <label class="field"><span>Default language</span><select id="brandLanguageInput"><option>Khmer</option><option>English</option><option>Khmer + English</option></select></label>
+                <label class="field full"><span>Voice traits</span><div class="trait-select" id="traitSelect"><button class="trait active">Friendly</button><button class="trait active">Modern</button><button class="trait">Premium</button><button class="trait">Playful</button><button class="trait">Direct</button><button class="trait">Educational</button></div></label>
+                <label class="field full"><span>Words / phrases to use</span><textarea id="brandUseInput" rows="3" placeholder="e.g. fresh, easy everyday care, feel confident">ស្រស់ស្រាយ, ថែទាំប្រចាំថ្ងៃ, ងាយស្រួលប្រើ, មានទំនុកចិត្ត</textarea></label>
+                <label class="field full"><span>Words / claims to avoid</span><textarea id="brandAvoidInput" rows="3" placeholder="e.g. absolute medical claims, over-promising">កុំធ្វើ medical claim, កុំប្រើពាក្យធានា 100%, កុំ overclaim លើសពី product brief</textarea></label>
+              </div>
+            </section>
+            <aside class="card brand-preview-card">
+              <span class="preview-label">LIVE PREVIEW</span>
+              <div class="brand-preview-logo">C</div>
+              <h2 id="brandPreviewName">Cellina Cambodia</h2>
+              <p id="brandPreviewDesc">Beauty and personal care brand focused on accessible everyday self-care products.</p>
+              <div class="preview-divider"></div>
+              <small>VOICE PROFILE</small>
+              <div class="preview-traits" id="previewTraits"><span>Friendly</span><span>Modern</span></div>
+              <blockquote>“Clear, warm and easy to understand — with benefits first and no unnecessary overclaim.”</blockquote>
+              <div class="brand-score"><span>Voice completeness</span><strong>88%</strong></div>
+              <div class="score-track"><span style="width:88%"></span></div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="page" data-page="projects">
+          <div class="page-heading">
+            <div><span class="eyebrow">PROJECTS</span><h1>Your copy library</h1><p>Find and reuse saved copy from your workspace.</p></div>
+            <button class="primary-btn compact-btn" id="projectsNewBtn">＋ New copy</button>
+          </div>
+          <section class="card projects-card">
+            <div class="projects-toolbar">
+              <div class="toolbar-search project-search"><span>⌕</span><input id="projectSearch" type="search" placeholder="Search projects..." /></div>
+              <select id="projectFilter" class="control-select"><option value="all">All content</option><option value="caption">Caption</option><option value="hook">Hook</option><option value="ad">Ad Copy</option><option value="product">Product</option><option value="script">Script</option><option value="email">Email</option></select>
+            </div>
+            <div class="projects-table-wrap">
+              <table class="projects-table">
+                <thead><tr><th>Project</th><th>Type</th><th>Platform</th><th>Updated</th><th></th></tr></thead>
+                <tbody id="projectsTableBody"></tbody>
+              </table>
+              <div class="empty-state projects-empty" id="projectsEmpty"><span class="empty-icon">□</span><h3>No projects yet</h3><p>Save a generated copy and it will appear here.</p><button class="text-btn" data-page-link="writer">Create your first copy</button></div>
+            </div>
+          </section>
+        </section>
+
+        <!-- ANALYTICS -->
+        <section class="page" data-page="analytics">
+          <div class="page-heading">
+            <div><span class="eyebrow">ANALYTICS</span><h1>Workspace performance</h1><p>Understand how your team uses Keovothy and where copy quality is improving.</p></div>
+            <select class="control-select"><option>Last 30 days</option><option>Last 90 days</option><option>This year</option></select>
+          </div>
+          <section class="stat-grid analytics-stats">
+            <article class="stat-card card"><div><span>Total generations</span><strong>128</strong><small><b>+18.4%</b> vs previous period</small></div></article>
+            <article class="stat-card card"><div><span>Copies saved</span><strong>46</strong><small><b>35.9%</b> save rate</small></div></article>
+            <article class="stat-card card"><div><span>Avg. quality score</span><strong>92.3%</strong><small><b>+4.1%</b> improvement</small></div></article>
+            <article class="stat-card card"><div><span>Time saved</span><strong>9.6h</strong><small>Estimated this month</small></div></article>
+          </section>
+          <div class="analytics-grid">
+            <section class="card chart-card">
+              <div class="section-head"><div><h2>Generations over time</h2><p>AI copy generations during the last 30 days.</p></div><span class="legend-dot">Generations</span></div>
+              <div class="bar-chart" aria-label="Generation chart">
+                <div style="--h:28%"><span>Mon</span></div><div style="--h:44%"><span>Tue</span></div><div style="--h:38%"><span>Wed</span></div><div style="--h:62%"><span>Thu</span></div><div style="--h:48%"><span>Fri</span></div><div style="--h:78%"><span>Sat</span></div><div style="--h:67%"><span>Sun</span></div><div style="--h:82%"><span>Mon</span></div><div style="--h:60%"><span>Tue</span></div><div style="--h:92%"><span>Wed</span></div><div style="--h:74%"><span>Thu</span></div><div style="--h:88%"><span>Fri</span></div>
+              </div>
+            </section>
+            <section class="card breakdown-card">
+              <div class="section-head"><div><h2>Content mix</h2><p>Most-used copy types.</p></div></div>
+              <div class="donut-wrap"><div class="donut"><div><strong>128</strong><span>Total</span></div></div></div>
+              <div class="breakdown-list"><div><span><i class="dot d1"></i>Social captions</span><strong>38%</strong></div><div><span><i class="dot d2"></i>Ad copy</span><strong>26%</strong></div><div><span><i class="dot d3"></i>Video scripts</span><strong>21%</strong></div><div><span><i class="dot d4"></i>Other</span><strong>15%</strong></div></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="page" data-page="settings">
+          <div class="page-heading"><div><span class="eyebrow">SETTINGS</span><h1>Workspace settings</h1><p>Manage preferences for your Keovothy workspace.</p></div></div>
+          <div class="settings-layout">
+            <section class="card settings-card">
+              <div class="settings-section"><div><h2>General</h2><p>Default preferences across the app.</p></div><div class="settings-controls"><label class="setting-row"><span><strong>Default output language</strong><small>Used when opening a new copy.</small></span><select id="settingLanguage" class="control-select"><option value="km">ខ្មែរ</option><option value="en">English</option><option value="both">Khmer + English</option></select></label><label class="setting-row"><span><strong>Default platform</strong><small>Preselect your most-used channel.</small></span><select id="settingPlatform" class="control-select"><option>Facebook</option><option>TikTok</option><option>Instagram</option><option>Website</option><option>Telegram</option></select></label></div></div>
+              <div class="settings-section"><div><h2>Appearance</h2><p>Customize how Keovothy looks.</p></div><div class="settings-controls"><label class="setting-row"><span><strong>Dark mode</strong><small>Use a darker interface for low-light environments.</small></span><button class="switch" id="darkModeSwitch" aria-label="Toggle dark mode"><span></span></button></label><label class="setting-row"><span><strong>Compact sidebar</strong><small>Use a narrower navigation rail on desktop.</small></span><button class="switch" id="compactSwitch" aria-label="Toggle compact sidebar"><span></span></button></label></div></div>
+              <div class="settings-section"><div><h2>AI preferences</h2><p>Set default generation behavior.</p></div><div class="settings-controls"><label class="setting-row"><span><strong>Default variations</strong><small>Number of outputs per generation.</small></span><select id="settingVariations" class="control-select"><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label><label class="setting-row"><span><strong>Quality review</strong><small>Always run the Reviewer agent.</small></span><button class="switch on" id="reviewSwitch" aria-label="Toggle quality review"><span></span></button></label></div></div>
+              <div class="settings-footer"><button class="primary-btn compact-btn" id="saveSettingsBtn">Save changes</button></div>
+            </section>
+            <aside class="card account-card"><span class="avatar account-avatar">KV</span><h2>Keovothy Team</h2><p>Workspace administrator</p><div class="account-divider"></div><div class="account-meta"><span>Plan<strong>Prototype</strong></span><span>Workspace<strong>Keovothy</strong></span><span>Version<strong>2.0</strong></span></div><button class="secondary-btn full-btn">Manage account</button></aside>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true">
+    <div class="search-modal card">
+      <div class="global-search"><span>⌕</span><input id="globalSearchInput" placeholder="Search pages and actions..." autocomplete="off" /><kbd>Esc</kbd></div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"><span>✓</span><span id="toastText">Saved</span></div>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+  <script src="app.js"></script>
+</body>
+</html>
