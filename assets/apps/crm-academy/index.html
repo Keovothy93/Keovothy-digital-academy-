@@ -700,7 +700,7 @@ body.site-access-locked > :not(#siteAccessGate):not(script){pointer-events:none;
 .site-access-eyebrow{display:block;color:#0b8b8f;font:800 9px Inter,sans-serif;letter-spacing:1.6px}
 .site-access-card h1{margin:7px 0 8px;color:#071f33;font-size:27px;line-height:1.5;letter-spacing:-.2px}
 .site-access-card>p{margin:0 0 23px;color:#667783;font-size:12px;line-height:1.9}
-.site-access-form label{display:block;margin-bottom:7px;color:#213748;font-size:11px;font-weight:700}
+.site-access-form label{display:block;margin-bottom:7px;color:#213748;font-size:11px;font-weight:700}.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}.masked-secret-input{-webkit-text-security:disc}
 .site-access-input-wrap{position:relative}
 .site-access-input-wrap input{width:100%;height:53px;padding:0 51px 0 15px;border:1px solid #d7e2e7;border-radius:14px;background:#f8fafb;color:#122536;outline:none;font:600 14px Inter,"Battambang",sans-serif;transition:border-color .18s,box-shadow .18s,background .18s}
 .site-access-input-wrap input:focus{border-color:#0b8b8f;background:#fff;box-shadow:0 0 0 4px rgba(11,139,143,.1)}
@@ -1430,9 +1430,10 @@ body.dark .auth-tabs button.active,body.dark .auth-account-benefits>div,body.dar
       <h1 id="siteAccessTitle">បញ្ចូល Password ដើម្បីបើក Website</h1>
       <p>វគ្គសិក្សានេះត្រូវបានការពារ។ សូមបញ្ចូល Password ដែលបានផ្តល់ ដើម្បីចូលមើលមេរៀន និងប្រើគណនីសិក្សា។</p>
       <form class="site-access-form" id="siteAccessForm" novalidate>
+        <input class="visually-hidden" type="text" name="username" value="course-access" autocomplete="username" tabindex="-1" aria-hidden="true">
         <label for="siteAccessPassword">Website Password</label>
         <div class="site-access-input-wrap">
-          <input id="siteAccessPassword" type="password" autocomplete="current-password" placeholder="បញ្ចូល Password" aria-describedby="siteAccessError" required>
+          <input id="siteAccessPassword" name="password" type="password" autocomplete="current-password" placeholder="បញ្ចូល Password" aria-describedby="siteAccessError" required>
           <button id="siteAccessToggle" type="button" aria-label="បង្ហាញ Password" title="បង្ហាញ Password">
             <svg class="eye-open" viewBox="0 0 24 24" width="20" height="20"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
             <svg class="eye-closed" viewBox="0 0 24 24" width="20" height="20" hidden><path d="m3 3 18 18M10.6 6.1c.46-.07.93-.1 1.4-.1 6 0 9.5 6 9.5 6a17 17 0 0 1-2.3 3.1M6.2 7.3C3.8 9 2.5 12 2.5 12s3.5 6 9.5 6c1.5 0 2.8-.37 4-.94M9.9 9.9a3 3 0 0 0 4.2 4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
@@ -1456,12 +1457,19 @@ body.dark .auth-tabs button.active,body.dark .auth-account-benefits>div,body.dar
       const submit = document.getElementById("siteAccessSubmit");
       if(!form || !input || !gate || form.dataset.fallbackBound === "1") return;
       form.dataset.fallbackBound = "1";
-      form.addEventListener("submit", function(event){
+      const expectedHash = "d94bc2a7cb8faedd4e133cd9c2aa7f7eb3929fad48b29542c3e0abcd7bcedceb";
+      const hashPassword = async value => {
+        if(!window.crypto?.subtle) return "";
+        const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+        return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
+      };
+      form.addEventListener("submit", async function(event){
         if(!document.body.classList.contains("site-access-locked")) return;
         event.preventDefault();
         const value = String(input.value || "").trim();
-        if(value !== "@keovothy"){
-          if(errorBox) errorBox.textContent = "Password មិនត្រឹមត្រូវ។ សូមប្រើ @keovothy។";
+        const valueHash = await hashPassword(value);
+        if(valueHash !== expectedHash){
+          if(errorBox) errorBox.textContent = "Password មិនត្រឹមត្រូវ។ សូមព្យាយាមម្ដងទៀត។";
           input.setAttribute("aria-invalid", "true");
           input.focus();
           input.select();
@@ -1761,7 +1769,7 @@ body.dark .auth-tabs button.active,body.dark .auth-account-benefits>div,body.dar
           <div class="gemini-field">
             <label for="geminiApiKeyInput">Gemini API Key</label>
             <div class="gemini-key-row">
-              <input id="geminiApiKeyInput" type="password" placeholder="Paste Gemini API key នៅទីនេះ" autocomplete="off">
+              <input id="geminiApiKeyInput" class="masked-secret-input" type="text" placeholder="Paste Gemini API key នៅទីនេះ" autocomplete="off" spellcheck="false">
               <button type="button" class="outline-btn" id="geminiSaveKeyBtn">Save Key</button>
             </div>
             <small class="gemini-help">API key ត្រូវបានរក្សាទុកនៅក្នុង browser នេះប៉ុណ្ណោះ។</small>
@@ -1849,6 +1857,7 @@ body.dark .auth-tabs button.active,body.dark .auth-account-benefits>div,body.dar
         <div class="google-button-shell" id="googleButtonShell">
           <div id="googleButtonContainer" aria-label="Sign in with Google"></div>
           <div class="auth-loading" id="authLoading"><span></span> កំពុងភ្ជាប់ Google Account…</div>
+          <button class="outline-btn full" id="googleAuthFallback" type="button" hidden>Google Login Setup</button>
         </div>
 
         <div class="auth-divider"><span>GOOGLE ACCOUNT</span></div>
@@ -1925,6 +1934,7 @@ body.dark .auth-tabs button.active,body.dark .auth-account-benefits>div,body.dar
 const ACCESS_PASSWORD_HASH = "d94bc2a7cb8faedd4e133cd9c2aa7f7eb3929fad48b29542c3e0abcd7bcedceb";
 const ACCESS_SESSION_KEY = "crmAcademyAccessGrantedV1";
 const GOOGLE_CLIENT_ID = "935141615808-s4eeptjh70o9uu6elq6fddcs74gn2ogr.apps.googleusercontent.com";
+const GOOGLE_SIGN_IN_ENABLED = false;
 const AUTH_STORAGE = {
   accounts: "crmAcademyGoogleAccountsV1",
   currentAccount: "crmAcademyCurrentGoogleAccountV1"
@@ -2297,10 +2307,9 @@ function requireSiteAccess(){
       els.siteAccessSubmit.disabled = true;
       els.siteAccessSubmit.querySelector("span").textContent = "កំពុងពិនិត្យ…";
       try{
-        const directPasswordMatch = entered === "@keovothy";
-        const enteredHash = directPasswordMatch ? ACCESS_PASSWORD_HASH : await hashAccessPassword(entered);
+        const enteredHash = await hashAccessPassword(entered);
         if(enteredHash !== ACCESS_PASSWORD_HASH){
-          showAccessError("Password មិនត្រឹមត្រូវ។ សូមប្រើ @keovothy ហើយព្យាយាមម្តងទៀត។");
+          showAccessError("Password មិនត្រឹមត្រូវ។ សូមព្យាយាមម្ដងទៀត។");
           return;
         }
         try { session?.setItem(ACCESS_SESSION_KEY, "1"); } catch {}
@@ -2418,6 +2427,10 @@ function setAuthMode(mode){
 
 function initializeGoogleIdentity(attempt=0){
   if(state.googleInitialized) return;
+  if(!GOOGLE_SIGN_IN_ENABLED){
+    showGoogleUnavailable("Google Sign-In ត្រូវបានផ្អាករហូតដល់ Authorized JavaScript Origin ត្រូវបានកំណត់ក្នុង Google Cloud Console។");
+    return;
+  }
   if(window.google?.accounts?.id){
     try{
       window.google.accounts.id.initialize({
@@ -2593,7 +2606,11 @@ function updateGoogleConnectionNote(highlight=false){
   let title = "GOOGLE CLIENT ID CONNECTED";
   let message = `Client ID បានបញ្ចូលរួច។ Current origin: ${location.protocol === "file:" ? "file://" : location.origin}`;
   let type = "success";
-  if(location.protocol === "file:"){
+  if(!GOOGLE_SIGN_IN_ENABLED){
+    title = "GOOGLE LOGIN SETUP REQUIRED";
+    message = `បន្ថែម ${location.origin} ទៅ Authorized JavaScript Origins ក្នុង Google Cloud Console រួចប្តូរ GOOGLE_SIGN_IN_ENABLED ទៅ true។`;
+    type = "warning";
+  } else if(location.protocol === "file:"){
     title = "HOSTING REQUIRED FOR GOOGLE LOGIN";
     message = "Google Sign-In មិនដំណើរការពី File ដែលបើកដោយ double-click (file://) ទេ។ Upload ទៅ HTTPS ឬប្រើ localhost ហើយ Add Origin នោះក្នុង Google Cloud Console។";
     type = "warning";
