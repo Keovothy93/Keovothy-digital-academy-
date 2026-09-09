@@ -244,6 +244,21 @@
             background: radial-gradient(circle at 50% 35%, rgba(212,175,55,.055), transparent 55%);
             pointer-events: none;
         }
+        .academy-combined-shell {
+            position: relative; width: min(calc(100% - 2rem), 80rem); margin-inline: auto;
+            padding: clamp(1.25rem, 3.2vw, 3rem); overflow: hidden;
+            border: 1px solid rgba(212,175,55,.22); border-radius: 2rem;
+            background:
+                radial-gradient(circle at 50% 18%, rgba(212,175,55,.075), transparent 34%),
+                linear-gradient(180deg, rgba(12,10,5,.72), rgba(5,5,5,.88));
+            box-shadow: 0 38px 100px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.035);
+        }
+        .academy-combined-shell::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background: linear-gradient(115deg, transparent 30%, rgba(212,175,55,.035) 50%, transparent 70%);
+        }
+        .academy-combined-shell .academy-group { position: relative; z-index: 1; }
+        .academy-combined-shell .academy-group > .max-w-7xl { max-width: none; padding-inline: 0; }
         .section-heading { text-wrap: balance; letter-spacing: -.025em; }
         .academy-card {
             isolation: isolate; min-height: 100%;
@@ -987,13 +1002,14 @@
 
     <!-- Knowledge Library + Practical Courses: combined into one section -->
     <section class="academy-section py-32 relative z-10" aria-label="Knowledge Library និង Practical Courses">
+        <div class="academy-combined-shell">
         <div id="books" class="academy-group scroll-mt-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
              <div class="text-center mb-16 md:mb-20" data-aos="fade-up">
-                <p class="section-kicker">Knowledge Library</p>
-                <h2 class="section-heading text-4xl md:text-5xl font-black text-white mb-6">ទាញយក<span class="text-shimmer"> និងប្រើមុខងារពិសេស</span></h2>
+                <p class="section-kicker">Knowledge Library • Practical Courses</p>
+                <h2 class="section-heading text-4xl md:text-5xl font-black text-white mb-6">ទាញយក និងប្រើមុខងារពិសេស <span class="block mt-3 text-shimmer">វគ្គសិក្សា និង AI Tools</span></h2>
                 <div class="w-20 h-1 bg-gold mx-auto rounded-full shadow-[0_0_15px_#D4AF37]"></div>
-                <p class="section-copy">រូបមន្តនៃការសរសេរ និងបង្កើតមាតិកា។ ទ្រឹស្តីពណ៌ ការរៀបចំ Layout និងគន្លឹះរចនា។ ទាញយកសៀវភៅសំបូរបែប </p>
+                <p class="section-copy">រូបមន្តនៃការសរសេរ និងបង្កើតមាតិកា។ ទ្រឹស្តីពណ៌ ការរៀបចំ Layout និងគន្លឹះរចនា។ ទាញយកសៀវភៅសំបូរបែប និងរៀនតាមជំហាន ជាមួយចំណុចសំខាន់ៗដែលផ្តោតលើជំនាញការងារ និងការប្រើប្រាស់ក្នុងអាជីវកម្មជាក់ស្តែង។</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
@@ -1065,19 +1081,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
 
-    <!-- Courses group within the combined section -->
-        <div id="courses" class="academy-group scroll-mt-32 mt-28 lg:mt-36">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 md:mb-20" data-aos="fade-up">
-                <p class="section-kicker">Practical Courses</p>
-                <h2 class="section-heading text-4xl md:text-5xl font-black text-white mb-6">វគ្គសិក្សា <span class="text-shimmer">និង AI Tools</span></h2>
-                <div class="w-20 h-1 bg-gold mx-auto rounded-full shadow-[0_0_15px_#D4AF37]"></div>
-                <p class="section-copy">រៀនតាមជំហាន ជាមួយចំណុចសំខាន់ៗដែលផ្តោតលើជំនាញការងារ និងការប្រើប្រាស់ក្នុងអាជីវកម្មជាក់ស្តែង។</p>
-            </div>
-
+            <!-- Courses continue directly in the same combined content block -->
+            <div id="courses" class="academy-group scroll-mt-32 mt-10 lg:mt-14">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
                 <!-- Course 1 -->
                 <div id="course-digital-marketing" class="academy-card preserve-3d glow-card-wrapper spotlight-card transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.8)]" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="10" data-tilt-glare="true" data-tilt-max-glare="0.2">
@@ -1153,6 +1159,8 @@
                 </div>
             </div>
             
+        </div>
+        </div>
         </div>
         </div>
     </section>
