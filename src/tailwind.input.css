@@ -1,0 +1,29 @@
+/*
+ * Build entry point for the production stylesheet:
+ *   npx tailwindcss -c tailwind.config.js -i src/tailwind.input.css -o assets/css/styles.css --minify
+ *
+ * (postcss-import must resolve @import before the @tailwind directives.)
+ */
+@import "./site.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    font-family: "Hanuman", "Noto Sans Khmer", sans-serif;
+  }
+  ::selection {
+    background: rgba(212, 175, 55, 0.35);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid #d4af37;
+    outline-offset: 3px;
+  }
+}

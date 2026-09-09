@@ -1,0 +1,13 @@
+{
+  "name": "keovothy-digital-academy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KEOVOTHY Digital Academy — standard multi-file static site build.",
+  "scripts": {
+    "build": "./build/build.sh",
+    "serve": "python3 -m http.server 3000"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
