@@ -1,0 +1,14 @@
+/* Fallback stylesheet served only when JavaScript is disabled:
+   the preloader, cursor, particles and scroll-reveal states are JS-driven,
+   so they must not hide or freeze content. Colours are identical to the site. */
+#preloader,
+.site-brand-field,
+#particle-canvas,
+#ambient-aura,
+#scroll-progress,
+.noise-overlay,
+.cursor-dot,
+.cursor-ring { display: none !important; }
+
+[data-aos] { opacity: 1 !important; transform: none !important; }
+body { cursor: auto !important; }
